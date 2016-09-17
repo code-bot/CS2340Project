@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
+ * Main application class. Handles switching scenes throughout application
  * Created by Sahaj Bhatt on 9/17/16.
  */
 public class MainFXApplication extends Application {
