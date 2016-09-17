@@ -4,6 +4,10 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Model;
+import model.User;
+
+import java.util.Map;
 
 /**
  * Main application class. Handles switching scenes throughout application
@@ -40,5 +44,11 @@ public class MainFXApplication extends Application {
         Scene login = new Scene(loginLayout);
         mainScreen.setScene(login);
         mainScreen.show();
+    }
+
+    public void logoutUser(User user) {
+        //TODO: Store user information before logging out
+        Model.getInstance().clearCurrentUser();
+        initLoginScene(mainScreen);
     }
 }

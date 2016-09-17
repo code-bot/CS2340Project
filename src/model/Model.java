@@ -16,17 +16,31 @@ public class Model {
     /** Currently logged in user */
     private final ObjectProperty<User> currUser = new SimpleObjectProperty<>();
 
+    /** Hard coded user for testing purposes. Will change after registration
+     is created */
+    public User testUser;
+
     /**
-     * Create a new model with
+     * Create a new model
      * Add default stored data
      */
     Model() {
-        /** Hard coded user for testing purposes. Will change after registration
-         is created */
-        currUser.set(new User("user", "pass"));
+        //TODO: Add additional default data
+        testUser = new User("user", "pass");
     }
 
     /** Getter and setter for the currUser */
     public User getCurrentUser() { return currUser.get(); }
-    public void setCurrentUser(User user) { currUser.set(user); }
+    public boolean setCurrentUser(User user) {
+        //Can only set the current user if there is no current user (Safety measure)
+        if (currUser.get() == null) {
+            currUser.set(user);
+            return true;
+        }
+        return false;
+    }
+    /** Clears the current user for logging out */
+    public void clearCurrentUser() {
+        currUser.set(null);
+    }
 }
