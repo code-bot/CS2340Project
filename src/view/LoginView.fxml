@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" styleClass="background" stylesheets="@../css/BackgroundColor.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CourseOverviewController">
+    <Text text="Welcome" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+    <Label layoutX="252.0" layoutY="237.0" text="Username:" textFill="#00aaff" />
+    <TextField fx:id="username" alignment="CENTER" layoutX="319.0" layoutY="232.0" promptText="Enter username..." styleClass="background" stylesheets="@../css/Transparent.css" />
+    <Label layoutX="252.0" layoutY="269.0" text="Password:" textFill="#00aaff" />
+    <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="319.0" layoutY="264.0" promptText="Enter password..." styleClass="background" stylesheets="@../css/Transparent.css" />
+    <Button ellipsisString="Login" layoutX="325.0" layoutY="302.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="34.0" style="-fx-background-radius: 10;" styleClass="background" stylesheets="@../css/ButtonColor.css" text="Login" textFill="#005580" />
+    <Hyperlink layoutX="322.0" layoutY="331.0" text="Sign Up" textFill="#00a3f5" />
+    <Hyperlink layoutX="275.0" layoutY="356.0" text="Forgot your password?" textAlignment="CENTER" textFill="#00aaff" />
+    <ImageView fitHeight="232.0" fitWidth="252.0" layoutX="229.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../../../../../Downloads/459f50e93558f9f20f61dea967bb306e.jpg" />
+        </image></ImageView>
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+</AnchorPane>
