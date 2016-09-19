@@ -1,0 +1,11 @@
+.textfield {
+    -fx-background-color: rgba(0,0,0,0.5);
+}
+
+.background-frame {
+    -fx-background-color: black;
+}
+
+.login-button {
+    -fx-background-color: #ff69b4;
+}

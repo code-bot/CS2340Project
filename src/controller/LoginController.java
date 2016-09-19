@@ -1,8 +1,11 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import model.Model;
 import model.User;
+import view.*;
 import model.UserNotFoundException;
 
 /**
@@ -15,6 +18,12 @@ public class LoginController {
     private String _password;
 
     private Model model;
+
+    @FXML
+    private TextField username;
+
+    @FXML
+    private PasswordField passwordField;
 
     public LoginController() {
         model = Model.getInstance();
@@ -31,17 +40,16 @@ public class LoginController {
 
     @FXML
     private void initialize() {
-        //TODO: Set the Current User only if validateUser passes
 
         //Initialize temp username and password:
-        //_username = textboxUsername.getText
-        //_password = textboxPassword.getText
+        _username = username.getText();
+        _password = passwordField.getText();
     }
 
     /** Sets the current user and goes to main user screen */
     public void setUser() throws UserNotFoundException {
-        //_username = textboxUsername.getText
-        //_password = textboxPassword.getText
+        _username = username.getText();
+        _password = passwordField.getText();
         if (validateUser(_username, _password)) {
             model.setCurrentUser(model.testUser);
         } else {
