@@ -4,9 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.Model;
-import model.User;
-import view.*;
-import model.UserNotFoundException;
 
 /**
  * Created by Matt Sternberg on 9/18/16.
@@ -47,13 +44,11 @@ public class LoginController {
     }
 
     /** Sets the current user and goes to main user screen */
-    public void setUser() throws UserNotFoundException {
+    public void setUser() {
         _username = username.getText();
         _password = passwordField.getText();
         if (validateUser(_username, _password)) {
             model.setCurrentUser(model.testUser);
-        } else {
-            throw new UserNotFoundException();
         }
     }
 
