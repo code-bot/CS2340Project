@@ -15,14 +15,13 @@
     <Text text="Welcome" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
     <TextField fx:id="username" alignment="CENTER" layoutX="273.0" layoutY="237.0" promptText="Enter username..." styleClass="textfield" stylesheets="@css/Login.css" />
     <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="272.0" layoutY="265.0" promptText="Enter password..." styleClass="textfield" stylesheets="@css/Login.css" />
-    <Button ellipsisString="Login" layoutX="325.0" layoutY="302.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="34.0" style="-fx-background-radius: 10;" styleClass="login-button" stylesheets="@css/Login.css" text="Login" textFill="#005580" />
-    <Hyperlink layoutX="322.0" layoutY="331.0" text="Sign Up" textFill="#00a3f5" />
-    <Hyperlink layoutX="275.0" layoutY="356.0" text="Forgot your password?" textAlignment="CENTER" textFill="#00aaff" />
+    <Button fx:id="login" ellipsisString="Login" layoutX="325.0" layoutY="302.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="34.0" style="-fx-background-radius: 10;" styleClass="login-button" stylesheets="@css/Login.css" text="Login" textFill="#005580" />
+    <Hyperlink fx:id="signUp" layoutX="322.0" layoutY="331.0" text="Sign Up" textFill="#00a3f5" />
+    <Hyperlink fx:id="forgotYourPassword" layoutX="275.0" layoutY="356.0" text="Forgot your password?" textAlignment="CENTER" textFill="#00aaff" />
     <ImageView fitHeight="232.0" fitWidth="252.0" layoutX="229.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
         <image>
             <Image url="@pictures/459f50e93558f9f20f61dea967bb306e.jpg" />
         </image></ImageView>
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="262.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
     <opaqueInsets>
         <Insets />
     </opaqueInsets>
