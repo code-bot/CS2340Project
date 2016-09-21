@@ -10,7 +10,11 @@
       <MenuBar BorderPane.alignment="CENTER">
          <menus>
              <Menu mnemonicParsing="false" text="Home"/>
-             <Menu mnemonicParsing="false" text="Sign Out"/>
+             <Menu mnemonicParsing="false" text="Settings">
+                 <items>
+                     <MenuItem mnemonicParsing="false" text="Sign Out" onAction="#signOut"/>
+                 </items>
+             </Menu>
          </menus>
       </MenuBar>
    </top>

@@ -3,6 +3,7 @@ package fxapp;
 import com.sun.javaws.Main;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import controller.LoginController;
+import controller.MenuController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +31,7 @@ public class MainFXApplication extends Application {
 
     private AnchorPane homeLayout;
 
-    private HBox menu;
+    private BorderPane menu;
 
     @Override
     public void start(Stage primaryStage) {
@@ -66,10 +67,11 @@ public class MainFXApplication extends Application {
         } catch (IOException e) {}
     }
 
-    public void logoutUser(User user) {
+    public void logoutUser() {
         //TODO: Store user information before logging out
         Model.getInstance().clearCurrentUser();
         initLoginScreen(mainStage);
+        rootLayout.setTop(null);
     }
 
     public void initLoginScreen(Stage mainStage) {
@@ -96,6 +98,9 @@ public class MainFXApplication extends Application {
             menu = loader.load();
 
             rootLayout.setTop(menu);
+
+            MenuController controller = loader.getController();
+            controller.setMain(this);
         } catch (IOException e) {
 
         }
