@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="loginLayout" prefHeight="500.0" prefWidth="700.0" styleClass="background-frame" stylesheets="@css/Login.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" styleClass="background-frame" stylesheets="@css/Login.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
     <Text text="Welcome" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
     <Label layoutX="252.0" layoutY="237.0" text="Username:" textFill="#00aaff" />
     <TextField fx:id="username" alignment="CENTER" layoutX="319.0" layoutY="232.0" promptText="Enter username..." styleClass="textfield" stylesheets="@css/Login.css" />

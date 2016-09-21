@@ -65,7 +65,7 @@ public class MainFXApplication extends Application {
     public void logoutUser(User user) {
         //TODO: Store user information before logging out
         Model.getInstance().clearCurrentUser();
-//        initLoginScene(mainScreen);
+//        initLoginScene(mainScreen)
     }
 
     public void showLoginScreen(Stage mainScreen) {
