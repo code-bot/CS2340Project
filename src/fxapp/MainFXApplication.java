@@ -5,10 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.Model;
 import model.User;
@@ -23,42 +20,44 @@ import java.util.Map;
 public class MainFXApplication extends Application {
 
     /** Main container for the application window */
-    private Stage mainScreen;
+    private Stage mainStage;
 
-    private BorderPane mainLayout;
+    private BorderPane rootLayout;
 
     private AnchorPane loginLayout;
 
     @Override
     public void start(Stage primaryStage) {
-        mainScreen = primaryStage;
-        initStage(mainScreen);
-        showLoginScreen(mainScreen);
+        mainStage = primaryStage;
+        initMainLayout(mainStage);
+        showLoginScreen(mainStage);
     }
 
-    public Stage getMainScreen() {
-        return mainScreen;
+    public Stage getMainStage() {
+        return mainStage;
     }
 
-    public void initStage(Stage mainScreen) {
+    public Pane getRootLayout() { return rootLayout; }
+
+    public void initMainLayout(Stage mainStage) {
 
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/MainView.fxml"));
-            mainLayout = loader.load();
+            rootLayout = loader.load();
 
-            Scene mainScene = new Scene(mainLayout);
-            mainLayout.setCenter(loginLayout);
+            Scene mainScene = new Scene(rootLayout);
+            rootLayout.setCenter(loginLayout);
 
             //TODO: Give controller access to the mainScreen
 
             //Set title of the application
-            mainScreen.setTitle("Login or Register");
+            mainStage.setTitle("Login or Register");
 
             //Show the login scene with the correct layout
-            mainScreen.setScene(mainScene);
-            mainScreen.show();
+            mainStage.setScene(mainScene);
+            mainStage.show();
         } catch (IOException e) {}
     }
 
@@ -68,14 +67,14 @@ public class MainFXApplication extends Application {
 //        initLoginScene(mainScreen);
     }
 
-    public void showLoginScreen(Stage mainScreen) {
+    public void showLoginScreen(Stage mainStage) {
         try {
             //Load layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/LoginView.fxml"));
             loginLayout = loader.load();
 
-            mainLayout.setCenter(loginLayout);
+            rootLayout.setCenter(loginLayout);
 
         } catch (IOException e) {}
 
