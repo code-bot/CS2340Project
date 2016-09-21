@@ -1,6 +1,8 @@
 package fxapp;
 
+import com.sun.javaws.Main;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,11 +28,15 @@ public class MainFXApplication extends Application {
 
     private AnchorPane loginLayout;
 
+    private AnchorPane homeLayout;
+
+    private HBox menu;
+
     @Override
     public void start(Stage primaryStage) {
         mainStage = primaryStage;
-        initMainLayout(mainStage);
-        showLoginScreen(mainStage);
+        initRootLayout(mainStage);
+        initLoginScreen(mainStage);
     }
 
     public Stage getMainStage() {
@@ -39,7 +45,7 @@ public class MainFXApplication extends Application {
 
     public Pane getRootLayout() { return rootLayout; }
 
-    public void initMainLayout(Stage mainStage) {
+    public void initRootLayout(Stage mainStage) {
 
         try {
             // Load root layout from fxml file.
@@ -50,8 +56,6 @@ public class MainFXApplication extends Application {
 
             Scene mainScene = new Scene(rootLayout);
             rootLayout.setCenter(loginLayout);
-
-            //TODO: Give controller access to the mainScreen
 
             //Set title of the application
             mainStage.setTitle("Login or Register");
@@ -65,10 +69,10 @@ public class MainFXApplication extends Application {
     public void logoutUser(User user) {
         //TODO: Store user information before logging out
         Model.getInstance().clearCurrentUser();
-//        initLoginScene(mainScreen)
+        initLoginScreen(mainStage);
     }
 
-    public void showLoginScreen(Stage mainStage) {
+    public void initLoginScreen(Stage mainStage) {
         try {
             //Load layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
@@ -76,9 +80,38 @@ public class MainFXApplication extends Application {
             loginLayout = loader.load();
 
             rootLayout.setCenter(loginLayout);
+            rootLayout.setTop(null);
+
+            LoginController controller = loader.getController();
+            controller.setMainApp(this);
 
         } catch (IOException e) {}
+    }
 
+    public void initMenu(Stage mainStage) {
+        try {
+            //Load layout from fxml file
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/SignOutPanel.fxml"));
+            menu = loader.load();
+
+            rootLayout.setTop(menu);
+        } catch (IOException e) {
+
+        }
+
+    }
+
+    public void initHomeScreen(Stage mainStage) {
+        try {
+            //Load layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/MainView.fxml"));
+            homeLayout = loader.load();
+
+            rootLayout.setCenter(homeLayout);
+
+        } catch (IOException e) {}
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,8 @@
 package controller;
 
+import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.Model;
@@ -9,6 +11,9 @@ import model.Model;
  * Created by Matt Sternberg on 9/18/16.
  */
 public class LoginController {
+
+    // Reference back to the main application if needed
+    private MainFXApplication mainApplication;
 
     private String _username;
 
@@ -26,13 +31,22 @@ public class LoginController {
         model = Model.getInstance();
     }
 
+    /**
+     * allow for calling back to the main application code if necessary
+     * @param main   the reference to the FX Application instance
+     */
+    public void setMainApp(MainFXApplication main) {
+        mainApplication = main;
+    }
+
+
     /** Ensures username and password textfields are the same as testUser */
-    public boolean validateUser(String uname, String pword) {
+    private boolean validateUser() {
         //TODO: Create way to validate any user based on username and password
 
         //Hard-coded case
-        return uname.equals(model.testUser.getUsername())
-                && pword.equals(model.testUser.getPassword());
+        return _username.equals(model.testUser.getUsername())
+                && _password.equals(model.testUser.getPassword());
     }
 
     @FXML
@@ -44,11 +58,22 @@ public class LoginController {
     }
 
     /** Sets the current user and goes to main user screen */
-    public void setUser() {
+    @FXML
+    private void login() {
         _username = username.getText();
         _password = passwordField.getText();
-        if (validateUser(_username, _password)) {
+        if (validateUser()) {
             model.setCurrentUser(model.testUser);
+            mainApplication.initMenu(mainApplication.getMainStage());
+            mainApplication.initHomeScreen(mainApplication.getMainStage());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Login Error");
+            alert.setHeaderText("Incorrect Information");
+            alert.setContentText("Wrong username or password");
+
+            alert.showAndWait();
+
         }
     }
 
