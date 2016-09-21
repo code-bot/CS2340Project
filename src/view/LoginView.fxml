@@ -12,7 +12,6 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="500.0" prefWidth="700.0" styleClass="background-frame" stylesheets="@css/Login.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
-    <Text text="Welcome" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
     <TextField fx:id="username" alignment="CENTER" layoutX="273.0" layoutY="237.0" promptText="Enter username..." styleClass="textfield" stylesheets="@css/Login.css" />
     <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="272.0" layoutY="265.0" promptText="Enter password..." styleClass="textfield" stylesheets="@css/Login.css" />
     <Button fx:id="login" ellipsisString="Login" layoutX="325.0" layoutY="302.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="34.0" style="-fx-background-radius: 10;" styleClass="login-button" stylesheets="@css/Login.css" text="Login" textFill="#005580" />
