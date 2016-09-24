@@ -1,5 +1,6 @@
 .textfield {
     -fx-text-fill: white;
+    -fx-highlight-text-fill: -fx-text-inner-color;
     -fx-background-color: rgba(0,0,0,0.5);
 }
 
