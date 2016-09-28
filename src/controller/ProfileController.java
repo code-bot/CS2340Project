@@ -89,7 +89,7 @@ public class ProfileController {
 
     @FXML
     private void register() {
-    }
+    
 
     }
 }
