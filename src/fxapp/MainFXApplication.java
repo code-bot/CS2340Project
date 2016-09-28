@@ -36,6 +36,7 @@ public class MainFXApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         mainStage = primaryStage;
+        mainStage.setResizable(false);
         initRootLayout(mainStage);
         initLoginScreen(mainStage);
     }
