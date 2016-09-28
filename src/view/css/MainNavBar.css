@@ -1,0 +1,8 @@
+.nav-button {
+    -fx-background-color: rgba(61, 61, 92, 1.0);
+    -fx-text-fill: rgba(170, 219, 255,1.0);
+}
+
+.background-frame {
+    -fx-background-color: rgba(61, 61, 92, 1.0);
+}
