@@ -4,17 +4,19 @@ package controller;
  * Created by Aman on 9/28/16.
  */
 import fxapp.MainFXApplication;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.Model;
 import model.States;
 
 import java.util.ArrayList;
 
 public class ProfileController {
+
+
+    private MainFXApplication mainApplication;
 
 
     private String username;
@@ -53,19 +55,18 @@ public class ProfileController {
     @FXML
     private ChoiceBox<String> stateChoiceBox;
 
+    @FXML
+    private Button register;
     private ArrayList<String> states = new ArrayList();
 
     @FXML
     private void initialize() {
 
        stateChoiceBox.getItems().addAll(States.toList());
-
-
     }
 
     private void createProfile() {
         //Initialize fields
-        username = usernameField.getText();
         password = passwordField.getText();
         passwordConfirm = confirmPasswordField.getText();
         email = emailField.getText();
@@ -75,21 +76,29 @@ public class ProfileController {
         zipCode = zipcodeField.getText();
 
     }
-
-    public void registerUser() {
-        //print error message for passwords not matching up
-        if (!(password.equals(passwordField))) {
-
-        }
+    @FXML
+    private void registerUser() {
+        System.out.println("YES");
+        createProfile();
         //print error message for emails not matching up
         if (!(email.equals(emailConfirm))) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Registration Error!");
+            alert.setHeaderText("Email Does Not Match");
+            alert.setContentText("The emails provided are not the same. Please ensure you have entered the same email address.");
 
+            alert.showAndWait();
         }
+        //print error message for passwords not matching up
+        if (!(password.equals(passwordField))) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Registration Error!");
+            alert.setHeaderText("Password Does Not Match");
+            alert.setContentText("The passwords provided are not the same. Please ensure you have entered the same email address.");
+
+            alert.showAndWait();
+        }
+
     }
 
-    @FXML
-    private void register() {
-    
-
-    }
 }

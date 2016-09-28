@@ -1,8 +1,11 @@
 package controller;
 
 import fxapp.MainFXApplication;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.Model;
@@ -20,6 +23,9 @@ public class LoginController {
     private String _password;
 
     private Model model;
+
+    @FXML
+    private Hyperlink signUp;
 
     @FXML
     private TextField username;
@@ -55,6 +61,12 @@ public class LoginController {
         //Initialize temp username and password:
         _username = username.getText();
         _password = passwordField.getText();
+        signUp.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                mainApplication.initRegisterScreen(mainApplication.getMainStage());
+            }
+        });
     }
 
     /** Sets the current user and goes to main user screen */
@@ -76,6 +88,7 @@ public class LoginController {
 
         }
     }
+
 
 
 }

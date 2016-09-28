@@ -31,6 +31,8 @@ public class MainFXApplication extends Application {
 
     private AnchorPane homeLayout;
 
+    private AnchorPane profileLayout;
+
     private BorderPane menu;
 
     @Override
@@ -120,6 +122,19 @@ public class MainFXApplication extends Application {
         } catch (IOException e) {}
     }
 
+    public void initRegisterScreen(Stage mainStage) {
+        try {
+            //Load layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/ProfileView.fxml"));
+            profileLayout = loader.load();
+
+            rootLayout.setCenter(profileLayout);
+
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
     public static void main(String[] args) {
         launch(args);
     }
