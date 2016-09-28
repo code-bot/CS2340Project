@@ -1,14 +1,28 @@
-.textfield {
+.text-field {
     -fx-text-fill: white;
-    -fx-highlight-text-fill: -fx-text-inner-color;
-    -fx-background-color: rgba(0,0,0,0.5);
+    -fx-background-color: rgba(61, 61, 92, 1.0);
+    -fx-border-color: rgba(170, 219, 255,1.0);
+    -fx-border-width : 1;
+    -fx-border-insets: 5;
+    -fx-border-radius : 10;
+    -fx-focus-color: white;
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
 }
 
+.text-field:focused {
+    -fx-text-fill: white;
+    -fx-background-color: rgba(61, 61, 92, 1.0);
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+}
+
+.hyper-link {
+    -fx-text-fill: rgba(170, 219, 255,1.0);
+}
 
 .background-frame {
-    -fx-background-color: black;
+    -fx-background-color: rgba(61, 61, 92, 1.0);
 }
 
 .login-button {
-    -fx-background-color: #ff69b4;
+    -fx-background-color: rgba(170, 219, 255,1.0);
 }
