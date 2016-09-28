@@ -38,8 +38,8 @@
 
        <ChoiceBox fx:id="stateChoiceBox" layoutX="363.0" layoutY="313.0" prefHeight="27.0" prefWidth="53.0" />
 
-       <Button ellipsisString="Register" layoutX="321.0" layoutY="356.0" mnemonicParsing="false" onAction="#register" prefHeight="27.0" prefWidth="34.0" style="-fx-background-radius: 10;" styleClass="login-button" stylesheets="@css/Login.css" text="Register" textFill="#005580" />
-
+       <Button ellipsisString="Register" layoutX="321.0" layoutY="356.0" mnemonicParsing="false" onAction="#login" prefHeight="27.0" prefWidth="34.0" style="-fx-background-radius: 10;" styleClass="login-button" stylesheets="@css/Login.css" text="Register" textFill="#005580" />
+       
    </children>
     <opaqueInsets>
         <Insets />
