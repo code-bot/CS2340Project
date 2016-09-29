@@ -63,6 +63,7 @@ public class ProfileController {
     private void initialize() {
 
        stateChoiceBox.getItems().addAll(States.toList());
+
     }
 
     private void createProfile() {
@@ -98,6 +99,23 @@ public class ProfileController {
 
             alert.showAndWait();
         }
+
+
+
+    }
+
+    /**
+     * allow for calling back to the main application code if necessary
+     * @param main   the reference to the FX Application instance
+     */
+    public void setMainApp(MainFXApplication main) {
+        mainApplication = main;
+    }
+
+    @FXML
+    private void cancel() {
+
+        mainApplication.initLoginScreen(mainApplication.getMainStage());
 
     }
 

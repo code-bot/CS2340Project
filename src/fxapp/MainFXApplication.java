@@ -4,6 +4,7 @@ import com.sun.javaws.Main;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import controller.LoginController;
 import controller.MenuController;
+import controller.ProfileController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -131,9 +132,13 @@ public class MainFXApplication extends Application {
 
             rootLayout.setCenter(profileLayout);
 
+            ProfileController controller = loader.getController();
+            controller.setMainApp(this);
+
         } catch (IOException e) {
             System.out.println(e.toString());
         }
+
     }
     public static void main(String[] args) {
         launch(args);
