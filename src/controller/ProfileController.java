@@ -66,7 +66,7 @@ public class ProfileController {
 
     }
 
-    private void createProfile() {
+    private void loadData() {
         //Initialize fields
         password = passwordField.getText();
         passwordConfirm = confirmPasswordField.getText();
@@ -79,8 +79,7 @@ public class ProfileController {
     }
     @FXML
     private void registerUser() {
-        System.out.println("YES");
-        createProfile();
+        loadData();
         //print error message for emails not matching up
         if (!(email.equals(emailConfirm))) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -101,6 +100,10 @@ public class ProfileController {
         }
 
 
+    }
+
+    public void createProfile() {
+
 
     }
 
@@ -114,9 +117,7 @@ public class ProfileController {
 
     @FXML
     private void cancel() {
-
         mainApplication.initLoginScreen(mainApplication.getMainStage());
-
     }
 
 }

@@ -14,20 +14,20 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" styleClass="background-frame" stylesheets="@css/Login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfileController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" styleClass="background-frame" stylesheets="@css/Register.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfileController">
    <children>
 
-       <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="272.0" layoutY="166.0" promptText="Enter password..." styleClass="textfield" stylesheets="@css/Login.css" />
-       <PasswordField fx:id="confirmPasswordField" alignment="CENTER" layoutX="271.0" layoutY="202.0" promptText="Confirm password..." styleClass="textfield" stylesheets="@css/Login.css" />
-       <TextField fx:id="emailField" alignment="CENTER" layoutX="273.0" layoutY="116.0" promptText="Confirm email address..." styleClass="textfield" stylesheets="@css/Login.css" />
-       <TextField fx:id="confirmEmailField" alignment="CENTER" layoutX="273.0" layoutY="81.0" promptText="Enter email address..." styleClass="textfield" stylesheets="@css/Login.css" />
-       <TextField fx:id="addressLabel" editable="false" layoutX="183.0" layoutY="266.0" prefHeight="39.0" prefWidth="86.0" styleClass="textfield" stylesheets="@css/Login.css" text="Address:" />
-       <TextField fx:id="addressLine1Field" alignment="CENTER" layoutX="270.0" layoutY="266.0" promptText="Enter Address Line 1" styleClass="textfield" stylesheets="@css/Login.css" />
-       <TextField fx:id="addressLine2Field" alignment="CENTER" layoutX="270.0" layoutY="306.0" promptText="Enter Address Line 2" styleClass="textfield" stylesheets="@css/Login.css" />
-       <TextField fx:id="zipcodeField" alignment="CENTER" layoutX="270.0" layoutY="346.0" prefHeight="39.0" prefWidth="86.0" promptText="Zip Code" styleClass="textfield" stylesheets="@css/Login.css" />
-       <ChoiceBox fx:id="stateChoiceBox" layoutX="363.0" layoutY="352.0" prefHeight="27.0" prefWidth="53.0" />
-       <Button fx:id="register" ellipsisString="registerUser" layoutX="321.0" layoutY="402.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="27.0" prefWidth="34.0" style="-fx-background-radius: 10;" styleClass="login-button" stylesheets="@css/Login.css" text="Register" textFill="#005580" />
-       <Hyperlink fx:id="cancelReg" onAction="#cancel" layoutX="327.0" layoutY="433.0" styleClass="hyper-link" stylesheets="@css/Login.css" text="Cancel" />
+       <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="272.0" layoutY="166.0" promptText="Enter password..." styleClass="textfield" stylesheets="@css/Register.css" />
+       <PasswordField fx:id="confirmPasswordField" alignment="CENTER" layoutX="271.0" layoutY="202.0" promptText="Confirm password..." styleClass="textfield" stylesheets="@css/Register.css" />
+       <TextField fx:id="emailField" alignment="CENTER" layoutX="273.0" layoutY="116.0" promptText="Confirm email address..." styleClass="textfield" stylesheets="@css/Register.css" />
+       <TextField fx:id="confirmEmailField" alignment="CENTER" layoutX="273.0" layoutY="81.0" promptText="Enter email address..." styleClass="textfield" stylesheets="@css/Register.css" />
+       <TextField fx:id="addressLabel" editable="false" layoutX="183.0" layoutY="266.0" prefHeight="39.0" prefWidth="86.0" styleClass="textfield" stylesheets="@css/Register.css" text="Address:" />
+       <TextField fx:id="addressLine1Field" alignment="CENTER" layoutX="270.0" layoutY="266.0" promptText="Enter Address Line 1" styleClass="textfield" stylesheets="@css/Register.css" />
+       <TextField fx:id="addressLine2Field" alignment="CENTER" layoutX="270.0" layoutY="306.0" promptText="Enter Address Line 2" styleClass="textfield" stylesheets="@css/Register.css" />
+       <TextField fx:id="zipcodeField" alignment="CENTER" layoutX="270.0" layoutY="346.0" prefHeight="39.0" prefWidth="86.0" promptText="Zip Code" styleClass="textfield" stylesheets="@css/Register.css" />
+       <ChoiceBox fx:id="stateChoiceBox" layoutX="363.0" layoutY="352.0" prefHeight="27.0" prefWidth="53.0" styleClass="choice-box" stylesheets="@css/Register.css"/>
+       <Button fx:id="register" ellipsisString="registerUser" layoutX="321.0" layoutY="402.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="27.0" prefWidth="34.0" style="-fx-background-radius: 10;" styleClass="register-button" stylesheets="@css/Register.css" text="Register" textFill="#005580" />
+       <Hyperlink fx:id="cancelReg" layoutX="327.0" layoutY="433.0" onAction="#cancel" styleClass="hyper-link" stylesheets="@css/Register.css" text="Cancel" />
 
    </children>
     <opaqueInsets>
