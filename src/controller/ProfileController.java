@@ -14,6 +14,7 @@ import model.User;
 import model.UserLevel;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class ProfileController {
 
@@ -131,7 +132,16 @@ public class ProfileController {
 
     @FXML
     private void cancel() {
-        mainApplication.initLoginScreen(mainApplication.getMainStage());
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Are you sure you want to cancel?");
+        alert.setContentText("If you cancel, the information will not be stored and you will be returned to the login page");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            mainApplication.initLoginScreen(mainApplication.getMainStage());
+        } else {
+        }
     }
 
 }

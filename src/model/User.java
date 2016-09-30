@@ -12,7 +12,6 @@ import javafx.beans.property.StringProperty;
 public class User {
 
     private final StringProperty email = new SimpleStringProperty();
-
     private final StringProperty password = new SimpleStringProperty();
 
     /** Authority level of user */

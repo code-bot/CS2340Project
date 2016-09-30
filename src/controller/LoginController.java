@@ -87,7 +87,6 @@ public class LoginController {
             alert.setContentText("Wrong username or password");
 
             alert.showAndWait();
-
         }
     }
 
