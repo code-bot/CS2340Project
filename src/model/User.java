@@ -39,7 +39,7 @@ public class User {
      * @param pass      Password
      * @param level     Authority level
      */
-    User(String uname, String pass, UserLevel level) {
+    public User(String uname, String pass, UserLevel level) {
         username.set(uname);
         password.set(pass);
         this.level.set(level);
@@ -50,7 +50,7 @@ public class User {
      * @param uname     Username
      * @param pass      Password
      */
-    User(String uname, String pass) {
+    public User(String uname, String pass) {
         username.set(uname);
         password.set(pass);
         this.level.set(UserLevel.NORMAL);

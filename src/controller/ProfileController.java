@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.Model;
 import model.States;
+import model.User;
+import model.UserLevel;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,8 @@ public class ProfileController {
     private String address1;
     private String address2;
     private String zipCode;
-
+    private ArrayList<User> users = new ArrayList<User>();
+    private UserLevel userType;
     @FXML
     private TextField usernameField;
 
@@ -56,14 +59,16 @@ public class ProfileController {
     private ChoiceBox<String> stateChoiceBox;
 
     @FXML
+    private ChoiceBox<UserLevel> userTypeBox;
+    @FXML
     private Button register;
-    private ArrayList<String> states = new ArrayList();
+
 
     @FXML
     private void initialize() {
 
-       stateChoiceBox.getItems().addAll(States.toList());
-
+        stateChoiceBox.getItems().addAll(States.toList());
+        userTypeBox.getItems().addAll(UserLevel.toList());
     }
 
     private void loadData() {
@@ -75,6 +80,7 @@ public class ProfileController {
         address1 = addressLine1Field.getText();
         address2 = addressLine2Field.getText();
         zipCode = zipcodeField.getText();
+        userType = userTypeBox.getValue();
 
     }
     @FXML
@@ -90,22 +96,22 @@ public class ProfileController {
             alert.showAndWait();
         }
         //print error message for passwords not matching up
-        if (!(password.equals(passwordField))) {
+        if (!(password.equals(passwordConfirm))) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Registration Error!");
             alert.setHeaderText("Password Does Not Match");
-            alert.setContentText("The passwords provided are not the same. Please ensure you have entered the same email address.");
+            alert.setContentText("The passwords provided are not the same. Please ensure you have entered the same password.");
 
             alert.showAndWait();
         }
-
+        User newUser = new User(email, password, userType);
+        users.add(newUser);
+        model.Model.setCurrentUser(newUser);
+        mainApplication.initMenu(mainApplication.getMainStage());
+        mainApplication.initHomeScreen(mainApplication.getMainStage());
 
     }
 
-    public void createProfile() {
-
-
-    }
 
     /**
      * allow for calling back to the main application code if necessary
