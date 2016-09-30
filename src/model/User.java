@@ -11,7 +11,7 @@ import javafx.beans.property.StringProperty;
  */
 public class User {
 
-    private final StringProperty username = new SimpleStringProperty();
+    private final StringProperty email = new SimpleStringProperty();
 
     private final StringProperty password = new SimpleStringProperty();
 
@@ -20,8 +20,8 @@ public class User {
 
     /** Can only get the username, setting username only happens during user
      * creation */
-    public String getUsername() {
-        return username.get();
+    public String getEmail() {
+        return email.get();
     }
     /** Can only get the password, setting password only happens during user
      * creation */
@@ -40,7 +40,7 @@ public class User {
      * @param level     Authority level
      */
     public User(String uname, String pass, UserLevel level) {
-        username.set(uname);
+        email.set(uname);
         password.set(pass);
         this.level.set(level);
     }
@@ -51,7 +51,7 @@ public class User {
      * @param pass      Password
      */
     public User(String uname, String pass) {
-        username.set(uname);
+        email.set(uname);
         password.set(pass);
         this.level.set(UserLevel.NORMAL);
     }

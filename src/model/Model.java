@@ -2,6 +2,7 @@ package model;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.control.Alert;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class Model {
      is created */
     public User testUser;
 
-    private Map<String, User>  userMap = new HashMap<String, User>();
+    private static Map<String, User>  userMap = new HashMap<String, User>();
 
     /**
      * Create a new model
@@ -32,7 +33,7 @@ public class Model {
     Model() {
         //TODO: Add additional default data
 
-        testUser = new User("user", "pass");
+
     }
 
     /** Getter and setter for the currUser */
@@ -52,7 +53,31 @@ public class Model {
         currUser.set(null);
     }
 
-    public void addUser() {
-
+    public static boolean addUser(User user) {
+        if (userMap.containsKey(user.getEmail())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Registration Error");
+            alert.setHeaderText("Email already exists in system");
+            alert.setContentText("Please go to login page to login or use forgot password feature");
+            alert.showAndWait();
+            return false;
+        } else {
+            userMap.put(user.getEmail(), user);
+            return true;
+        }
     }
+
+    public boolean validateUser(User user) {
+        if (userMap.containsKey(user.getEmail())) {
+            if(userMap.get(user.getEmail()).getPassword().equals(user.getPassword())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public User getUser(String email) {
+        return userMap.get(email);
+    }
+
 }

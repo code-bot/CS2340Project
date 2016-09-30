@@ -29,7 +29,7 @@ public class ProfileController {
     private String address1;
     private String address2;
     private String zipCode;
-    private ArrayList<User> users = new ArrayList<User>();
+//    private ArrayList<User> users = new ArrayList<User>();
     private UserLevel userType;
     @FXML
     private TextField usernameField;
@@ -111,10 +111,12 @@ public class ProfileController {
         } else {
 
             User newUser = new User(email, password, userType);
-            users.add(newUser);
-            model.Model.setCurrentUser(newUser);
-            mainApplication.initMenu(mainApplication.getMainStage());
-            mainApplication.initHomeScreen(mainApplication.getMainStage());
+            boolean addedUser = model.Model.addUser(newUser);
+            if (addedUser) {
+                model.Model.setCurrentUser(newUser);
+                mainApplication.initMenu(mainApplication.getMainStage());
+                mainApplication.initHomeScreen(mainApplication.getMainStage());
+            }
         }
     }
 
