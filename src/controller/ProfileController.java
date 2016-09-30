@@ -86,30 +86,36 @@ public class ProfileController {
     @FXML
     private void registerUser() {
         loadData();
-        //print error message for emails not matching up
-        if (!(email.equals(emailConfirm))) {
+        //print error message for empty fields or emails/passwords not matching up
+        if (email.isEmpty() || password.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Registration Error!");
+            alert.setHeaderText("Please complete all fields");
+            alert.setContentText("One or more of the fields are empty.");
+
+            alert.showAndWait();
+        } else if (!(email.equals(emailConfirm))) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Registration Error!");
             alert.setHeaderText("Email Does Not Match");
             alert.setContentText("The emails provided are not the same. Please ensure you have entered the same email address.");
 
             alert.showAndWait();
-        }
-        //print error message for passwords not matching up
-        if (!(password.equals(passwordConfirm))) {
+        } else if (!(password.equals(passwordConfirm))) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Registration Error!");
             alert.setHeaderText("Password Does Not Match");
             alert.setContentText("The passwords provided are not the same. Please ensure you have entered the same password.");
 
             alert.showAndWait();
-        }
-        User newUser = new User(email, password, userType);
-        users.add(newUser);
-        model.Model.setCurrentUser(newUser);
-        mainApplication.initMenu(mainApplication.getMainStage());
-        mainApplication.initHomeScreen(mainApplication.getMainStage());
+        } else {
 
+            User newUser = new User(email, password, userType);
+            users.add(newUser);
+            model.Model.setCurrentUser(newUser);
+            mainApplication.initMenu(mainApplication.getMainStage());
+            mainApplication.initHomeScreen(mainApplication.getMainStage());
+        }
     }
 
 
