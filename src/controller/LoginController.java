@@ -9,6 +9,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.Model;
+import model.User;
+import model.UserLevel;
 
 /**
  * Created by Matt Sternberg on 9/18/16.
@@ -47,13 +49,13 @@ public class LoginController {
 
 
     /** Ensures username and password textfields are the same as testUser */
-    private boolean validateUser() {
-        //TODO: Create way to validate any user based on username and password
-
-        //Hard-coded case
-        return _username.equals(model.testUser.getUsername())
-                && _password.equals(model.testUser.getPassword());
-    }
+//    private boolean validateUser() {
+//        //TODO: Create way to validate any user based on username and password
+//
+//        //Hard-coded case
+//        return _username.equals(model.getUser())
+//                && _password.equals(model.testUser.getPassword());
+//    }
 
     @FXML
     private void initialize() {
@@ -74,8 +76,8 @@ public class LoginController {
     private void login() {
         _username = username.getText();
         _password = passwordField.getText();
-        if (validateUser()) {
-            model.setCurrentUser(model.testUser);
+        if (model.validateUser(new User(username.getText(), passwordField.getText()))) {
+            model.setCurrentUser(model.getUser(username.getText()));
             mainApplication.initMenu(mainApplication.getMainStage());
             mainApplication.initHomeScreen(mainApplication.getMainStage());
         } else {
@@ -85,7 +87,6 @@ public class LoginController {
             alert.setContentText("Wrong username or password");
 
             alert.showAndWait();
-
         }
     }
 
