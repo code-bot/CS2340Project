@@ -17,7 +17,7 @@
     <Hyperlink fx:id="forgotYourPassword" layoutX="280.0" layoutY="436.0" text="Forgot your password?" textAlignment="CENTER" styleClass="hyper-link" stylesheets="@css/Login.css" />
     <ImageView fitHeight="232.0" fitWidth="400.0" layoutX="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
         <image>
-            <Image url="@pictures/Logomakr_1JPVkU.png" />
+            <Image url="@pictures/logo.png" />
         </image></ImageView>
     <opaqueInsets>
         <Insets />
