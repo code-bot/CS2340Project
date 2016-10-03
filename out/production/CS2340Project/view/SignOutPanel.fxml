@@ -9,7 +9,7 @@
         <Button ellipsisString="Home" prefHeight="48.0" text="Home" alignment="CENTER" textAlignment="CENTER" mnemonicParsing="false" styleClass="nav-button" stylesheets="@css/MainNavBar.css"/>
     </left>
     <center>
-        <Button ellipsisString="Profile" prefHeight="48.0"  text="Profile" alignment="CENTER" textAlignment="CENTER" mnemonicParsing="false" onAction="#goToProfileView" styleClass="nav-button" stylesheets="@css/MainNavBar.css"/>
+        <Button ellipsisString="Profile" prefHeight="48.0"  text="Edit Profile" alignment="CENTER" textAlignment="CENTER" mnemonicParsing="false" onAction="#goToEditProfileView" styleClass="nav-button" stylesheets="@css/MainNavBar.css"/>
     </center>
     <right>
         <Button ellipsisString="Sign Out" prefHeight="48.0"  text="Sign Out" alignment="CENTER" textAlignment="CENTER" mnemonicParsing="false" onAction="#signOut" styleClass="nav-button" stylesheets="@css/MainNavBar.css"/>

@@ -2,6 +2,7 @@ package fxapp;
 
 import com.sun.javaws.Main;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import controller.EditProfileController;
 import controller.LoginController;
 import controller.MenuController;
 import controller.ProfileController;
@@ -34,7 +35,11 @@ public class MainFXApplication extends Application {
 
     private AnchorPane profileLayout;
 
+    private AnchorPane editProfileLayout;
+
     private BorderPane menu;
+
+    private Model model = Model.getInstance();
 
     @Override
     public void start(Stage primaryStage) {
@@ -81,6 +86,10 @@ public class MainFXApplication extends Application {
 
     public void goToProfile() {
         initRegisterScreen(mainStage);
+    }
+
+    public void goToEditProfile() {
+        initEditRegisterScreen(mainStage);
     }
 
     public void initLoginScreen(Stage mainStage) {
@@ -145,6 +154,24 @@ public class MainFXApplication extends Application {
         }
 
     }
+
+    public void initEditRegisterScreen(Stage mainStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/EditProfileView.fxml"));
+            editProfileLayout = loader.load();
+
+            rootLayout.setCenter(editProfileLayout);
+
+            EditProfileController controller = loader.getController();
+            controller.getEmailTextField().setPromptText(model.getCurrentUser().getEmail());
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+
     public static void main(String[] args) {
         launch(args);
     }

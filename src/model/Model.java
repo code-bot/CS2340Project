@@ -67,7 +67,18 @@ public class Model {
         }
     }
 
+    public static boolean deleteUser(User user) {
+        if (userMap.containsKey(user.getEmail())) {
+            userMap.remove(user.getEmail());
+            return true;
+        }
+        return false;
+    }
+
     public boolean validateUser(User user) {
+        System.out.println(userMap.size());
+        System.out.println(user.getEmail());
+        user.getEmail();
         if (userMap.containsKey(user.getEmail())) {
             if(userMap.get(user.getEmail()).getPassword().equals(user.getPassword())) {
                 return true;

@@ -76,6 +76,7 @@ public class LoginController {
     private void login() {
         _username = username.getText();
         _password = passwordField.getText();
+        System.out.println(model.validateUser(new User(username.getText(), passwordField.getText())));
         if (model.validateUser(new User(username.getText(), passwordField.getText()))) {
             model.setCurrentUser(model.getUser(username.getText()));
             mainApplication.initMenu(mainApplication.getMainStage());

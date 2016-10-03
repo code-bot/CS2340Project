@@ -21,9 +21,9 @@ public class MenuController {
     }
 
     @FXML
-    private void goToProfileView() {
+    private void goToEditProfileView() {
         System.out.println("Loading profile...");
-        mainApplication.goToProfile();
+        mainApplication.goToEditProfile();
     }
 
 }
