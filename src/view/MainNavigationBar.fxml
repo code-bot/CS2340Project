@@ -8,7 +8,7 @@
         <Button alignment="CENTER" mnemonicParsing="false" prefHeight="48.0" styleClass="nav-button" stylesheets="@css/MainNavBar.css" text="Home" textAlignment="CENTER" />
     </left>
     <center>
-        <Button alignment="CENTER" mnemonicParsing="false" onAction="#goToProfileView" prefHeight="48.0" styleClass="nav-button" stylesheets="@css/MainNavBar.css" text="Profile" textAlignment="CENTER" />
+        <Button alignment="CENTER" mnemonicParsing="false" onAction="#goToEditProfileView" prefHeight="48.0" styleClass="nav-button" stylesheets="@css/MainNavBar.css" text="Profile" textAlignment="CENTER" />
     </center>
     <right>
         <Button alignment="CENTER" mnemonicParsing="false" onAction="#signOut" prefHeight="48.0" styleClass="nav-button" stylesheets="@css/MainNavBar.css" text="Sign Out" textAlignment="CENTER" />
