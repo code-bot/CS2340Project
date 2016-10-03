@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import model.Model;
 import model.States;
 import model.User;
@@ -27,13 +28,15 @@ public class ProfileController {
     private String passwordConfirm;
     private String email;
     private String emailConfirm;
-    private String address1;
-    private String address2;
-    private String zipCode;
+    private String address;
+//    private String address2;
+    private String zipcode;
 //    private ArrayList<User> users = new ArrayList<User>();
     private UserLevel userType;
-    @FXML
-    private TextField usernameField;
+    private String state;
+    private String city;
+//    @FXML
+//    private TextField usernameField;
 
     @FXML
     private PasswordField passwordField;
@@ -51,6 +54,9 @@ public class ProfileController {
     private TextField addressLine1Field;
 
     @FXML
+    private TextField cityField;
+
+    @FXML
     private TextField zipcodeField;
 
     @FXML
@@ -58,8 +64,10 @@ public class ProfileController {
 
     @FXML
     private ComboBox<UserLevel> userTypeBox;
+    
     @FXML
     private Button register;
+
 
 
     @FXML
@@ -79,8 +87,10 @@ public class ProfileController {
         passwordConfirm = confirmPasswordField.getText();
         email = emailField.getText();
         emailConfirm = confirmEmailField.getText();
-        address1 = addressLine1Field.getText();
-        zipCode = zipcodeField.getText();
+        address = addressLine1Field.getText();
+        city = cityField.getText();
+        zipcode = zipcodeField.getText();
+        state = stateChoiceBox.getValue();
         userType = userTypeBox.getValue();
 
     }
@@ -88,7 +98,7 @@ public class ProfileController {
     private void registerUser() {
         loadData();
         //print error message for empty fields or emails/passwords not matching up
-        if (email.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty() || address.isEmpty() || zipcode.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Registration Error!");
             alert.setHeaderText("Please complete all fields");
@@ -110,8 +120,7 @@ public class ProfileController {
 
             alert.showAndWait();
         } else {
-
-            User newUser = new User(email, password, userType);
+            User newUser = new User(email, password, userType, address, city, zipcode, state);
             boolean addedUser = model.Model.addUser(newUser);
             if (addedUser) {
                 model.Model.setCurrentUser(newUser);

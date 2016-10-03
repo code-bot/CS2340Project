@@ -67,9 +67,10 @@ public class Model {
         }
     }
 
-    public boolean validateUser(User user) {
-        if (userMap.containsKey(user.getEmail())) {
-            if(userMap.get(user.getEmail()).getPassword().equals(user.getPassword())) {
+    public boolean validateUser(String email, String password) {
+
+        if (userMap.containsKey(email)) {
+            if(userMap.get(email).getPassword().equals(password)) {
                 return true;
             }
         }
