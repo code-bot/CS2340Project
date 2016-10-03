@@ -90,7 +90,7 @@ public class ProfileController {
         address = addressLine1Field.getText();
         city = cityField.getText();
         zipcode = zipcodeField.getText();
-        state = stateChoiceBox.getValue();
+        state = stateComboBox.getValue();
         userType = userTypeBox.getValue();
 
     }
