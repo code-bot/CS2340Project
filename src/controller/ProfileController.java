@@ -55,18 +55,16 @@ public class ProfileController {
 
     @FXML
     private TextField cityField;
-//    @FXML
-//    private TextField addressLine2Field;
 
     @FXML
     private TextField zipcodeField;
 
     @FXML
-    private ChoiceBox<String> stateChoiceBox;
+    private ComboBox<String> stateComboBox;
 
     @FXML
-    private ChoiceBox<UserLevel> userTypeBox;
-
+    private ComboBox<UserLevel> userTypeBox;
+    
     @FXML
     private Button register;
 
@@ -75,10 +73,12 @@ public class ProfileController {
     @FXML
     private void initialize() {
 
-        stateChoiceBox.getItems().addAll(States.toList());
-        stateChoiceBox.getSelectionModel().selectFirst();
+        stateComboBox.getItems().addAll(States.toList());
+        stateComboBox.getSelectionModel().selectFirst();
+        stateComboBox.setVisibleRowCount(6);
         userTypeBox.getItems().addAll(UserLevel.toList());
         userTypeBox.getSelectionModel().selectFirst();
+        userTypeBox.setVisibleRowCount(4);
     }
 
     private void loadData() {
@@ -90,7 +90,7 @@ public class ProfileController {
         address = addressLine1Field.getText();
         city = cityField.getText();
         zipcode = zipcodeField.getText();
-        state = stateChoiceBox.getValue();
+        state = stateComboBox.getValue();
         userType = userTypeBox.getValue();
 
     }
