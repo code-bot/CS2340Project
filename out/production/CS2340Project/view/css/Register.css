@@ -26,6 +26,7 @@
 
 .register-button {
     -fx-background-color: rgba(170, 219, 255,1.0);
+    -fx-background-radius: 10;
 }
 
 /** Size the combo-box button. */
