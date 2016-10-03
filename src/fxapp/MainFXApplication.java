@@ -79,6 +79,10 @@ public class MainFXApplication extends Application {
         rootLayout.setTop(null);
     }
 
+    public void goToProfile() {
+        initRegisterScreen(mainStage);
+    }
+
     public void initLoginScreen(Stage mainStage) {
         try {
             //Load layout from fxml file.

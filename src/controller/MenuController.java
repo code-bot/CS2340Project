@@ -20,4 +20,10 @@ public class MenuController {
         mainApplication.logoutUser();
     }
 
+    @FXML
+    private void goToProfileView() {
+        System.out.println("Loading profile...");
+        mainApplication.goToProfile();
+    }
+
 }
