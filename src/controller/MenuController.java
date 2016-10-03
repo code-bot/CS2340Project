@@ -25,5 +25,4 @@ public class MenuController {
         System.out.println("Loading profile...");
         mainApplication.goToEditProfile();
     }
-
 }

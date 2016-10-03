@@ -1,13 +1,13 @@
 package fxapp;
 
+
 import com.sun.javaws.Main;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import controller.EditProfileController;
 import controller.LoginController;
 import controller.MenuController;
-import controller.ProfileController;
+import controller.RegisterController;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
@@ -16,7 +16,6 @@ import model.Model;
 import model.User;
 
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Main application class. Handles switching scenes throughout application
@@ -112,7 +111,7 @@ public class MainFXApplication extends Application {
         try {
             //Load layout from fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/SignOutPanel.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource("../view/MainNavigationBar.fxml"));
             menu = loader.load();
 
             rootLayout.setTop(menu);
@@ -141,12 +140,12 @@ public class MainFXApplication extends Application {
         try {
             //Load layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/ProfileView.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource("../view/RegisterView.fxml"));
             profileLayout = loader.load();
 
             rootLayout.setCenter(profileLayout);
 
-            ProfileController controller = loader.getController();
+            RegisterController controller = loader.getController();
             controller.setMainApp(this);
 
         } catch (IOException e) {

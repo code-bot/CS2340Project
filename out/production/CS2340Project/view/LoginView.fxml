@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.PasswordField?>
@@ -9,17 +8,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" styleClass="background-frame" stylesheets="@css/Login.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
-    <TextField fx:id="username" alignment="CENTER_LEFT" layoutX="222.0" layoutY="237.0" promptText="Email" styleClass="text-field" stylesheets="@css/Login.css" />
-    <PasswordField fx:id="passwordField" alignment="CENTER_LEFT" layoutX="222.0" layoutY="285.0" promptText="Password" styleClass="text-field" stylesheets="@css/Login.css" />
-    <Button ellipsisString="Login" layoutX="280.0" layoutY="342.0" mnemonicParsing="false" onAction="#login" prefHeight="27.0" prefWidth="34.0" style="-fx-background-radius: 10;" styleClass="login-button" stylesheets="@css/Login.css" text="Login" textFill="#005580" />
-    <Hyperlink fx:id="signUp" layoutX="277.0" layoutY="391.0" text="Sign Up"  styleClass="hyper-link" stylesheets="@css/Login.css" />
-    <Hyperlink fx:id="forgotYourPassword" layoutX="230.0" layoutY="436.0" text="Forgot your password?" textAlignment="CENTER" styleClass="hyper-link" stylesheets="@css/Login.css" />
-    <ImageView fitHeight="232.0" fitWidth="400.0" layoutX="100.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" styleClass="background-frame" stylesheets="@css/Login.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+    <TextField fx:id="username" layoutX="223.0" layoutY="242.0" promptText="Email" styleClass="text-field" stylesheets="@css/Login.css" />
+    <PasswordField fx:id="passwordField" layoutX="223.0" layoutY="281.0" promptText="Password" styleClass="text-field" stylesheets="@css/Login.css" />
+    <Button layoutX="285.0" layoutY="341.0" mnemonicParsing="false" onAction="#login" prefHeight="27.0" prefWidth="54.0" styleClass="login-button" stylesheets="@css/Login.css" text="Login" />
+    <Hyperlink fx:id="signUp" layoutX="282.0" layoutY="388.0" styleClass="hyper-link" stylesheets="@css/Login.css" text="Sign Up" />
+    <Hyperlink fx:id="forgotYourPassword" layoutX="236.0" layoutY="429.0" styleClass="hyper-link" stylesheets="@css/Login.css" text="Forgot your password?" />
+    <ImageView fitHeight="232.0" fitWidth="400.0" layoutX="112.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
         <image>
             <Image url="@pictures/logo.png" />
         </image></ImageView>
-    <opaqueInsets>
-        <Insets />
-    </opaqueInsets>
 </AnchorPane>

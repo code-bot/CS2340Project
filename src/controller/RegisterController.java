@@ -17,7 +17,7 @@ import model.UserLevel;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class ProfileController {
+public class RegisterController {
 
 
     private MainFXApplication mainApplication;
@@ -29,14 +29,10 @@ public class ProfileController {
     private String email;
     private String emailConfirm;
     private String address;
-//    private String address2;
     private String zipcode;
-//    private ArrayList<User> users = new ArrayList<User>();
     private UserLevel userType;
     private String state;
     private String city;
-//    @FXML
-//    private TextField usernameField;
 
     @FXML
     private PasswordField passwordField;
