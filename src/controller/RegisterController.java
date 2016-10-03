@@ -23,7 +23,7 @@ public class RegisterController {
     private MainFXApplication mainApplication;
 
 
-    private String username;
+    //private String username;
     private String password;
     private String passwordConfirm;
     private String email;
@@ -102,19 +102,19 @@ public class RegisterController {
 
             alert.showAndWait();
         } else if (!(email.equals(emailConfirm))) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Registration Error!");
-            alert.setHeaderText("Email Does Not Match");
-            alert.setContentText("The emails provided are not the same. Please ensure you have entered the same email address.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Registration Error!");
+                alert.setHeaderText("Email Does Not Match");
+                alert.setContentText("The emails provided are not the same. Please ensure you have entered the same email address.");
 
-            alert.showAndWait();
-        } else if (!(password.equals(passwordConfirm))) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Registration Error!");
-            alert.setHeaderText("Password Does Not Match");
-            alert.setContentText("The passwords provided are not the same. Please ensure you have entered the same password.");
+                alert.showAndWait();
+            } else if (!(password.equals(passwordConfirm))) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Registration Error!");
+                alert.setHeaderText("Password Does Not Match");
+                alert.setContentText("The passwords provided are not the same. Please ensure you have entered the same password.");
 
-            alert.showAndWait();
+                alert.showAndWait();
         } else {
             User newUser = new User(email, password, userType, address, city, zipcode, state);
             boolean addedUser = model.Model.addUser(newUser);

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="50.0" prefWidth="600.0" styleClass="background-frame" stylesheets="@css/MainNavBar.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
+    <left>
+        <Button ellipsisString="Home" prefHeight="48.0" text="Home" alignment="CENTER" textAlignment="CENTER" mnemonicParsing="false" styleClass="nav-button" stylesheets="@css/MainNavBar.css"/>
+    </left>
+    <center>
+        <Button ellipsisString="Profile" prefHeight="48.0"  text="Edit Profile" alignment="CENTER" textAlignment="CENTER" mnemonicParsing="false" onAction="#goToEditProfileView" styleClass="nav-button" stylesheets="@css/MainNavBar.css"/>
+    </center>
+    <right>
+        <Button ellipsisString="Sign Out" prefHeight="48.0"  text="Sign Out" alignment="CENTER" textAlignment="CENTER" mnemonicParsing="false" onAction="#signOut" styleClass="nav-button" stylesheets="@css/MainNavBar.css"/>
+    </right>
+</BorderPane>
