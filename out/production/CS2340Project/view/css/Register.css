@@ -29,12 +29,12 @@
 }
 
 /** Size the combo-box button. */
-.choice-box {
+.state-combo-box {
 
 }
 
 /** Size the combo-box drop down list. */
-.choice-box-popup > .list-view {
-
+.state-combo-box-popup > .list-view {
+    -fx-pref-height: 150;
     overflow:scroll;
 }

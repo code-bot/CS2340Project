@@ -51,16 +51,13 @@ public class ProfileController {
     private TextField addressLine1Field;
 
     @FXML
-    private TextField addressLine2Field;
-
-    @FXML
     private TextField zipcodeField;
 
     @FXML
-    private ChoiceBox<String> stateChoiceBox;
+    private ComboBox<String> stateComboBox;
 
     @FXML
-    private ChoiceBox<UserLevel> userTypeBox;
+    private ComboBox<UserLevel> userTypeBox;
     @FXML
     private Button register;
 
@@ -68,10 +65,12 @@ public class ProfileController {
     @FXML
     private void initialize() {
 
-        stateChoiceBox.getItems().addAll(States.toList());
-        stateChoiceBox.getSelectionModel().selectFirst();
+        stateComboBox.getItems().addAll(States.toList());
+        stateComboBox.getSelectionModel().selectFirst();
+        stateComboBox.setVisibleRowCount(6);
         userTypeBox.getItems().addAll(UserLevel.toList());
         userTypeBox.getSelectionModel().selectFirst();
+        userTypeBox.setVisibleRowCount(4);
     }
 
     private void loadData() {
@@ -81,7 +80,6 @@ public class ProfileController {
         email = emailField.getText();
         emailConfirm = confirmEmailField.getText();
         address1 = addressLine1Field.getText();
-        address2 = addressLine2Field.getText();
         zipCode = zipcodeField.getText();
         userType = userTypeBox.getValue();
 
