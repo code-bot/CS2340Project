@@ -69,7 +69,9 @@ public class ProfileController {
     private void initialize() {
 
         stateChoiceBox.getItems().addAll(States.toList());
+        stateChoiceBox.getSelectionModel().selectFirst();
         userTypeBox.getItems().addAll(UserLevel.toList());
+        userTypeBox.getSelectionModel().selectFirst();
     }
 
     private void loadData() {
