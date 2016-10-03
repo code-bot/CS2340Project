@@ -47,7 +47,7 @@ public class MainFXApplication extends Application {
         mainStage.setResizable(false);
         initRootLayout(mainStage);
         initLoginScreen(mainStage);
-        Model.addUser(new User("user", "pass"));
+        Model.addUser(new User("user", "pass", "123 Techwood Drive", "Atlanta", "30332", "Georgia"));
     }
 
     public Stage getMainStage() {

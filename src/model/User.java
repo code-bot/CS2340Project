@@ -11,8 +11,12 @@ import javafx.beans.property.StringProperty;
  */
 public class User {
 
-    private StringProperty email = new SimpleStringProperty();
-    private StringProperty password = new SimpleStringProperty();
+    private final StringProperty email = new SimpleStringProperty();
+    private final StringProperty password = new SimpleStringProperty();
+    private final StringProperty address = new SimpleStringProperty();
+    private final StringProperty zipcode = new SimpleStringProperty();
+    private final StringProperty city = new SimpleStringProperty();
+    private final StringProperty state = new SimpleStringProperty();
 
     /** Authority level of user */
     private final ObjectProperty<UserLevel> level = new SimpleObjectProperty<>();
@@ -23,6 +27,7 @@ public class User {
     public void setEmail(String email) {
         this.email.set(email);
     }
+
     /** Can only get the password, setting password only happens during user
      * creation */
     public String getPassword() {
@@ -36,16 +41,37 @@ public class User {
      * creation */
     public UserLevel getUserLevel() { return level.get(); }
 
+    public String getAddress() {
+        return address.get();
+    }
+
+    public String getZipcode() {
+        return zipcode.get();
+    }
+
+    public String getCity() {
+        return city.get();
+    }
+
+    public String getState() {
+        return state.get();
+    }
+
     /**
      * Main constructor
      * @param uname     Username
      * @param pass      Password
      * @param level     Authority level
      */
-    public User(String uname, String pass, UserLevel level) {
+    public User(String uname, String pass, UserLevel level, String address,
+                String city, String zipcode, String state) {
         email.set(uname);
         password.set(pass);
         this.level.set(level);
+        this.city.set(city);
+        this.address.set(address);
+        this.zipcode.set(zipcode);
+        this.state.set(state);
     }
 
     /**
@@ -53,9 +79,14 @@ public class User {
      * @param uname     Username
      * @param pass      Password
      */
-    public User(String uname, String pass) {
+    public User(String uname, String pass, String address,
+                String city, String zipcode, String state) {
         email.set(uname);
         password.set(pass);
         this.level.set(UserLevel.NORMAL);
+        this.city.set(city);
+        this.address.set(address);
+        this.zipcode.set(zipcode);
+        this.state.set(state);
     }
 }

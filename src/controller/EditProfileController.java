@@ -91,7 +91,10 @@ public class EditProfileController {
             System.out.println("Email: " + model.getCurrentUser().getEmail());
             System.out.println("Password: " + model.getCurrentUser().getPassword());
 
-            User newUser = new User(model.getCurrentUser().getEmail(), model.getCurrentUser().getPassword(), model.getCurrentUser().getUserLevel());
+            User currUser = model.getCurrentUser();
+
+            User newUser = new User(currUser.getEmail(), currUser.getPassword(), currUser.getUserLevel(),
+                    currUser.getAddress(), currUser.getCity(), currUser.getZipcode(), currUser.getState());
             boolean addedUser = model.addUser(newUser);
             if (addedUser) {
                 model.deleteUser(oldUser);
