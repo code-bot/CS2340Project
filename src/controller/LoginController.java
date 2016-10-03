@@ -4,11 +4,9 @@ import fxapp.MainFXApplication;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.Model;
+import model.States;
 import model.User;
 import model.UserLevel;
 
@@ -76,8 +74,8 @@ public class LoginController {
     private void login() {
         _username = username.getText();
         _password = passwordField.getText();
-        if (model.validateUser(new User(username.getText(), passwordField.getText()))) {
-            model.setCurrentUser(model.getUser(username.getText()));
+        if (model.validateUser(_username, _password)) {
+            model.setCurrentUser(model.getUser(_username));
             mainApplication.initMenu(mainApplication.getMainStage());
             mainApplication.initHomeScreen(mainApplication.getMainStage());
         } else {
@@ -85,7 +83,6 @@ public class LoginController {
             alert.setTitle("Login Error");
             alert.setHeaderText("Incorrect Information");
             alert.setContentText("Wrong username or password");
-
             alert.showAndWait();
         }
     }
