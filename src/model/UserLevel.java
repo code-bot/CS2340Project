@@ -11,7 +11,10 @@ public enum UserLevel {
     NORMAL, WORKER, MANAGER, ADMIN;
 
 
-
+    /**
+     * Transforms the enum into a list
+     * @return  the final list
+     */
     public static ObservableList<UserLevel> toList() {
         ObservableList<UserLevel> list = FXCollections.observableArrayList();
 

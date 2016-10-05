@@ -77,6 +77,10 @@ public enum States {
         return getValue();
     }
 
+    /**
+     * Transforms the ENUM into a list
+     * @return  the final list
+     */
     public static ObservableList<String> toList() {
         ObservableList<String> list = FXCollections.observableArrayList();
 

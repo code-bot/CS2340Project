@@ -56,6 +56,10 @@ public class MainFXApplication extends Application {
 
     public Pane getRootLayout() { return rootLayout; }
 
+    /**
+     * Initializes the root border pane
+     * @param mainStage The stage to add the layout to
+     */
     public void initRootLayout(Stage mainStage) {
 
         try {
@@ -77,6 +81,9 @@ public class MainFXApplication extends Application {
         } catch (IOException e) {}
     }
 
+    /**
+     * Log out the user and remove nav bar
+     */
     public void logoutUser() {
         //TODO: Store user information before logging out
         Model.getInstance().clearCurrentUser();
@@ -84,14 +91,14 @@ public class MainFXApplication extends Application {
         rootLayout.setTop(null);
     }
 
-    public void goToProfile() {
-        initRegisterScreen(mainStage);
-    }
-
     public void goToEditProfile() {
         initEditRegisterScreen(mainStage);
     }
 
+    /**
+     * Initialize login screen on the main stage
+     * @param mainStage the stage to add the layouts to
+     */
     public void initLoginScreen(Stage mainStage) {
         try {
             //Load layout from fxml file.
@@ -108,6 +115,10 @@ public class MainFXApplication extends Application {
         } catch (IOException e) {}
     }
 
+    /**
+     * Initialize navigation bar
+     * @param mainStage the stage to add the layout to
+     */
     public void initMenu(Stage mainStage) {
         try {
             //Load layout from fxml file
@@ -125,6 +136,10 @@ public class MainFXApplication extends Application {
 
     }
 
+    /**
+     * Initialize the home screen
+     * @param mainStage the stage to add the layout to
+     */
     public void initHomeScreen(Stage mainStage) {
         try {
             //Load layout from fxml file.
@@ -137,6 +152,10 @@ public class MainFXApplication extends Application {
         } catch (IOException e) {}
     }
 
+    /**
+     * Initialize the registration screen
+     * @param mainStage the stage to add the layout to
+     */
     public void initRegisterScreen(Stage mainStage) {
         try {
             //Load layout from fxml file.
@@ -155,6 +174,10 @@ public class MainFXApplication extends Application {
 
     }
 
+    /**
+     * Initialize the edit profile screen
+     * @param mainStage the stage to add the layout to
+     */
     public void initEditRegisterScreen(Stage mainStage) {
         try {
             FXMLLoader loader = new FXMLLoader();

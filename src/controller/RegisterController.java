@@ -66,7 +66,9 @@ public class RegisterController {
     private Button register;
 
 
-
+    /**
+     * Gets called when controller is created. Sets ComboBox properties
+     */
     @FXML
     private void initialize() {
 
@@ -78,6 +80,9 @@ public class RegisterController {
         userTypeBox.setVisibleRowCount(4);
     }
 
+    /**
+     * Load data from the correct inputs
+     */
     private void loadData() {
         //Initialize fields
         password = passwordField.getText();
@@ -91,6 +96,10 @@ public class RegisterController {
         userType = userTypeBox.getValue();
 
     }
+
+    /**
+     * Register the user, handle exceptions, and store the user in the model
+     */
     @FXML
     private void registerUser() {
         loadData();
@@ -136,6 +145,9 @@ public class RegisterController {
         mainApplication = main;
     }
 
+    /**
+     * Cancels the registration and the user is not saved in the model
+     */
     @FXML
     private void cancel() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

@@ -46,15 +46,9 @@ public class LoginController {
     }
 
 
-    /** Ensures username and password textfields are the same as testUser */
-//    private boolean validateUser() {
-//        //TODO: Create way to validate any user based on username and password
-//
-//        //Hard-coded case
-//        return _username.equals(model.getUser())
-//                && _password.equals(model.testUser.getPassword());
-//    }
-
+    /**
+     * Gets called when controller is first initialized
+     */
     @FXML
     private void initialize() {
 

@@ -46,6 +46,10 @@ public class EditProfileController {
     @FXML
     private ComboBox<String> stateComboBox;
 
+    /**
+     * Sets default placeholders for required fields
+     * @param user  User holding the default info
+     */
     public void setDefaultInfo(User user) {
         emailField.setPromptText(user.getEmail());
         addressLine1Field.setPromptText(user.getAddress());
@@ -56,11 +60,17 @@ public class EditProfileController {
         stateComboBox.getSelectionModel().select(user.getState().name());
     }
 
-
+    /**
+     * Set the main application
+     * @param main  The main application
+     */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
     }
 
+    /**
+     * Cancel the edit and return to home screen
+     */
     @FXML
     private void cancel() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -77,6 +87,9 @@ public class EditProfileController {
         }
     }
 
+    /**
+     * Update the user and edit the changes as necessary
+     */
     @FXML
     private void updateUser() {
         password = passwordField.getText();

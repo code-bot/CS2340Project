@@ -53,6 +53,11 @@ public class Model {
         currUser.set(null);
     }
 
+    /**
+     * Add user to the hashmap
+     * @param user  the user to add
+     * @return  successfully added or not
+     */
     public boolean addUser(User user) {
         if (userMap.containsKey(user.getEmail())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -67,6 +72,13 @@ public class Model {
         }
     }
 
+    /**
+     * Update a user that exists in the hashmap
+     * @param previous  the user in the hashmap to update
+     * @param user      the updated user
+     * @param sameEmail whether the email changed or not
+     * @return  successfully updated or not
+     */
     public boolean updateUser(User previous, User user, boolean sameEmail) {
         if (!userMap.containsKey(previous.getEmail())) {
             System.out.println("Email does not exist");
@@ -90,6 +102,11 @@ public class Model {
         }
     }
 
+    /**
+     * Delete user from hashmap
+     * @param user  the user to delete
+     * @return  successfully deleted or not
+     */
     public boolean deleteUser(User user) {
         if (userMap.containsKey(user.getEmail())) {
             userMap.remove(user.getEmail());
@@ -98,18 +115,20 @@ public class Model {
         return false;
     }
 
+    /**
+     * Validate if email and password match
+     * @param email     the email to check
+     * @param password  the password to check
+     * @return  if the email and password match or not
+     */
     public boolean validateUser(String email, String password) {
 
         if (userMap.containsKey(email)) {
-            if(userMap.get(email).getPassword().equals(password)) {
+            if (userMap.get(email).getPassword().equals(password)) {
                 return true;
             }
         }
         return false;
-    }
-
-    public User getUser(String email) {
-        return userMap.get(email);
     }
 
 }
