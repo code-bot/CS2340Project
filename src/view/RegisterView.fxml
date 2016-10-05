@@ -9,8 +9,8 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" styleClass="background-frame" stylesheets="@css/Register.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
    <children>
-       <TextField fx:id="emailField" layoutX="212.0" layoutY="114.0" promptText="Confirm email address..." styleClass="text-field" stylesheets="@css/Register.css" />
-       <TextField fx:id="confirmEmailField" layoutX="212.0" layoutY="75.0" prefWidth="179.0" promptText="Enter email address..." styleClass="text-field" stylesheets="@css/Register.css" />
+       <TextField fx:id="emailField" layoutX="209.0" layoutY="74.0" promptText="Enter email address..." styleClass="text-field" stylesheets="@css/Register.css" />
+       <TextField fx:id="confirmEmailField" layoutX="209.0" layoutY="113.0" prefWidth="179.0" promptText="Confirm email address..." styleClass="text-field" stylesheets="@css/Register.css" />
        <PasswordField fx:id="passwordField" layoutX="210.0" layoutY="167.0" promptText="Enter password..." styleClass="text-field" stylesheets="@css/Register.css" />
        <PasswordField fx:id="confirmPasswordField" layoutX="210.0" layoutY="206.0" promptText="Confirm password..." styleClass="text-field" stylesheets="@css/Register.css" />
        <TextField fx:id="addressLine1Field" layoutX="209.0" layoutY="264.0" prefWidth="179.0" promptText="Enter Address Line 1" styleClass="text-field" stylesheets="@css/Register.css" />
