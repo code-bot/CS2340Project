@@ -40,7 +40,7 @@ public class Model {
     public User getCurrentUser() { return currUser.get(); }
 
 
-    public static boolean setCurrentUser(User user) {
+    public boolean setCurrentUser(User user) {
         //Can only set the current user if there is no current user (Safety measure)
         if (currUser.get() == null) {
             currUser.set(user);
@@ -53,7 +53,7 @@ public class Model {
         currUser.set(null);
     }
 
-    public static boolean addUser(User user) {
+    public boolean addUser(User user) {
         if (userMap.containsKey(user.getEmail())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Registration Error");
@@ -67,7 +67,30 @@ public class Model {
         }
     }
 
-    public static boolean deleteUser(User user) {
+    public boolean updateUser(User previous, User user, boolean sameEmail) {
+        if (!userMap.containsKey(previous.getEmail())) {
+            System.out.println("Email does not exist");
+            return false;
+        } else if (!sameEmail && userMap.containsKey(user.getEmail())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Registration Error");
+            alert.setHeaderText("Email already exists in system");
+            alert.setContentText("Please go to login page to login or use forgot password feature");
+            alert.showAndWait();
+            return false;
+        } else if (sameEmail) {
+            userMap.put(previous.getEmail(), user);
+            currUser.set(user);
+            return true;
+        } else {
+            userMap.remove(previous.getEmail(), previous);
+            userMap.put(user.getEmail(), user);
+            currUser.set(user);
+            return true;
+        }
+    }
+
+    public boolean deleteUser(User user) {
         if (userMap.containsKey(user.getEmail())) {
             userMap.remove(user.getEmail());
             return true;

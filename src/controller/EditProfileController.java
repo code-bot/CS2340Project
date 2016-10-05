@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import fxapp.MainFXApplication;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -7,7 +8,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import model.Model;
+import model.States;
 import model.User;
+import model.UserLevel;
 
 import java.util.Optional;
 
@@ -21,7 +24,10 @@ public class EditProfileController {
     private String email;
     private String password;
     private String emailConfirm;
-    private Model model;
+    private String address;
+    private String city;
+    private String zipcode;
+    private States state;
 
     @FXML
     private PasswordField passwordField;
@@ -31,12 +37,25 @@ public class EditProfileController {
     private TextField emailField;
     @FXML
     private TextField confirmEmailField;
+    @FXML
+    private TextField addressLine1Field;
+    @FXML
+    private TextField cityField;
+    @FXML
+    private TextField zipcodeField;
+    @FXML
+    private ComboBox<String> stateComboBox;
 
-    public EditProfileController() {
-        model = Model.getInstance();
+    public void setDefaultInfo(User user) {
+        emailField.setPromptText(user.getEmail());
+        addressLine1Field.setPromptText(user.getAddress());
+        cityField.setPromptText(user.getCity());
+        zipcodeField.setPromptText(user.getZipcode());
+        stateComboBox.getItems().addAll(States.toList());
+        stateComboBox.setVisibleRowCount(6);
+        stateComboBox.getSelectionModel().select(user.getState().name());
     }
 
-    public TextField getEmailTextField() { return emailField; }
 
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
@@ -54,15 +73,20 @@ public class EditProfileController {
             mainApplication.initMenu(mainApplication.getMainStage());
             mainApplication.initHomeScreen(mainApplication.getMainStage());
         } else {
+
         }
     }
 
     @FXML
-    private void setUser() {
+    private void updateUser() {
         password = passwordField.getText();
         passwordConfirm = confirmPasswordField.getText();
         email = emailField.getText();
         emailConfirm = confirmEmailField.getText();
+        address = addressLine1Field.getText();
+        city = cityField.getText();
+        zipcode = zipcodeField.getText();
+        state = States.valueOf(stateComboBox.getSelectionModel().getSelectedItem());
 
         if (!(email.equals(emailConfirm))) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -79,26 +103,29 @@ public class EditProfileController {
 
             alert.showAndWait();
         } else {
-            User oldUser = model.getCurrentUser();
-            if (!email.isEmpty() && !emailConfirm.isEmpty()) {
-                model.getCurrentUser().setEmail(emailConfirm);
+            User oldUser = Model.getInstance().getCurrentUser();
+            boolean sameEmail = false;
+            if (email.equals("")) {
+                sameEmail = true;
+                email = oldUser.getEmail();
             }
-            if (!password.isEmpty() && !passwordConfirm.isEmpty()) {
-                model.getCurrentUser().setPassword(passwordConfirm);
+            if (password.equals("")) {
+                password = oldUser.getPassword();
             }
-            mainApplication.initMenu(mainApplication.getMainStage());
-            mainApplication.initHomeScreen(mainApplication.getMainStage());
-            System.out.println("Email: " + model.getCurrentUser().getEmail());
-            System.out.println("Password: " + model.getCurrentUser().getPassword());
+            if (address.equals("")) {
+                address = oldUser.getAddress();
+            }
+            if (city.equals("")) {
+                city = oldUser.getCity();
+            }
+            if (zipcode.equals("")) {
+                zipcode = oldUser.getZipcode();
+            }
 
-            User currUser = model.getCurrentUser();
-
-            User newUser = new User(currUser.getEmail(), currUser.getPassword(), currUser.getUserLevel(),
-                    currUser.getAddress(), currUser.getCity(), currUser.getZipcode(), currUser.getState());
-            boolean addedUser = model.addUser(newUser);
-            if (addedUser) {
-                model.deleteUser(oldUser);
-                model.setCurrentUser(newUser);
+            User newUser = new User(email, password, oldUser.getUserLevel(),
+                    address, city, zipcode, state);
+            boolean updatedUser = Model.getInstance().updateUser(oldUser, newUser, sameEmail);
+            if (updatedUser) {
                 mainApplication.initMenu(mainApplication.getMainStage());
                 mainApplication.initHomeScreen(mainApplication.getMainStage());
             }

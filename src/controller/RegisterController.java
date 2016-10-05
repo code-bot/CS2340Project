@@ -3,6 +3,7 @@ package controller;
 /**
  * Created by Aman on 9/28/16.
  */
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import fxapp.MainFXApplication;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -116,10 +117,10 @@ public class RegisterController {
 
                 alert.showAndWait();
         } else {
-            User newUser = new User(email, password, userType, address, city, zipcode, state);
-            boolean addedUser = model.Model.addUser(newUser);
+            User newUser = new User(email, password, userType, address, city, zipcode, States.valueOf(state));
+            boolean addedUser = Model.getInstance().addUser(newUser);
             if (addedUser) {
-                model.Model.setCurrentUser(newUser);
+                Model.getInstance().setCurrentUser(newUser);
                 mainApplication.initMenu(mainApplication.getMainStage());
                 mainApplication.initHomeScreen(mainApplication.getMainStage());
             }

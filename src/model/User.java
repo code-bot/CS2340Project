@@ -16,7 +16,7 @@ public class User {
     private final StringProperty address = new SimpleStringProperty();
     private final StringProperty zipcode = new SimpleStringProperty();
     private final StringProperty city = new SimpleStringProperty();
-    private final StringProperty state = new SimpleStringProperty();
+    private final ObjectProperty<States> state = new SimpleObjectProperty();
 
     /** Authority level of user */
     private final ObjectProperty<UserLevel> level = new SimpleObjectProperty<>();
@@ -53,7 +53,7 @@ public class User {
         return city.get();
     }
 
-    public String getState() {
+    public States getState() {
         return state.get();
     }
 
@@ -64,7 +64,7 @@ public class User {
      * @param level     Authority level
      */
     public User(String uname, String pass, UserLevel level, String address,
-                String city, String zipcode, String state) {
+                String city, String zipcode, States state) {
         email.set(uname);
         password.set(pass);
         this.level.set(level);
@@ -80,7 +80,7 @@ public class User {
      * @param pass      Password
      */
     public User(String uname, String pass, String address,
-                String city, String zipcode, String state) {
+                String city, String zipcode, States state) {
         email.set(uname);
         password.set(pass);
         this.level.set(UserLevel.NORMAL);
@@ -88,5 +88,12 @@ public class User {
         this.address.set(address);
         this.zipcode.set(zipcode);
         this.state.set(state);
+    }
+
+    @Override
+    public String toString() {
+        return email.get() + " " + password.get() + " " + level.get().name() +
+                " " + address.get() + " " + city.get() + " " + zipcode.get() +
+                " " + state.get().name();
     }
 }

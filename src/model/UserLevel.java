@@ -15,7 +15,7 @@ public enum UserLevel {
     public static ObservableList<UserLevel> toList() {
         ObservableList<UserLevel> list = FXCollections.observableArrayList();
 
-        for (UserLevel value: values()) {
+        for (UserLevel value : values()) {
             list.add(value);
         }
         return list;

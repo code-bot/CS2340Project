@@ -12,7 +12,6 @@
 .text-field:focused {
     -fx-text-fill: white;
     -fx-background-color: rgba(61, 61, 92, 1.0);
-    -fx-prompt-text-fill: #000000
 }
 
 .hyper-link {

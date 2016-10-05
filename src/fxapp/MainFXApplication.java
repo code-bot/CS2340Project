@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.Model;
+import model.States;
 import model.User;
 
 import java.io.IOException;
@@ -46,7 +47,7 @@ public class MainFXApplication extends Application {
         mainStage.setResizable(false);
         initRootLayout(mainStage);
         initLoginScreen(mainStage);
-        Model.addUser(new User("user", "pass", "123 Techwood Drive", "Atlanta", "30332", "Georgia"));
+        Model.getInstance().addUser(new User("user", "pass", "123 Techwood Drive", "Atlanta", "30332", States.GA));
     }
 
     public Stage getMainStage() {
@@ -163,7 +164,7 @@ public class MainFXApplication extends Application {
             rootLayout.setCenter(editProfileLayout);
 
             EditProfileController controller = loader.getController();
-            controller.getEmailTextField().setPromptText(model.getCurrentUser().getEmail());
+            controller.setDefaultInfo(Model.getInstance().getCurrentUser());
             controller.setMainApp(this);
 
         } catch (IOException e) {
