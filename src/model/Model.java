@@ -131,4 +131,12 @@ public class Model {
         return false;
     }
 
+    /**
+     * Gets the user corresponding to the email
+     * @param email The email of the user
+     * @return  the user associated with the email
+     */
+    public User getUser(String email) {
+        return userMap.get(email);
+    }
 }
