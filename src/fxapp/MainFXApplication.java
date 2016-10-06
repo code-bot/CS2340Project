@@ -1,4 +1,5 @@
 package fxapp;
+import com.google.firebase.FirebaseOptions;
 
 
 import com.sun.javaws.Main;

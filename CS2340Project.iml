@@ -7,5 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="com.firebase.client:firebase-client-jvm:1.0.7" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-server-sdk:3.0.1" level="project" />
   </component>
 </module>
