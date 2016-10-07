@@ -5,12 +5,9 @@
 
 <BorderPane prefHeight="50.0" prefWidth="600.0" styleClass="background-frame" stylesheets="@css/MainNavBar.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
     <left>
-        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="48.0" styleClass="nav-button" stylesheets="@css/MainNavBar.css" text="Home" textAlignment="CENTER" />
+        <Button alignment="CENTER" mnemonicParsing="false" onAction="#goToEditProfileView" prefHeight="48.0" prefWidth="100.0" styleClass="nav-button" stylesheets="@css/MainNavBar.css" text="My Profile" textAlignment="CENTER" />
     </left>
-    <center>
-        <Button alignment="CENTER" mnemonicParsing="false" onAction="#goToEditProfileView" prefHeight="48.0" styleClass="nav-button" stylesheets="@css/MainNavBar.css" text="Profile" textAlignment="CENTER" />
-    </center>
     <right>
-        <Button alignment="CENTER" mnemonicParsing="false" onAction="#signOut" prefHeight="48.0" styleClass="nav-button" stylesheets="@css/MainNavBar.css" text="Sign Out" textAlignment="CENTER" />
+        <Button alignment="CENTER" mnemonicParsing="false" onAction="#signOut" prefHeight="48.0" prefWidth="100.0" styleClass="nav-button" stylesheets="@css/MainNavBar.css" text="Sign Out" textAlignment="CENTER" />
     </right>
 </BorderPane>

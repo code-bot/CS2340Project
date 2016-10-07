@@ -45,6 +45,8 @@ public class EditProfileController {
     private TextField zipcodeField;
     @FXML
     private ComboBox<String> stateComboBox;
+    @FXML
+    private Label userTypeLbl;
 
     /**
      * Sets default placeholders for required fields
@@ -58,6 +60,7 @@ public class EditProfileController {
         stateComboBox.getItems().addAll(States.toList());
         stateComboBox.setVisibleRowCount(6);
         stateComboBox.getSelectionModel().select(user.getState().name());
+        userTypeLbl.textProperty().set("User Type: " + user.getUserLevel().name());
     }
 
     /**
