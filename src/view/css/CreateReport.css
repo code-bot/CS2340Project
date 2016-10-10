@@ -1,0 +1,50 @@
+.text-field {
+    -fx-text-fill: white;
+    -fx-background-color: rgba(61, 61, 92, 1.0);
+    -fx-border-color: rgba(170, 219, 255,1.0);
+    -fx-border-width : 0 0 1 0;
+    -fx-focus-color: white;
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+}
+
+.text-field:focused {
+    -fx-text-fill: white;
+    -fx-background-color: rgba(61, 61, 92, 1.0);
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+}
+
+.toggle-button {
+    -fx-text-fill: white;
+    -fx-background-color: rgba(61, 61, 92, 1.0);
+    -fx-border-color: rgba(170, 219, 255,1.0);
+    -fx-border-width : 1;
+    -fx-border-radius : 10;
+}
+
+.toggle-button:selected {
+    -fx-text-fill: rgba(0, 85, 128, 1.0);
+    -fx-background-color: rgba(170, 219, 255,1.0);
+    -fx-border-width : 1;
+}
+
+.hyper-link {
+    -fx-text-fill: rgba(170, 219, 255,1.0);
+
+}
+
+.background-frame {
+    -fx-background-color: rgba(61, 61, 92, 1.0);
+}
+
+.create-button {
+    -fx-background-color: rgba(170, 219, 255,1.0);
+    -fx-background-radius: 10;
+}
+
+.location-selection {
+    -fx-background-color: rgba(61, 61, 92, 1.0);
+}
+
+.focus-label {
+    -fx-text-fill: rgba(170, 219, 255,1.0);
+}

@@ -7,6 +7,8 @@ import javafx.beans.property.*;
  */
 public abstract class Report {
 
+    private static int num = 0;
+
     private IntegerProperty reportNum = new SimpleIntegerProperty();
     private StringProperty date = new SimpleStringProperty();
     private StringProperty time = new SimpleStringProperty();
@@ -32,13 +34,14 @@ public abstract class Report {
     public double getLong() { return lon.get(); }
     public void setLong(double longitude) { lon.set(longitude); }
 
-    Report(int num, String date, String time, String name, double lat, double lon) {
+    Report(String date, String time, String name, double lat, double lon) {
         this.reportNum.set(num);
         this.date.set(date);
         this.time.set(time);
         this.reporterName.set(name);
         this.lat.set(lat);
         this.lon.set(lon);
+        num++;
     }
 
 

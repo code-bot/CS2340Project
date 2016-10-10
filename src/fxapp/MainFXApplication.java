@@ -3,10 +3,7 @@ package fxapp;
 
 import com.sun.javaws.Main;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-import controller.EditProfileController;
-import controller.LoginController;
-import controller.MenuController;
-import controller.RegisterController;
+import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -129,7 +126,7 @@ public class MainFXApplication extends Application {
             rootLayout.setTop(menu);
 
             MenuController controller = loader.getController();
-            controller.setMain(this);
+            controller.setMainApp(this);
         } catch (IOException e) {
 
         }
@@ -148,6 +145,9 @@ public class MainFXApplication extends Application {
             homeLayout = loader.load();
 
             rootLayout.setCenter(homeLayout);
+
+            MainViewController controller = loader.getController();
+            controller.setMainApp(this);
 
         } catch (IOException e) {}
     }

@@ -25,8 +25,8 @@ public class WaterSourceReport extends Report {
     public WaterCondition getCondition() { return condition.get(); }
     public void setCondition(WaterCondition waterCondition) { condition.set(waterCondition); }
 
-    WaterSourceReport(int num, String date, String time, String name, double lat, double lon, WaterType type, WaterCondition condition) {
-        super(num, date, time, name, lat, lon);
+    WaterSourceReport(String date, String time, String name, double lat, double lon, WaterType type, WaterCondition condition) {
+        super(date, time, name, lat, lon);
         this.type.set(type);
         this.condition.set(condition);
     }

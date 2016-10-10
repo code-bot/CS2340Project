@@ -14,7 +14,7 @@ public class MenuController {
      * Set the main application reference
      * @param main  The main application
      */
-    public void setMain(MainFXApplication main) {
+    public void setMainApp(MainFXApplication main) {
         mainApplication = main;
     }
 
