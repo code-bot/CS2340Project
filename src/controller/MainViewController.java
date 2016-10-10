@@ -2,7 +2,6 @@ package controller;
 
 import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
 /**
  * Created by sahajbot on 10/10/16.
@@ -22,6 +21,6 @@ public class MainViewController {
 
     @FXML
     public void createReport() {
-
+        mainApplication.initCreateReportScreen(mainApplication.getMainStage());
     }
 }

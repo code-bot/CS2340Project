@@ -4,8 +4,10 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Alert;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * Serves as Facade into the application model
@@ -24,7 +26,8 @@ public class Model {
      is created */
     public User testUser;
 
-    private static Map<String, User>  userMap = new HashMap<String, User>();
+    private static Map<String, User>  userMap;
+    private static Set<Report> reports;
 
     /**
      * Create a new model
@@ -32,8 +35,8 @@ public class Model {
      */
     Model() {
         //TODO: Add additional default data
-
-
+        userMap = new HashMap<String, User>();
+        reports = new HashSet<>();
     }
 
     /** Getter and setter for the currUser */
@@ -138,5 +141,23 @@ public class Model {
      */
     public User getUser(String email) {
         return userMap.get(email);
+    }
+
+    /**
+     * Adds a report to be stored
+     * @param report    the report to be stored
+     * @return  if report was successfully added to hashset
+     */
+    public boolean addReport(Report report) {
+        return reports.add(report);
+    }
+
+    /**
+     * Removes a report
+     * @param report    the report to be removed
+     * @return  if report was successfully removed from hashset
+     */
+    public boolean removeReport(Report report) {
+        return reports.remove(report);
     }
 }

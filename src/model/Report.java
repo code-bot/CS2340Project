@@ -44,6 +44,24 @@ public abstract class Report {
         num++;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (!other.getClass().equals(this.getClass())) {
+            return false;
+        }
+        Report that = (Report) other;
+        if (that.getNum() != this.getNum()) {
+            return false;
+        }
+        return true;
+    }
 
+    @Override
+    public int hashCode() {
+        return num;
+    }
 
 }
