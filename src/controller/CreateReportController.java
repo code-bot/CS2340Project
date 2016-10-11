@@ -6,6 +6,8 @@ import javafx.scene.control.*;
 import model.Model;
 import model.WaterSourceReport;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
@@ -53,8 +55,11 @@ public class CreateReportController {
         double lonNum = -84.3880;
         WaterSourceReport.WaterType type = typeComboBox.getValue();
         WaterSourceReport.WaterCondition condition = conditionComboBox.getValue();
-        String date = "date";
-        String time = "time";
+        DateFormat df = new SimpleDateFormat("MM/dd/yy");
+        Date dateObj =  new Date();
+        String date = df.format(dateObj);
+        DateFormat tf = new SimpleDateFormat("HH:mm:ss");
+        String time = tf.format(dateObj);
         String name = Model.getInstance().getCurrentUser().getEmail();
 
 
@@ -74,6 +79,7 @@ public class CreateReportController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
             WaterSourceReport report = new WaterSourceReport(date, time, name, latNum, lonNum, type, condition);
+            System.out.println(report);
             if (Model.getInstance().addReport(report)) {
                 mainApplication.initMenu(mainApplication.getMainStage());
                 mainApplication.initHomeScreen(mainApplication.getMainStage());

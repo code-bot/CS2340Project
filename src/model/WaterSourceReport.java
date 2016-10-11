@@ -58,4 +58,12 @@ public class WaterSourceReport extends Report {
         this.type.set(type);
         this.condition.set(condition);
     }
+
+    @Override
+    public String toString() {
+        return "Num: " + super.getNum() + "\n" + "Date: " + super.getDate() + "\n"
+                + "Time: " + super.getTime() + "\n" + "Name: " + super.getName()
+                + "\n" + "Lat: " + super.getLat() + "\n" + "Long: " + super.getLong()
+                + "\n" + "Type: " + this.getType() + "\n" + "Condition: " + this.getCondition();
+    }
 }

@@ -7,7 +7,7 @@ import javafx.beans.property.*;
  */
 public abstract class Report {
 
-    private static int num = 0;
+    private static int num = 1;
 
     private IntegerProperty reportNum = new SimpleIntegerProperty();
     private StringProperty date = new SimpleStringProperty();

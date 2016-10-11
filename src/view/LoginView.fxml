@@ -9,10 +9,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" styleClass="background-frame" stylesheets="@css/Login.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
-    <TextField fx:id="username" layoutX="223.0" layoutY="242.0" promptText="Email" styleClass="text-field" stylesheets="@css/Login.css" />
-    <PasswordField fx:id="passwordField" layoutX="223.0" layoutY="281.0" promptText="Password" styleClass="text-field" stylesheets="@css/Login.css" />
+    <TextField fx:id="username" layoutX="228.0" layoutY="241.0" promptText="Email" styleClass="text-field" stylesheets="@css/Login.css" />
+    <PasswordField fx:id="passwordField" layoutX="229.0" layoutY="286.0" promptText="Password" styleClass="text-field" stylesheets="@css/Login.css" />
     <Button layoutX="285.0" layoutY="341.0" mnemonicParsing="false" onAction="#login" prefHeight="27.0" prefWidth="54.0" styleClass="login-button" stylesheets="@css/Login.css" text="Login" />
-    <Hyperlink fx:id="signUp" layoutX="282.0" layoutY="388.0" styleClass="hyper-link" stylesheets="@css/Login.css" text="Sign Up" />
+    <Hyperlink fx:id="signUp" layoutX="282.0" layoutY="397.0" styleClass="hyper-link" stylesheets="@css/Login.css" text="Sign Up" />
     <Hyperlink fx:id="forgotYourPassword" layoutX="236.0" layoutY="429.0" styleClass="hyper-link" stylesheets="@css/Login.css" text="Forgot your password?" />
     <ImageView fitHeight="232.0" fitWidth="400.0" layoutX="112.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
         <image>
