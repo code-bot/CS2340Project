@@ -23,4 +23,18 @@ public enum UserLevel {
         }
         return list;
     }
+
+    public static UserLevel stringToUserLevel(String level) {
+        switch(level) {
+            case "NORMAL":
+                return UserLevel.NORMAL;
+            case "WORKER":
+                return UserLevel.WORKER;
+            case "MANAGER":
+                return UserLevel.MANAGER;
+            case "ADMIN":
+                return UserLevel.ADMIN;
+        }
+        return null;
+    }
 }

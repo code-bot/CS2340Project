@@ -1,14 +1,16 @@
 package controller;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import fxapp.MainFXApplication;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
-import model.Model;
-import model.States;
-import model.User;
-import model.UserLevel;
+import model.*;
 
 /**
  * Created by Matt Sternberg on 9/18/16.
@@ -66,19 +68,45 @@ public class LoginController {
     /** Sets the current user and goes to main user screen */
     @FXML
     private void login() {
-        _username = username.getText();
+        _username = username.getText().replaceAll("[-+.^:,@]", "");
         _password = passwordField.getText();
-        if (model.validateUser(_username, _password)) {
-            model.setCurrentUser(model.getUser(_username));
-            mainApplication.initMenu(mainApplication.getMainStage());
-            mainApplication.initHomeScreen(mainApplication.getMainStage());
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Login Error");
-            alert.setHeaderText("Incorrect Information");
-            alert.setContentText("Wrong username or password");
-            alert.showAndWait();
-        }
+        Firebase usersRef = DatabaseModel.getInstance().getRootRef().child("users");
+        usersRef.orderByChild("password").equalTo(_password).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                System.out.println(dataSnapshot.hasChild(_username));
+                System.out.println(dataSnapshot.getValue());
+                if (dataSnapshot.getValue() == null || !dataSnapshot.hasChild(_username)) {
+                    loginError();
+                } else {
+                    DataSnapshot userChild = dataSnapshot.child(_username);
+                    UserLevel userLevel = UserLevel.stringToUserLevel((String) userChild.child("userLevel").getValue());
+                    String address = (String) userChild.child("address").getValue();
+                    String city = (String) userChild.child("city").getValue();
+                    String zipcode = (String) userChild.child("zipcode").getValue();
+                    States state = States.stringToState((String) userChild.child("state").getValue());
+                    DatabaseModel.getInstance().setCurrentUser(new User(_username, _password, userLevel,
+                            address, city, zipcode, state));
+                    mainApplication.initMenu(mainApplication.getMainStage());
+                    mainApplication.initHomeScreen(mainApplication.getMainStage());
+
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println(firebaseError.getMessage());
+            }
+        });
+    }
+
+    public void loginError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Login Error");
+        alert.setHeaderText("Incorrect Information");
+        alert.setContentText("Wrong username or password");
+        alert.showAndWait();
+
     }
 
 
