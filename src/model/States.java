@@ -89,4 +89,13 @@ public enum States {
         }
         return list;
     }
+
+    public static States stringToState(String state) {
+        for (States val: values()) {
+            if (val.getValue().equals(state)) {
+                return val;
+            }
+        }
+        return null;
+    }
 }
