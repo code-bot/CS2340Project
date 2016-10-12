@@ -1,12 +1,17 @@
 .backgroundColor {
     -fx-background-color: rgba(61, 61, 92, 1.0);
-        -fx-border-color: rgba(170, 219, 255,1.0);
-        -fx-border-width: 1;
+    -fx-border-color: rgba(170, 219, 255,1.0);
+    -fx-border-width: 1;
 }
 .listView {
     -fx-background-color: rgba(61, 61, 92, 1.0);
     -fx-background-radius: 10;
 }
+.list-cell:even {
+}
+.list-cell:odd {
+}
+
 .list-cell {
     -fx-background-color: rgba(61, 61, 92, 1.0);
     -fx-text-fill: white;

@@ -31,14 +31,14 @@ public class ViewReportsController {
 
     @FXML
     public void initialize() {
-
+//        listOfReports.getItems().clear();
+        items.clear();
         Iterator iter = Model.getInstance().getReports().iterator();
         while (iter.hasNext()) {
             items.add(iter.next());
-            items.add("");
 //            System.out.println(iter.next());
         }
+//        listOfReports.getItems().removeAll(items);
         listOfReports.setItems(items);
-
     }
 }
