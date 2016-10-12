@@ -211,6 +211,22 @@ public class MainFXApplication extends Application {
         }
     }
 
+    public void initViewReportsScreen(Stage mainStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/ViewReportsView.fxml"));
+            AnchorPane viewReportsLayout = loader.load();
+
+            rootLayout.setCenter(viewReportsLayout);
+
+            ViewReportsController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+
     public static void main(String[] args) {
         launch(args);
     }

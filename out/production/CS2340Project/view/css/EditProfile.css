@@ -4,6 +4,8 @@
     -fx-border-color: rgba(170, 219, 255,1.0);
     -fx-border-width : 0 0 1 0;
     -fx-focus-color: white;
+    -fx-alignment: center;
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
 }
 
 .text-field:focused {

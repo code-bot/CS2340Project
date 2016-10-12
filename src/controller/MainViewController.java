@@ -23,4 +23,9 @@ public class MainViewController {
     public void createReport() {
         mainApplication.initCreateReportScreen(mainApplication.getMainStage());
     }
+
+    @FXML
+    public void viewReports() {
+        mainApplication.initViewReportsScreen(mainApplication.getMainStage());
+    }
 }

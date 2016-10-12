@@ -4,9 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainViewController">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainViewController">
    <children>
       <Label layoutX="241.0" layoutY="192.0" text="You are signed in!" />
-      <Button fx:id="createReportBtn" layoutX="245.0" layoutY="273.0" mnemonicParsing="false" text="Create Report" onAction="#createReport"/>
+      <Button fx:id="createReportBtn" layoutX="245.0" layoutY="273.0" mnemonicParsing="false" onAction="#createReport" text="Create Report" />
+      <Button fx:id="viewReportsBtn" layoutX="245.0" layoutY="300.0" mnemonicParsing="false" onAction="#viewReports" prefHeight="27.0" prefWidth="104.0" text="View Reports" />
    </children>
 </AnchorPane>

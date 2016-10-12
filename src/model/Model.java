@@ -160,4 +160,6 @@ public class Model {
     public boolean removeReport(Report report) {
         return reports.remove(report);
     }
+
+    public Set getReports() { return reports; }
 }
