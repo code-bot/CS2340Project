@@ -1,0 +1,11 @@
+.backgroundColor {
+    -fx-background-color: rgba(61, 61, 92, 1.0);
+}
+.listView {
+    -fx-background-color: rgba(61, 61, 92, 1.0);
+    -fx-background-radius: 10;
+}
+.list-cell {
+    -fx-background-color: rgba(61, 61, 92, 1.0);
+    -fx-text-fill: white;
+}
