@@ -1,5 +1,7 @@
 .backgroundColor {
     -fx-background-color: rgba(61, 61, 92, 1.0);
+        -fx-border-color: rgba(170, 219, 255,1.0);
+        -fx-border-width: 1;
 }
 .listView {
     -fx-background-color: rgba(61, 61, 92, 1.0);
