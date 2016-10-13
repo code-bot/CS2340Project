@@ -34,6 +34,8 @@ public class MainFXApplication extends Application {
 
     private AnchorPane editProfileLayout;
 
+    private AnchorPane viewReportsLayout;
+
     private BorderPane menu;
 
     private Model model = Model.getInstance();
@@ -92,6 +94,10 @@ public class MainFXApplication extends Application {
         initEditRegisterScreen(mainStage);
     }
 
+    public void goToHomePage() {
+        initMenu(mainStage);
+        initHomeScreen(mainStage);
+    }
     /**
      * Initialize login screen on the main stage
      * @param mainStage the stage to add the layouts to
@@ -132,6 +138,29 @@ public class MainFXApplication extends Application {
         }
 
     }
+
+    /**
+     * Initialize navigation bar
+     * @param mainStage the stage to add the layout to
+     */
+    public void initBackMenu(Stage mainStage) {
+        try {
+            //Load layout from fxml file
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/BackMenuView.fxml"));
+            menu = loader.load();
+
+            rootLayout.setTop(menu);
+
+            BackMenuController controller = loader.getController();
+            controller.setMainApp(this);
+        } catch (IOException e) {
+
+        }
+
+    }
+
+
 
     /**
      * Initialize the home screen
@@ -215,7 +244,7 @@ public class MainFXApplication extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/ViewReportsView.fxml"));
-            AnchorPane viewReportsLayout = loader.load();
+            viewReportsLayout = loader.load();
 
             rootLayout.setCenter(viewReportsLayout);
 

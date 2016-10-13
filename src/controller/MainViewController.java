@@ -27,5 +27,7 @@ public class MainViewController {
     @FXML
     public void viewReports() {
         mainApplication.initViewReportsScreen(mainApplication.getMainStage());
+        mainApplication.initBackMenu(mainApplication.getMainStage());
+
     }
 }
