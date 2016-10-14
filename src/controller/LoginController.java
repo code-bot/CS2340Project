@@ -1,16 +1,17 @@
 package controller;
 
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
+import com.firebase.client.*;
 import fxapp.MainFXApplication;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import model.*;
+
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by Matt Sternberg on 9/18/16.
@@ -68,36 +69,56 @@ public class LoginController {
     /** Sets the current user and goes to main user screen */
     @FXML
     private void login() {
-        _username = username.getText().replaceAll("[-+.^:,@]", "");
+        _username = username.getText();
         _password = passwordField.getText();
-        Firebase usersRef = DatabaseModel.getInstance().getRootRef().child("users");
-        usersRef.orderByChild("password").equalTo(_password).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println(dataSnapshot.hasChild(_username));
-                System.out.println(dataSnapshot.getValue());
-                if (dataSnapshot.getValue() == null || !dataSnapshot.hasChild(_username)) {
-                    loginError();
-                } else {
-                    DataSnapshot userChild = dataSnapshot.child(_username);
-                    UserLevel userLevel = UserLevel.stringToUserLevel((String) userChild.child("userLevel").getValue());
-                    String address = (String) userChild.child("address").getValue();
-                    String city = (String) userChild.child("city").getValue();
-                    String zipcode = (String) userChild.child("zipcode").getValue();
-                    States state = States.stringToState((String) userChild.child("state").getValue());
-                    DatabaseModel.getInstance().setCurrentUser(new User(_username, _password, userLevel,
-                            address, city, zipcode, state));
-                    mainApplication.initMenu(mainApplication.getMainStage());
-                    mainApplication.initHomeScreen(mainApplication.getMainStage());
+        Firebase rootRef = DatabaseModel.getInstance().getRootRef();
+        rootRef.authWithPassword(_username, _password,
+                new Firebase.AuthResultHandler() {
+                    @Override
+                    public void onAuthenticated(AuthData authData) {
+                        // Authentication just completed successfully :)
+                        Firebase users = rootRef.child("users");
+                        users.orderByKey().equalTo(authData.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                DataSnapshot uid = dataSnapshot.child(authData.getUid());
+                                String uname = (String) uid.child("email").getValue();
+                                String pass = (String) uid.child("password").getValue();
+                                UserLevel userLevel = UserLevel.stringToUserLevel((String) uid.child("userLevel").getValue());
+                                String address = (String) uid.child("address").getValue();
+                                String city = (String) uid.child("city").getValue();
+                                String zipcode = (String) uid.child("zipcode").getValue();
+                                States state = States.stringToState((String) uid.child("state").getValue());
+                                DatabaseModel.getInstance().setCurrentUser(
+                                        new User(uname, pass, userLevel, address, city, zipcode, state));
+                            }
 
-                }
-            }
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+                                System.out.println(firebaseError.getMessage());
+                            }
+                        });
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                mainApplication.initHomeScreen(mainApplication.getMainStage());
+                                mainApplication.initMenu(mainApplication.getMainStage());
+                            }
+                        });
 
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println(firebaseError.getMessage());
-            }
-        });
+                    }
+                    @Override
+                    public void onAuthenticationError(FirebaseError error) {
+                        // Something went wrong :(
+                        System.out.println(error.getMessage());
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                loginError();
+                            }
+                        });
+                    }
+                });
     }
 
     public void loginError() {

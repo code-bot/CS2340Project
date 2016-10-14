@@ -4,6 +4,8 @@ import com.firebase.client.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+import java.util.Map;
+
 /**
  * Created by Matt Sternberg on 10/7/2016.
  */
@@ -53,9 +55,18 @@ public class DatabaseModel {
      * Create user
      */
     public boolean createUser(User newUser) {
-        String emailStripped = newUser.getEmail().replaceAll("[-+.^:,@]", "");
-        Firebase usersRef = rootRef.child("users").child(emailStripped);
-        usersRef.setValue(newUser);
+        rootRef.createUser(newUser.getEmail(), newUser.getPassword(), new Firebase.ValueResultHandler<Map<String, Object>>() {
+            @Override
+            public void onSuccess(Map<String, Object> stringObjectMap) {
+                String uid = (String) stringObjectMap.get("uid");
+                rootRef.child("users").child(uid).setValue(newUser);
+            }
+
+            @Override
+            public void onError(FirebaseError firebaseError) {
+                System.out.println(firebaseError.getMessage());
+            }
+        });
         return true;
     }
 

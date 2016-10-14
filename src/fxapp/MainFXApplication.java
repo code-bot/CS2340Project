@@ -1,4 +1,6 @@
 package fxapp;
+import com.firebase.client.AuthData;
+import com.firebase.client.Firebase;
 import com.google.firebase.*;
 
 
@@ -54,7 +56,25 @@ public class MainFXApplication extends Application {
         initRootLayout(mainStage);
         initLoginScreen(mainStage);
         databaseModel = DatabaseModel.getInstance();
+//        initAuthListener();
     }
+
+//    public void initAuthListener() {
+//        databaseModel.getRootRef().addAuthStateListener(new Firebase.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(AuthData authData) {
+//                if (authData != null) {
+//                    // user is logged in
+//                    initHomeScreen(mainStage);
+//                    initMenu(mainStage);
+//                } else {
+//                    // user is not logged in
+//                    initLoginScreen(mainStage);
+//                    rootLayout.setTop(null);
+//                }
+//            }
+//        });
+//    }
 
     public Stage getMainStage() {
         return mainStage;
