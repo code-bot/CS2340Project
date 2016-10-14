@@ -1,19 +1,29 @@
 package fxapp;
+import com.google.firebase.FirebaseOptions;
+
+import com.firebase.client.AuthData;
+import com.firebase.client.Firebase;
+import com.google.firebase.*;
 
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.sun.javaws.Main;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import model.Model;
-import model.States;
-import model.User;
+import model.*;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Main application class. Handles switching scenes throughout application
@@ -38,7 +48,7 @@ public class MainFXApplication extends Application {
 
     private BorderPane menu;
 
-    private Model model = Model.getInstance();
+    private DatabaseModel databaseModel;
 
     @Override
     public void start(Stage primaryStage) {
@@ -46,8 +56,26 @@ public class MainFXApplication extends Application {
         mainStage.setResizable(false);
         initRootLayout(mainStage);
         initLoginScreen(mainStage);
-        Model.getInstance().addUser(new User("user", "pass", "123 Techwood Drive", "Atlanta", "30332", States.GA));
+        databaseModel = DatabaseModel.getInstance();
+//        initAuthListener();
     }
+
+//    public void initAuthListener() {
+//        databaseModel.getRootRef().addAuthStateListener(new Firebase.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(AuthData authData) {
+//                if (authData != null) {
+//                    // user is logged in
+//                    initHomeScreen(mainStage);
+//                    initMenu(mainStage);
+//                } else {
+//                    // user is not logged in
+//                    initLoginScreen(mainStage);
+//                    rootLayout.setTop(null);
+//                }
+//            }
+//        });
+//    }
 
     public Stage getMainStage() {
         return mainStage;

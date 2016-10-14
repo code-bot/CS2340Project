@@ -8,12 +8,10 @@ import fxapp.MainFXApplication;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
-import model.Model;
-import model.States;
-import model.User;
-import model.UserLevel;
+import model.*;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -127,9 +125,9 @@ public class RegisterController {
                 alert.showAndWait();
         } else {
             User newUser = new User(email, password, userType, address, city, zipcode, States.valueOf(state));
-            boolean addedUser = Model.getInstance().addUser(newUser);
+            boolean addedUser = DatabaseModel.getInstance().createUser(newUser);
             if (addedUser) {
-                Model.getInstance().setCurrentUser(newUser);
+                DatabaseModel.getInstance().setCurrentUser(newUser);
                 mainApplication.initMenu(mainApplication.getMainStage());
                 mainApplication.initHomeScreen(mainApplication.getMainStage());
             }

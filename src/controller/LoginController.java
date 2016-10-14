@@ -1,14 +1,17 @@
 package controller;
 
+import com.firebase.client.*;
 import fxapp.MainFXApplication;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
-import model.Model;
-import model.States;
-import model.User;
-import model.UserLevel;
+import model.*;
+
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by Matt Sternberg on 9/18/16.
@@ -68,17 +71,63 @@ public class LoginController {
     private void login() {
         _username = username.getText();
         _password = passwordField.getText();
-        if (model.validateUser(_username, _password)) {
-            model.setCurrentUser(model.getUser(_username));
-            mainApplication.initMenu(mainApplication.getMainStage());
-            mainApplication.initHomeScreen(mainApplication.getMainStage());
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Login Error");
-            alert.setHeaderText("Incorrect Information");
-            alert.setContentText("Wrong username or password");
-            alert.showAndWait();
-        }
+        Firebase rootRef = DatabaseModel.getInstance().getRootRef();
+        rootRef.authWithPassword(_username, _password,
+                new Firebase.AuthResultHandler() {
+                    @Override
+                    public void onAuthenticated(AuthData authData) {
+                        // Authentication just completed successfully :)
+                        Firebase users = rootRef.child("users");
+                        users.orderByKey().equalTo(authData.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                DataSnapshot uid = dataSnapshot.child(authData.getUid());
+                                String uname = (String) uid.child("email").getValue();
+                                String pass = (String) uid.child("password").getValue();
+                                UserLevel userLevel = UserLevel.stringToUserLevel((String) uid.child("userLevel").getValue());
+                                String address = (String) uid.child("address").getValue();
+                                String city = (String) uid.child("city").getValue();
+                                String zipcode = (String) uid.child("zipcode").getValue();
+                                States state = States.stringToState((String) uid.child("state").getValue());
+                                DatabaseModel.getInstance().setCurrentUser(
+                                        new User(uname, pass, userLevel, address, city, zipcode, state));
+                            }
+
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+                                System.out.println(firebaseError.getMessage());
+                            }
+                        });
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                mainApplication.initHomeScreen(mainApplication.getMainStage());
+                                mainApplication.initMenu(mainApplication.getMainStage());
+                            }
+                        });
+
+                    }
+                    @Override
+                    public void onAuthenticationError(FirebaseError error) {
+                        // Something went wrong :(
+                        System.out.println(error.getMessage());
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                loginError();
+                            }
+                        });
+                    }
+                });
+    }
+
+    public void loginError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Login Error");
+        alert.setHeaderText("Incorrect Information");
+        alert.setContentText("Wrong username or password");
+        alert.showAndWait();
+
     }
 
 

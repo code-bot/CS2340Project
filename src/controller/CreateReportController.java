@@ -2,7 +2,9 @@ package controller;
 
 import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import model.DatabaseModel;
 import model.Model;
 import model.WaterSourceReport;
 
@@ -60,7 +62,7 @@ public class CreateReportController {
         String date = df.format(dateObj);
         DateFormat tf = new SimpleDateFormat("HH:mm:ss");
         String time = tf.format(dateObj);
-        String name = Model.getInstance().getCurrentUser().getEmail();
+        String name = DatabaseModel.getInstance().getCurrentUser().getEmail();
 
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
