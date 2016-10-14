@@ -1,4 +1,5 @@
 package fxapp;
+
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.google.firebase.*;
