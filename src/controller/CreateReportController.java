@@ -9,6 +9,8 @@ import model.Model;
 import model.WaterSourceReport;
 
 import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -51,6 +53,7 @@ public class CreateReportController {
 
     @FXML
     public void createReport() {
+        boolean coordErr = false;
         String lat = latField.getText();
         double latNum = 33.7490;
         String lon = longField.getText();
@@ -74,17 +77,25 @@ public class CreateReportController {
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Submit Report?");
             alert.setContentText("Lat and Long provided. Make sure all information is accurate");
-            latNum = Double.parseDouble(lat);
-            lonNum = Double.parseDouble(lon);
+            try {
+                latNum = Double.parseDouble(lat);
+                System.out.println(latNum);
+                lonNum = Double.parseDouble(lon);
+            } catch (NumberFormatException e) {     // User inputs incorrect format for latitude or longitude
+                coordError();
+                coordErr = true;
+            }
         }
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-            WaterSourceReport report = new WaterSourceReport(date, time, name, latNum, lonNum, type, condition);
-            System.out.println(report);
-            if (Model.getInstance().addReport(report)) {
-                mainApplication.initMenu(mainApplication.getMainStage());
-                mainApplication.initHomeScreen(mainApplication.getMainStage());
+        if (!coordErr) {
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                WaterSourceReport report = new WaterSourceReport(date, time, name, latNum, lonNum, type, condition);
+                System.out.println(report);
+                if (Model.getInstance().addReport(report)) {
+                    mainApplication.initMenu(mainApplication.getMainStage());
+                    mainApplication.initHomeScreen(mainApplication.getMainStage());
+                }
             }
         }
     }
@@ -102,4 +113,12 @@ public class CreateReportController {
             mainApplication.initHomeScreen(mainApplication.getMainStage());
         }
     }
-}
+
+    public void coordError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setHeaderText("Latitude/Longitude Error");
+        alert.setContentText("Make sure the latitude and longitude are in the correct format");
+        Optional<ButtonType> result = alert.showAndWait();
+
+    }}
