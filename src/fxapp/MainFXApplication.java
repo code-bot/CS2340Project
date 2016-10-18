@@ -284,7 +284,22 @@ public class MainFXApplication extends Application {
         }
     }
 
+    public void initMapViewScreen(Stage mainStage) {
+        MapController controller = new MapController(this, mainStage);
+        controller.setMainApp(this);
+    }
     public static void main(String[] args) {
         launch(args);
+    }
+
+    /**
+     * dummy method to simulate a callback from the map view
+     */
+    public void closeMapView() {
+        Facade fc = Facade.getInstance();
+        fc.addLocations();
+        MapController controller = new MapController(this, mainStage);
+
+        //TODO: Find what this does and fix it
     }
 }
