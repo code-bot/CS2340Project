@@ -30,4 +30,9 @@ public class MainViewController {
         mainApplication.initBackMenu(mainApplication.getMainStage());
 
     }
+
+    @FXML
+    public void goToMap() {
+        mainApplication.initMapViewScreen(mainApplication.getMainStage());
+    }
 }
