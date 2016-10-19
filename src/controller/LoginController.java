@@ -25,7 +25,7 @@ public class LoginController {
 
     private String _password;
 
-    private Model model;
+    private DatabaseModel model;
 
     @FXML
     private Hyperlink signUp;
@@ -37,7 +37,7 @@ public class LoginController {
     private PasswordField passwordField;
 
     public LoginController() {
-        model = Model.getInstance();
+        model = DatabaseModel.getInstance();
     }
 
     /**
@@ -71,7 +71,7 @@ public class LoginController {
     private void login() {
         _username = username.getText();
         _password = passwordField.getText();
-        Firebase rootRef = DatabaseModel.getInstance().getRootRef();
+        Firebase rootRef = model.getRootRef();
         rootRef.authWithPassword(_username, _password,
                 new Firebase.AuthResultHandler() {
                     @Override
@@ -89,7 +89,7 @@ public class LoginController {
                                 String city = (String) uid.child("city").getValue();
                                 String zipcode = (String) uid.child("zipcode").getValue();
                                 States state = States.stringToState((String) uid.child("state").getValue());
-                                DatabaseModel.getInstance().setCurrentUser(
+                                model.setCurrentUser(
                                         new User(uname, pass, userLevel, address, city, zipcode, state));
                             }
 

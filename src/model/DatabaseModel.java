@@ -74,4 +74,8 @@ public class DatabaseModel {
         return rootRef;
     }
 
+    public void logout() {
+        rootRef.unauth();
+    }
+
 }

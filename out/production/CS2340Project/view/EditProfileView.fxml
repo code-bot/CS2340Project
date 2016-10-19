@@ -9,16 +9,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="600.0" styleClass="background-frame" stylesheets="@css/Register.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditProfileController">
+<AnchorPane prefHeight="550.0" prefWidth="600.0" styleClass="background-frame" stylesheets="@css/Register.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditProfileController">
     <Label alignment="CENTER" layoutX="209.0" layoutY="33.0" prefHeight="39.0" prefWidth="179.0" text="My Profile" textAlignment="CENTER" textFill="WHITE">
         <font>
             <Font size="20.0" />
         </font>
     </Label>
     <TextField fx:id="emailField" layoutX="212.0" layoutY="89.0" prefHeight="28.0" prefWidth="179.0" promptText="placeholder" styleClass="text-field" stylesheets="@css/EditProfile.css" />
-    <TextField fx:id="confirmEmailField" layoutX="212.0" layoutY="128.0" prefWidth="179.0" promptText="Confirm Email" />
     <PasswordField fx:id="passwordField" layoutX="210.0" layoutY="181.0" prefHeight="28.0" prefWidth="179.0" promptText="New password" />
-    <PasswordField fx:id="confirmPasswordField" layoutX="210.0" layoutY="220.0" prefHeight="28.0" prefWidth="179.0" promptText="Confirm password" />
     <TextField fx:id="addressLine1Field" layoutX="209.0" layoutY="278.0" prefWidth="179.0" promptText="Enter Address Line 1" styleClass="text-field" stylesheets="@css/EditProfile.css" />
     <TextField fx:id="cityField" layoutX="210.0" layoutY="317.0" prefHeight="28.0" prefWidth="179.0" promptText="City" styleClass="text-field" stylesheets="@css/EditProfile.css" />
     <TextField fx:id="zipcodeField" layoutX="210.0" layoutY="357.0" prefHeight="28.0" prefWidth="102.0" promptText="Zip Code" styleClass="text-field" stylesheets="@css/EditProfile.css" />

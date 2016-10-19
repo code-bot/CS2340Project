@@ -24,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Main application class. Handles switching scenes throughout application
@@ -57,25 +58,8 @@ public class MainFXApplication extends Application {
         initRootLayout(mainStage);
         initLoginScreen(mainStage);
         databaseModel = DatabaseModel.getInstance();
-//        initAuthListener();
     }
 
-//    public void initAuthListener() {
-//        databaseModel.getRootRef().addAuthStateListener(new Firebase.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(AuthData authData) {
-//                if (authData != null) {
-//                    // user is logged in
-//                    initHomeScreen(mainStage);
-//                    initMenu(mainStage);
-//                } else {
-//                    // user is not logged in
-//                    initLoginScreen(mainStage);
-//                    rootLayout.setTop(null);
-//                }
-//            }
-//        });
-//    }
 
     public Stage getMainStage() {
         return mainStage;
@@ -116,6 +100,7 @@ public class MainFXApplication extends Application {
         Model.getInstance().clearCurrentUser();
         initLoginScreen(mainStage);
         rootLayout.setTop(null);
+        DatabaseModel.getInstance().logout();
     }
 
     public void goToEditProfile() {
@@ -244,7 +229,7 @@ public class MainFXApplication extends Application {
             rootLayout.setCenter(editProfileLayout);
 
             EditProfileController controller = loader.getController();
-            controller.setDefaultInfo(Model.getInstance().getCurrentUser());
+            controller.setDefaultInfo(DatabaseModel.getInstance().getCurrentUser());
             controller.setMainApp(this);
 
         } catch (IOException e) {
