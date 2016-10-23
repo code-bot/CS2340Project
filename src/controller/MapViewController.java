@@ -25,6 +25,12 @@ import javafx.scene.control.Button;
 
 public class MapViewController implements Initializable, MapComponentInitializedListener {
 
+    private MainFXApplication mainApplication;
+
+    public void setMainApp(MainFXApplication main) {
+        mainApplication = main;
+    }
+
     @FXML
     private Button button;
 

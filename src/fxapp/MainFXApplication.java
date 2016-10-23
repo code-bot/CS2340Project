@@ -19,6 +19,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.*;
+import sun.plugin.javascript.navig.Anchor;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -46,6 +47,8 @@ public class MainFXApplication extends Application {
     private AnchorPane editProfileLayout;
 
     private AnchorPane viewReportsLayout;
+
+    private AnchorPane mapLayout;
 
     private BorderPane menu;
 
@@ -261,7 +264,7 @@ public class MainFXApplication extends Application {
 
             rootLayout.setCenter(viewReportsLayout);
 
-            ViewReportsController controller = loader.getController();
+            MapViewController controller = loader.getController();
             controller.setMainApp(this);
 
         } catch (IOException e) {
@@ -273,11 +276,11 @@ public class MainFXApplication extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/MapView.fxml"));
-            AnchorPane mapLayout = loader.load();
+            mapLayout = loader.load();
 
             rootLayout.setCenter(mapLayout);
 
-            CreateReportController controller = loader.getController();
+            MapViewController controller = loader.getController();
             controller.setMainApp(this);
 
         } catch (IOException e) {
