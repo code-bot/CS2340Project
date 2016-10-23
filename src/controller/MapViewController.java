@@ -7,7 +7,8 @@ import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.*;
-
+import java.util.Set;
+import netscape.javascript.JSObject;
 import fxapp.MainFXApplication;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
@@ -17,10 +18,14 @@ import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 import java.net.URL;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import model.Model;
+import model.Report;
 
 
 public class MapViewController implements Initializable, MapComponentInitializedListener {
@@ -46,12 +51,6 @@ public class MapViewController implements Initializable, MapComponentInitialized
 
     @Override
     public void mapInitialized() {
-        LatLong loc1 = new LatLong(33.77, -84.38);
-        LatLong loc2 = new LatLong(34.50, -84.60);
-        LatLong loc3 = new LatLong(35.29, -85.10);
-        LatLong loc4 = new LatLong(35.91, -85.92);
-        LatLong loc5 = new LatLong(32.95, -83.85);
-
 
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
@@ -68,33 +67,22 @@ public class MapViewController implements Initializable, MapComponentInitialized
 
         map = mapView.createMap(mapOptions);
 
-        //Add markers to the map
-        MarkerOptions markerOptions1 = new MarkerOptions();
-        markerOptions1.position(loc1);
+        Set<Report> reports = new HashSet<Report>();
+        reports = Model.getInstance().getReports();
+        for (Report report : reports) {
+            MarkerOptions markerOptions = new MarkerOptions();
+            LatLong loc = new LatLong(report.getLat(), report.getLong());
+            markerOptions.position(loc);
+            Marker marker = new Marker( markerOptions );
+            map.addMarker(marker);
+            map.addUIEventHandler(marker,
+                    UIEventType.click,
+                    (JSObject obj) -> {
+                        InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+                        infoWindowOptions.content(report.toString());
 
-        MarkerOptions markerOptions2 = new MarkerOptions();
-        markerOptions2.position(loc2);
-
-        MarkerOptions markerOptions3 = new MarkerOptions();
-        markerOptions3.position(loc3);
-
-        MarkerOptions markerOptions4 = new MarkerOptions();
-        markerOptions4.position(loc4);
-
-        MarkerOptions markerOptions5 = new MarkerOptions();
-        markerOptions5.position(loc5);
-
-        Marker loc1Marker = new Marker(markerOptions1);
-        Marker loc2Marker = new Marker(markerOptions2);
-        Marker loc3Marker = new Marker(markerOptions3);
-        Marker loc4Marker= new Marker(markerOptions4);
-        Marker loc5Marker = new Marker(markerOptions5);
-
-        map.addMarker(loc1Marker);
-        map.addMarker(loc2Marker);
-        map.addMarker(loc3Marker);
-        map.addMarker(loc4Marker);
-        map.addMarker(loc5Marker);
-
+                        InfoWindow window = new InfoWindow(infoWindowOptions);
+                        window.open(map, marker);});
+        }
     }
 }

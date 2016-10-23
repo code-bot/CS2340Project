@@ -59,6 +59,11 @@ public abstract class Report {
         return true;
     }
 
+//    @Override
+//    public String toString() {
+//        return "Name: " + this.getName() + "Date: " + this.getDate() + "Time: " + this.getTime();
+//    }
+
     @Override
     public int hashCode() {
         return num;

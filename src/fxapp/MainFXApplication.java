@@ -264,7 +264,7 @@ public class MainFXApplication extends Application {
 
             rootLayout.setCenter(viewReportsLayout);
 
-            MapViewController controller = loader.getController();
+            ViewReportsController controller = loader.getController();
             controller.setMainApp(this);
 
         } catch (IOException e) {
