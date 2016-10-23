@@ -270,21 +270,23 @@ public class MainFXApplication extends Application {
     }
 
     public void initMapViewScreen(Stage mainStage) {
-        MapController controller = new MapController(this, mainStage);
-        controller.setMainApp(this);
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/MapView.fxml"));
+            AnchorPane mapLayout = loader.load();
+
+            rootLayout.setCenter(mapLayout);
+
+            CreateReportController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
     }
     public static void main(String[] args) {
         launch(args);
     }
 
-    /**
-     * dummy method to simulate a callback from the map view
-     */
-    public void closeMapView() {
-        Facade fc = Facade.getInstance();
-        fc.addLocations();
-        MapController controller = new MapController(this, mainStage);
 
-        //TODO: Find what this does and fix it
     }
-}
