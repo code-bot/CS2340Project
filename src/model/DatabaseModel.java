@@ -4,6 +4,8 @@ import com.firebase.client.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,6 +18,8 @@ public class DatabaseModel {
 
     private final String DATABASE_URL = "https://h2woah.firebaseio.com";
     private Firebase rootRef;
+
+    private ArrayList<WaterSourceReport> waterSourceReports;
 
 
     DatabaseModel() {
@@ -70,12 +74,61 @@ public class DatabaseModel {
         return true;
     }
 
+    /**
+     * Get the root reference to the firebase database
+     */
     public Firebase getRootRef() {
         return rootRef;
     }
 
+    /**
+     * Logout of the server and unathenticate the current user
+     */
     public void logout() {
         rootRef.unauth();
+    }
+
+    /**
+     * Initialize and populate the list of water source reports with
+     * the information in the firebase database
+     */
+    public void initWaterReports() {
+        waterSourceReports = new ArrayList<WaterSourceReport>();
+        Firebase waterRepRef = rootRef.child("water source reports");
+        waterRepRef.orderByValue().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println(firebaseError.getMessage());
+            }
+        });
+
+    }
+
+    /**
+     * Add the water source report to the database
+     * @param report the water source report to add to the database
+     */
+    public void submitWaterSourceReport(WaterSourceReport report) {
+        waterSourceReports.add(report);
     }
 
 }
