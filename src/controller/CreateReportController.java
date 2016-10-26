@@ -93,8 +93,7 @@ public class CreateReportController {
                 WaterSourceReport report = new WaterSourceReport(date, time, name, latNum, lonNum, type, condition);
                 System.out.println(report);
                 if (Model.getInstance().addReport(report)) {
-                    mainApplication.initMenu(mainApplication.getMainStage());
-                    mainApplication.initHomeScreen(mainApplication.getMainStage());
+                    mainApplication.goToHomePage();
                 }
             }
         }
@@ -109,8 +108,7 @@ public class CreateReportController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
-            mainApplication.initMenu(mainApplication.getMainStage());
-            mainApplication.initHomeScreen(mainApplication.getMainStage());
+            mainApplication.goToHomePage();
         }
     }
 

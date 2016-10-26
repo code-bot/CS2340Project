@@ -83,8 +83,7 @@ public class EditProfileController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
-            mainApplication.initMenu(mainApplication.getMainStage());
-            mainApplication.initHomeScreen(mainApplication.getMainStage());
+            mainApplication.goToHomePage();
         } else {
 
         }
@@ -142,8 +141,7 @@ public class EditProfileController {
                     address, city, zipcode, state);
             boolean updatedUser = Model.getInstance().updateUser(oldUser, newUser, sameEmail);
             if (updatedUser) {
-                mainApplication.initMenu(mainApplication.getMainStage());
-                mainApplication.initHomeScreen(mainApplication.getMainStage());
+                mainApplication.goToHomePage();
             }
         }
     }

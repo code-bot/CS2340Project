@@ -101,8 +101,7 @@ public class LoginController {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                mainApplication.initHomeScreen(mainApplication.getMainStage());
-                                mainApplication.initMenu(mainApplication.getMainStage());
+                                mainApplication.goToHomePage();
                             }
                         });
 

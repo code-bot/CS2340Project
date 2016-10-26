@@ -107,12 +107,14 @@ public class MainFXApplication extends Application {
     }
 
     public void goToEditProfile() {
+        initBackMenu(mainStage);
         initEditRegisterScreen(mainStage);
     }
 
     public void goToHomePage() {
         initMenu(mainStage);
-        initHomeScreen(mainStage);
+        initMapViewScreen(mainStage);
+        //initHomeScreen(mainStage);
     }
     /**
      * Initialize login screen on the main stage

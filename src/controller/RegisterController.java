@@ -128,8 +128,7 @@ public class RegisterController {
             boolean addedUser = DatabaseModel.getInstance().createUser(newUser);
             if (addedUser) {
                 DatabaseModel.getInstance().setCurrentUser(newUser);
-                mainApplication.initMenu(mainApplication.getMainStage());
-                mainApplication.initHomeScreen(mainApplication.getMainStage());
+                mainApplication.goToHomePage();
             }
         }
     }

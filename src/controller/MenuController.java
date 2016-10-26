@@ -1,7 +1,12 @@
 package controller;
 
 import fxapp.MainFXApplication;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 
 /**
  * Created by Matt Sternberg on 9/21/16.
@@ -9,6 +14,42 @@ import javafx.fxml.FXML;
 public class MenuController {
 
     private MainFXApplication mainApplication;
+
+    @FXML
+    private MenuBar pageMenu;
+
+    @FXML
+    public void initialize() {
+        Menu goToPage = new Menu("Go To Page");
+
+        MenuItem profile = new MenuItem("My Profile");
+        profile.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                goToEditProfileView();
+            }
+        });
+
+        MenuItem createReport = new MenuItem("Create Report");
+        createReport.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                createReport();
+            }
+        });
+
+        MenuItem viewReport = new MenuItem("View Reports");
+        viewReport.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                viewReports();
+            }
+        });
+
+        goToPage.getItems().addAll(profile, createReport, viewReport);
+        pageMenu.getMenus().addAll(goToPage);
+
+    }
 
     /**
      * Set the main application reference
@@ -32,7 +73,26 @@ public class MenuController {
      */
     @FXML
     private void goToEditProfileView() {
-        System.out.println("Loading profile...");
         mainApplication.goToEditProfile();
+    }
+
+    @FXML
+    public void createReport() {
+        mainApplication.initCreateReportScreen(mainApplication.getMainStage());
+        mainApplication.initBackMenu(mainApplication.getMainStage());
+    }
+
+    @FXML
+    public void viewReports() {
+        mainApplication.initViewReportsScreen(mainApplication.getMainStage());
+        mainApplication.initBackMenu(mainApplication.getMainStage());
+
+    }
+
+    @FXML
+    public void goToMap() {
+        mainApplication.initMapViewScreen(mainApplication.getMainStage());
+        mainApplication.initBackMenu(mainApplication.getMainStage());
+
     }
 }
