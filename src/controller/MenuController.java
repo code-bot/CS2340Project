@@ -30,7 +30,7 @@ public class MenuController {
             }
         });
 
-        MenuItem createReport = new MenuItem("Create Report");
+        MenuItem createReport = new MenuItem("Create Source Report");
         createReport.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -38,7 +38,7 @@ public class MenuController {
             }
         });
 
-        MenuItem viewReport = new MenuItem("View Reports");
+        MenuItem viewReport = new MenuItem("View Source Reports");
         viewReport.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -46,7 +46,24 @@ public class MenuController {
             }
         });
 
-        goToPage.getItems().addAll(profile, createReport, viewReport);
+        MenuItem createQualityReport = new MenuItem("Create Quality Reports");
+        viewReport.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                createQualityReports();
+            }
+        });
+
+        MenuItem viewQualityReport = new MenuItem("View Quality Reports");
+        viewReport.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                viewQualityReports();
+            }
+        });
+
+        goToPage.getItems().addAll(profile, createReport, viewReport, createQualityReport,
+                                    viewQualityReport);
         pageMenu.getMenus().addAll(goToPage);
 
     }
@@ -94,5 +111,17 @@ public class MenuController {
         mainApplication.initMapViewScreen(mainApplication.getMainStage());
         mainApplication.initBackMenu(mainApplication.getMainStage());
 
+    }
+
+    @FXML
+    public void createQualityReports() {
+        mainApplication.initCreateQualityScreen(mainApplication.getMainStage());
+        mainApplication.initBackMenu(mainApplication.getMainStage());
+    }
+
+    @FXML
+    public void viewQualityReports() {
+        mainApplication.initQualityReportScreen(mainApplication.getMainStage());
+        mainApplication.initBackMenu(mainApplication.getMainStage());
     }
 }

@@ -258,10 +258,42 @@ public class MainFXApplication extends Application {
         }
     }
 
+    public void initCreateQualityScreen(Stage mainStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/CreateQualityView.fxml"));
+            AnchorPane createReportLayout = loader.load();
+
+            rootLayout.setCenter(createReportLayout);
+
+            CreateReportController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+
     public void initViewReportsScreen(Stage mainStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/ViewReportsView.fxml"));
+            viewReportsLayout = loader.load();
+
+            rootLayout.setCenter(viewReportsLayout);
+
+            ViewReportsController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public void initQualityReportScreen(Stage mainStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/QualityView.fxml"));
             viewReportsLayout = loader.load();
 
             rootLayout.setCenter(viewReportsLayout);
