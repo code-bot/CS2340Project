@@ -6,6 +6,7 @@ import java.util.Iterator;
 import javafx.scene.control.*;
 import model.DatabaseModel;
 import model.Model;
+import model.Report;
 import model.WaterSourceReport;
 
 import java.text.DateFormat;
@@ -36,7 +37,10 @@ public class ViewReportsController {
         items.clear();
         Iterator iter = DatabaseModel.getInstance().getReports().iterator();
         while (iter.hasNext()) {
-            items.add(iter.next());
+            Report report = (Report)iter.next();
+            if (report.getTypeOfReport().equals("Source Report")) {
+                items.add(report);
+            }
 //            System.out.println(iter.next());
         }
 //        listOfReports.getItems().removeAll(items);

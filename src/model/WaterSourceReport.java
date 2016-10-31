@@ -78,7 +78,7 @@ public class WaterSourceReport extends Report {
 
     public static WaterType stringToWaterType(String s) {
         // BOTTLED, WELL, STREAM, LAKE, SPRING, OTHER;
-        switch(s) {
+        switch (s) {
             case "BOTTLED":
                 return WaterType.BOTTLED;
             case "WELL":
@@ -92,6 +92,10 @@ public class WaterSourceReport extends Report {
             default:
                 return WaterType.OTHER;
         }
+    }
+
+    public String getTypeOfReport() {
+        return "Source Report";
     }
 
     @Override

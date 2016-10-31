@@ -48,6 +48,12 @@ public class MainFXApplication extends Application {
 
     private AnchorPane viewReportsLayout;
 
+    private AnchorPane qualityReportsLayout;
+
+    private AnchorPane createReportsLayout;
+
+    private AnchorPane createQualityLayout;
+
     private AnchorPane mapLayout;
 
     private BorderPane menu;
@@ -246,9 +252,9 @@ public class MainFXApplication extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/CreateReportView.fxml"));
-            AnchorPane createReportLayout = loader.load();
+            createReportsLayout = loader.load();
 
-            rootLayout.setCenter(createReportLayout);
+            rootLayout.setCenter(createReportsLayout);
 
             CreateReportController controller = loader.getController();
             controller.setMainApp(this);
@@ -259,14 +265,15 @@ public class MainFXApplication extends Application {
     }
 
     public void initCreateQualityScreen(Stage mainStage) {
+        System.out.println("Make Quality");
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/CreateQualityView.fxml"));
-            AnchorPane createReportLayout = loader.load();
+            createQualityLayout = loader.load();
 
-            rootLayout.setCenter(createReportLayout);
+            rootLayout.setCenter(createQualityLayout);
 
-            CreateReportController controller = loader.getController();
+            CreateQualityController controller = loader.getController();
             controller.setMainApp(this);
 
         } catch (IOException e) {
@@ -291,14 +298,15 @@ public class MainFXApplication extends Application {
     }
 
     public void initQualityReportScreen(Stage mainStage) {
+        System.out.println("Quality");
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/QualityView.fxml"));
-            viewReportsLayout = loader.load();
+            qualityReportsLayout = loader.load();
 
-            rootLayout.setCenter(viewReportsLayout);
+            rootLayout.setCenter(qualityReportsLayout);
 
-            ViewReportsController controller = loader.getController();
+            QualityController controller = loader.getController();
             controller.setMainApp(this);
 
         } catch (IOException e) {

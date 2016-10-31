@@ -39,6 +39,10 @@ public class WaterQualityReport extends Report {
         this.contaminantPPM.set(contaminantPPM);
     }
 
+    public String getTypeOfReport() {
+        return "Quality Report";
+    }
+
     @Override
     public String toString() {
         return "Num: " + super.getNum() + "\n" + "Date: " + super.getDate() + "\n"

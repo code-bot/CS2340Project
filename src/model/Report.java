@@ -34,6 +34,8 @@ public abstract class Report {
     public double getLong() { return lon.get(); }
     public void setLong(double longitude) { lon.set(longitude); }
 
+    public abstract String getTypeOfReport();
+
     Report(String date, String time, String name, double lat, double lon) {
         this.reportNum.set(num);
         this.date.set(date);
