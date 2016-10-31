@@ -92,7 +92,7 @@ public class CreateReportController {
             if (result.get() == ButtonType.OK) {
                 WaterSourceReport report = new WaterSourceReport(date, time, name, latNum, lonNum, type, condition);
                 System.out.println(report);
-                if (Model.getInstance().addReport(report)) {
+                if (DatabaseModel.getInstance().addReport(report)) {
                     mainApplication.goToHomePage();
                 }
             }

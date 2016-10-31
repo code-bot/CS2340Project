@@ -47,7 +47,7 @@ public class MenuController {
         });
 
         MenuItem createQualityReport = new MenuItem("Create Quality Reports");
-        viewReport.setOnAction(new EventHandler<ActionEvent>() {
+        createQualityReport.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 createQualityReports();
@@ -55,7 +55,7 @@ public class MenuController {
         });
 
         MenuItem viewQualityReport = new MenuItem("View Quality Reports");
-        viewReport.setOnAction(new EventHandler<ActionEvent>() {
+        viewQualityReport.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 viewQualityReports();
