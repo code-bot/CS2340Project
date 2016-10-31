@@ -68,8 +68,10 @@ public class CreateQualityController {
         DateFormat tf = new SimpleDateFormat("HH:mm:ss");
         String time = tf.format(dateObj);
         String name = DatabaseModel.getInstance().getCurrentUser().getEmail();
-        String vPPM = virusPPM.getText();
-        String cPPM = contaminantPPM.getText();
+        String vPPMString = virusPPM.getText();
+        String cPPMString = contaminantPPM.getText();
+        double vPPM = Double.parseDouble(vPPMString);
+        double cPPM = Double.parseDouble(cPPMString);
 
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

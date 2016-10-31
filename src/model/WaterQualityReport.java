@@ -1,6 +1,8 @@
 package model;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,16 +30,17 @@ public class WaterQualityReport extends Report {
     public WaterSafety getSafety() { return safety.get(); }
     public void setType(WaterSafety waterSafety) { safety.set(waterSafety); }
 
-    public ObjectProperty<String> virusPPM = new SimpleObjectProperty<>();
-    public ObjectProperty<String> contaminantPPM = new SimpleObjectProperty<>();
+    private DoubleProperty virusPPM = new SimpleDoubleProperty();
+    private DoubleProperty contaminantPPM = new SimpleDoubleProperty();
 
     public WaterQualityReport(String date, String time, String name, double lat,
-                              double lon, WaterSafety safety, String virusPPM, String contaminantPPM) {
+                              double lon, WaterSafety safety, double virusPPM, double contaminantPPM) {
         super(date, time, name, lat, lon);
         this.safety.set(safety);
         this.virusPPM.set(virusPPM);
         this.contaminantPPM.set(contaminantPPM);
     }
+
 
     public String getTypeOfReport() {
         return "Quality Report";
@@ -48,6 +51,7 @@ public class WaterQualityReport extends Report {
         return "Num: " + super.getNum() + "\n" + "Date: " + super.getDate() + "\n"
                 + "Time: " + super.getTime() + "\n" + "Name: " + super.getName()
                 + "\n" + "Lat: " + super.getLat() + "\n" + "Long: " + super.getLong()
-                + "\n" + "Type: " + this.getSafety();
+                + "\n" + "Type: " + this.getSafety() + "\n" + "Virus PPM: " + virusPPM.get()
+                + "\n" + "Contaminant PPM: " + contaminantPPM.get();
     }
 }
