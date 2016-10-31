@@ -89,8 +89,14 @@ public class LoginController {
                                 String city = (String) uid.child("city").getValue();
                                 String zipcode = (String) uid.child("zipcode").getValue();
                                 States state = States.stringToState((String) uid.child("state").getValue());
-                                model.setCurrentUser(
-                                        new User(uname, pass, userLevel, address, city, zipcode, state));
+                                System.out.println(model.setCurrentUser(
+                                        new User(uname, pass, userLevel, address, city, zipcode, state)));
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mainApplication.goToHomePage();
+                                    }
+                                });
                             }
 
                             @Override
@@ -98,13 +104,6 @@ public class LoginController {
                                 System.out.println(firebaseError.getMessage());
                             }
                         });
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                mainApplication.goToHomePage();
-                            }
-                        });
-
                     }
                     @Override
                     public void onAuthenticationError(FirebaseError error) {

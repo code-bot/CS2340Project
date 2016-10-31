@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import model.DatabaseModel;
+import model.Model;
+import model.UserLevel;
 
 /**
  * Created by Matt Sternberg on 9/21/16.
@@ -38,32 +41,38 @@ public class MenuController {
             }
         });
 
-        MenuItem viewSourceReport = new MenuItem("View Source Reports");
-        viewSourceReport.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                viewSourceReports();
-            }
-        });
+        goToPage.getItems().addAll(profile, createSourceReport);
 
-        MenuItem createQualityReport = new MenuItem("Create Quality Reports");
-        createQualityReport.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                createQualityReport();
-            }
-        });
+        DatabaseModel model = DatabaseModel.getInstance();
 
-        MenuItem viewQualityReport = new MenuItem("View Quality Reports");
-        viewQualityReport.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                viewQualityReports();
-            }
-        });
+        if (model.getCurrentUser().getUserLevel() != UserLevel.NORMAL) {
+            MenuItem viewSourceReport = new MenuItem("View Source Reports");
+            viewSourceReport.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    viewSourceReports();
+                }
+            });
 
-        goToPage.getItems().addAll(profile, createSourceReport, viewSourceReport, createQualityReport,
-                                    viewQualityReport);
+            MenuItem createQualityReport = new MenuItem("Create Quality Reports");
+            createQualityReport.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    createQualityReport();
+                }
+            });
+
+            MenuItem viewQualityReport = new MenuItem("View Quality Reports");
+            viewQualityReport.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    viewQualityReports();
+                }
+            });
+            goToPage.getItems().addAll(viewSourceReport, createQualityReport,
+                    viewQualityReport);
+        }
+
         pageMenu.getMenus().addAll(goToPage);
 
     }
