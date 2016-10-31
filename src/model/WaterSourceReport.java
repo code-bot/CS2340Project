@@ -59,6 +59,10 @@ public class WaterSourceReport extends Report {
         this.condition.set(condition);
     }
 
+    public String getTypeOfReport() {
+        return "Source Report";
+    }
+
     @Override
     public String toString() {
         return "Num: " + super.getNum() + "\n" + "Date: " + super.getDate() + "\n"
