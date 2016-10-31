@@ -26,43 +26,43 @@ public class MenuController {
         profile.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                goToEditProfileView();
+                editProfileView();
             }
         });
 
-        MenuItem createReport = new MenuItem("Create Source Report");
-        createReport.setOnAction(new EventHandler<ActionEvent>() {
+        MenuItem createSourceReport = new MenuItem("Create Source Report");
+        createSourceReport.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                createReport();
+                createSourceReport();
             }
         });
 
-        MenuItem viewReport = new MenuItem("View Source Reports");
-        viewReport.setOnAction(new EventHandler<ActionEvent>() {
+        MenuItem viewSourceReport = new MenuItem("View Source Reports");
+        viewSourceReport.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                viewReports();
+                viewSourceReports();
             }
         });
 
         MenuItem createQualityReport = new MenuItem("Create Quality Reports");
-        viewReport.setOnAction(new EventHandler<ActionEvent>() {
+        createQualityReport.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                createQualityReports();
+                createQualityReport();
             }
         });
 
         MenuItem viewQualityReport = new MenuItem("View Quality Reports");
-        viewReport.setOnAction(new EventHandler<ActionEvent>() {
+        viewQualityReport.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 viewQualityReports();
             }
         });
 
-        goToPage.getItems().addAll(profile, createReport, viewReport, createQualityReport,
+        goToPage.getItems().addAll(profile, createSourceReport, viewSourceReport, createQualityReport,
                                     viewQualityReport);
         pageMenu.getMenus().addAll(goToPage);
 
@@ -89,32 +89,25 @@ public class MenuController {
      * Go to edit profile view
      */
     @FXML
-    private void goToEditProfileView() {
+    private void editProfileView() {
         mainApplication.goToEditProfile();
     }
 
     @FXML
-    public void createReport() {
+    public void createSourceReport() {
         mainApplication.initCreateReportScreen(mainApplication.getMainStage());
         mainApplication.initBackMenu(mainApplication.getMainStage());
     }
 
     @FXML
-    public void viewReports() {
+    public void viewSourceReports() {
         mainApplication.initViewReportsScreen(mainApplication.getMainStage());
         mainApplication.initBackMenu(mainApplication.getMainStage());
 
     }
 
     @FXML
-    public void goToMap() {
-        mainApplication.initMapViewScreen(mainApplication.getMainStage());
-        mainApplication.initBackMenu(mainApplication.getMainStage());
-
-    }
-
-    @FXML
-    public void createQualityReports() {
+    public void createQualityReport() {
         mainApplication.initCreateQualityScreen(mainApplication.getMainStage());
         mainApplication.initBackMenu(mainApplication.getMainStage());
     }

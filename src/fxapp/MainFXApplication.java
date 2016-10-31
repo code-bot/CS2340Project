@@ -306,7 +306,7 @@ public class MainFXApplication extends Application {
 
             rootLayout.setCenter(qualityReportsLayout);
 
-            ViewReportsController controller = loader.getController();
+            QualityController controller = loader.getController();
             controller.setMainApp(this);
 
         } catch (IOException e) {
