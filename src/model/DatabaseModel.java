@@ -4,6 +4,7 @@ import com.firebase.client.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,7 @@ public class DatabaseModel {
      */
     public void initFirebase() {
         rootRef = new Firebase(DATABASE_URL);
+        initWaterReports();
     }
 
 
@@ -94,10 +96,11 @@ public class DatabaseModel {
      */
     public void initWaterReports() {
         waterSourceReports = new ArrayList<WaterSourceReport>();
-        Firebase waterRepRef = rootRef.child("water source reports");
-        waterRepRef.orderByValue().addChildEventListener(new ChildEventListener() {
+        Firebase waterRepRef = rootRef.child("water_reports");
+        waterRepRef.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                waterSourceReports.add(makeSourceReport(dataSnapshot));
             }
 
             @Override
@@ -107,7 +110,12 @@ public class DatabaseModel {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                WaterSourceReport waterSourceReport = makeSourceReport(dataSnapshot);
+                for (WaterSourceReport report : waterSourceReports) {
+                    if (report.equals(waterSourceReport)) {
+                        waterSourceReports.remove(report);
+                    }
+                }
             }
 
             @Override
@@ -131,4 +139,33 @@ public class DatabaseModel {
         waterSourceReports.add(report);
     }
 
+    private WaterSourceReport makeSourceReport(DataSnapshot dataSnapshot) {
+        String date = (String) dataSnapshot.child("date").getValue();
+        double lat = (double) dataSnapshot.child("lat").getValue();
+        double lon = (double) dataSnapshot.child("long").getValue();
+        String time = (String) dataSnapshot.child("time").getValue();
+        WaterSourceReport.WaterCondition waterCondition = WaterSourceReport.stringToCondition(
+                (String) dataSnapshot.child("condition").getValue()
+        );
+        WaterSourceReport.WaterType waterType = WaterSourceReport.stringToWaterType(
+                (String) dataSnapshot.child("type").getValue()
+        );
+        String name = (String) dataSnapshot.child("name").getValue();
+        return new WaterSourceReport(date, time, name, lat, lon, waterType, waterCondition);
+    }
+
+    public boolean addReport(WaterSourceReport waterSourceReport) {
+        Firebase reportsRef = rootRef.child("water_reports");
+        try {
+            reportsRef.child(String.valueOf(waterSourceReport.getNum())).setValue(waterSourceReport);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public ArrayList<WaterSourceReport> getReports() {
+        return waterSourceReports;
+    }
 }

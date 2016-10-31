@@ -4,6 +4,7 @@ import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
 import java.util.Iterator;
 import javafx.scene.control.*;
+import model.DatabaseModel;
 import model.Model;
 import model.Report;
 import model.WaterSourceReport;
@@ -34,7 +35,7 @@ public class ViewReportsController {
     public void initialize() {
 //        listOfReports.getItems().clear();
         items.clear();
-        Iterator iter = Model.getInstance().getReports().iterator();
+        Iterator iter = DatabaseModel.getInstance().getReports().iterator();
         while (iter.hasNext()) {
             Report report = (Report)iter.next();
             if (report.getTypeOfReport().equals("Source Report")) {
