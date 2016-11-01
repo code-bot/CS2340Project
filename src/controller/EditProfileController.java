@@ -1,16 +1,16 @@
 package controller;
 
+import com.firebase.client.utilities.Pair;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import fxapp.MainFXApplication;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import model.Model;
-import model.States;
-import model.User;
-import model.UserLevel;
+import model.*;
 
 import java.util.Optional;
 
@@ -143,6 +143,58 @@ public class EditProfileController {
             if (updatedUser) {
                 mainApplication.goToHomePage();
             }
+        }
+    }
+
+    /**
+     * Allows the user to change their password
+     */
+    @FXML
+    public void changePassword() {
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle("Change Password Dialog");
+        dialog.setHeaderText("Change your password");
+
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL, ButtonType.APPLY);
+
+        // Create the password and confirm labels and fields.
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField pword = new TextField();
+        pword.setPromptText("Password");
+        PasswordField confirm = new PasswordField();
+        confirm.setPromptText("Confirm Password");
+
+        grid.add(new Label("New Password:"), 0, 0);
+        grid.add(pword, 1, 0);
+        grid.add(new Label("Confirm Password:"), 0, 1);
+        grid.add(confirm, 1, 1);
+
+        dialog.getDialogPane().setContent(grid);
+
+        Optional<Pair<String, String>> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            if (pword.getText().equals(confirm.getText())) {
+                String password = pword.getText();
+                DatabaseModel.getInstance().getCurrentUser().resetPassword(password);
+            } else {
+                incorrectPasswordSubmit();
+            }
+        }
+    }
+
+    public void incorrectPasswordSubmit() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("New Password Error");
+        alert.setHeaderText("The two password fields do not match");
+        alert.setContentText("Please try changing password again");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent()) {
+            changePassword();
         }
     }
 }

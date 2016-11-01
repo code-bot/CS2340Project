@@ -96,4 +96,8 @@ public class User {
                 " " + address.get() + " " + city.get() + " " + zipcode.get() +
                 " " + state.get().name();
     }
+
+    public void resetPassword(String newPassword) {
+        DatabaseModel.getInstance().changePassword(getEmail(), getPassword(), newPassword);
+    }
 }

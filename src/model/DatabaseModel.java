@@ -19,6 +19,7 @@ public class DatabaseModel {
 
     private final String DATABASE_URL = "https://h2woah.firebaseio.com";
     private Firebase rootRef;
+    private String uid;
 
     private ArrayList<WaterSourceReport> waterSourceReports;
     private ArrayList<WaterQualityReport> waterQualityReports;
@@ -45,6 +46,10 @@ public class DatabaseModel {
     /** Getter and setter for the currUser */
     public User getCurrentUser() { return currUser.get(); }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
 
     public boolean setCurrentUser(User user) {
         //Can only set the current user if there is no current user (Safety measure)
@@ -66,7 +71,7 @@ public class DatabaseModel {
         rootRef.createUser(newUser.getEmail(), newUser.getPassword(), new Firebase.ValueResultHandler<Map<String, Object>>() {
             @Override
             public void onSuccess(Map<String, Object> stringObjectMap) {
-                String uid = (String) stringObjectMap.get("uid");
+                uid = (String) stringObjectMap.get("uid");
                 rootRef.child("users").child(uid).setValue(newUser);
             }
 
@@ -242,4 +247,34 @@ public class DatabaseModel {
     }
 
     public ArrayList<WaterQualityReport> getWaterQualityReports() { return waterQualityReports; }
+
+    public void forgotPassword(String email) {
+        rootRef.resetPassword(email, new Firebase.ResultHandler() {
+            @Override
+            public void onSuccess() {
+                System.out.println("Successful password reset!");
+            }
+
+            @Override
+            public void onError(FirebaseError firebaseError) {
+                System.out.println(firebaseError.getMessage());
+            }
+        });
+    }
+
+    public void changePassword(String email, String oldPass, String newPass) {
+        rootRef.changePassword(email, oldPass, newPass, new Firebase.ResultHandler() {
+            @Override
+            public void onSuccess() {
+                System.out.println("Password successfully changed to " + newPass);
+                rootRef.child("users").child(uid).child("password").setValue(newPass);
+            }
+
+            @Override
+            public void onError(FirebaseError firebaseError) {
+                System.out.println(firebaseError.getMessage());
+            }
+        });
+
+    }
 }

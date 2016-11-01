@@ -124,5 +124,5 @@ public class CreateQualityController {
         alert.setHeaderText("Latitude/Longitude Error");
         alert.setContentText("Make sure the latitude and longitude are in the correct format");
         Optional<ButtonType> result = alert.showAndWait();
-
-    }}
+    }
+}

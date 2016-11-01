@@ -321,6 +321,7 @@ public class MainFXApplication extends Application {
             System.out.println(e.toString());
         }
     }
+
     public static void main(String[] args) {
         launch(args);
     }

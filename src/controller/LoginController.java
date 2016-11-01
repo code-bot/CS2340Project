@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import model.*;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -91,6 +92,7 @@ public class LoginController {
                                 States state = States.stringToState((String) uid.child("state").getValue());
                                 System.out.println(model.setCurrentUser(
                                         new User(uname, pass, userLevel, address, city, zipcode, state)));
+                                model.setUid(authData.getUid());
                                 Platform.runLater(new Runnable() {
                                     @Override
                                     public void run() {
@@ -125,9 +127,34 @@ public class LoginController {
         alert.setHeaderText("Incorrect Information");
         alert.setContentText("Wrong username or password");
         alert.showAndWait();
-
     }
 
+    public void resetPassword() {
+        TextInputDialog dialog = new TextInputDialog(username.getText());
+        dialog.setTitle("Forgot Password Dialog");
+        dialog.setHeaderText("Password Reset");
+        dialog.setContentText("Please enter your email address:");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            if (isValidEmail(result.get())) {
+                DatabaseModel.getInstance().forgotPassword(result.get());
+            } else {
+                incorrectResetEmail();
+            }
+        }
+    }
+
+    public void incorrectResetEmail() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Password Reset Error");
+        alert.setHeaderText("Incorrect Email Format");
+        alert.setContentText("The given email address is in an incorrect format");
+        alert.showAndWait();
+    }
+
+    public static boolean isValidEmail(String emailAddress) {
+        return emailAddress.contains(" ") == false && emailAddress.matches(".+@.+\\.[a-z]+");
+    }
 
 
 }

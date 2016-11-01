@@ -16,7 +16,7 @@
         </font>
     </Label>
     <TextField fx:id="emailField" layoutX="212.0" layoutY="89.0" prefHeight="28.0" prefWidth="179.0" promptText="placeholder" styleClass="text-field" stylesheets="@css/EditProfile.css" />
-    <PasswordField fx:id="passwordField" layoutX="210.0" layoutY="181.0" prefHeight="28.0" prefWidth="179.0" promptText="New password" />
+    <Button fx:id="passwordButton" layoutX = "230.0" layoutY="190.0" prefHeight="28.0" prefWidth="150.0" onAction="#changePassword" text="Change Password" style="-fx-background-radius: 10;" styleClass="register-button" textFill="#005580"/>
     <TextField fx:id="addressLine1Field" layoutX="209.0" layoutY="278.0" prefWidth="179.0" promptText="Enter Address Line 1" styleClass="text-field" stylesheets="@css/EditProfile.css" />
     <TextField fx:id="cityField" layoutX="210.0" layoutY="317.0" prefHeight="28.0" prefWidth="179.0" promptText="City" styleClass="text-field" stylesheets="@css/EditProfile.css" />
     <TextField fx:id="zipcodeField" layoutX="210.0" layoutY="357.0" prefHeight="28.0" prefWidth="102.0" promptText="Zip Code" styleClass="text-field" stylesheets="@css/EditProfile.css" />
