@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import model.*;
 
 import java.util.Map;
@@ -37,6 +38,7 @@ public class LoginController {
     @FXML
     private PasswordField passwordField;
 
+
     public LoginController() {
         model = DatabaseModel.getInstance();
     }
@@ -63,6 +65,17 @@ public class LoginController {
             @Override
             public void handle(ActionEvent e) {
                 mainApplication.initRegisterScreen(mainApplication.getMainStage());
+            }
+        });
+        //You can press enter while in TextField to initiate login
+        username.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                login();
+            }
+        });
+        passwordField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                login();
             }
         });
     }
