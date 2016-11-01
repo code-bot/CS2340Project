@@ -25,6 +25,18 @@ public class WaterQualityReport extends Report {
         }
     }
 
+    public static WaterSafety stringToSafety(String s) {
+        switch(s) {
+            case "SAFE":
+                return WaterSafety.SAFE;
+            case "TREATABLE":
+                return WaterSafety.TREATABLE;
+            case "UNSAFE":
+                return WaterSafety.UNSAFE;
+        }
+        return WaterSafety.UNSAFE;
+    }
+
     public ObjectProperty<WaterSafety> safety = new SimpleObjectProperty<>();
 
     public WaterSafety getSafety() { return safety.get(); }
@@ -41,6 +53,13 @@ public class WaterQualityReport extends Report {
         this.contaminantPPM.set(contaminantPPM);
     }
 
+    public double getVppm() {
+        return virusPPM.get();
+    }
+
+    public double getCppm() {
+        return contaminantPPM.get();
+    }
 
     public String getTypeOfReport() {
         return "Quality Report";

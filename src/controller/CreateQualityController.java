@@ -98,7 +98,7 @@ public class CreateQualityController {
             if (result.get() == ButtonType.OK) {
                 WaterQualityReport report = new WaterQualityReport(date, time, name, latNum, lonNum, safety, vPPM, cPPM);
                 System.out.println(report);
-                if (Model.getInstance().addReport(report)) {
+                if (DatabaseModel.getInstance().addReport(report)) {
                     mainApplication.goToHomePage();
                 }
             }

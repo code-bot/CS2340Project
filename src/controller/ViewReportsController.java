@@ -35,7 +35,7 @@ public class ViewReportsController {
     public void initialize() {
 //        listOfReports.getItems().clear();
         items.clear();
-        Iterator iter = DatabaseModel.getInstance().getReports().iterator();
+        Iterator iter = DatabaseModel.getInstance().getSourceReports().iterator();
         while (iter.hasNext()) {
             Report report = (Report)iter.next();
             if (report.getTypeOfReport().equals("Source Report")) {

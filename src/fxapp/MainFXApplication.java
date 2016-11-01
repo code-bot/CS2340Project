@@ -1,31 +1,16 @@
 package fxapp;
-import com.google.firebase.FirebaseOptions;
 
-import com.firebase.client.AuthData;
-import com.firebase.client.Firebase;
-import com.google.firebase.*;
-
-
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.sun.javaws.Main;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import controller.*;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.*;
-import sun.plugin.javascript.navig.Anchor;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Logger;
 
 /**
  * Main application class. Handles switching scenes throughout application
@@ -67,6 +52,13 @@ public class MainFXApplication extends Application {
         initRootLayout(mainStage);
         initLoginScreen(mainStage);
         databaseModel = DatabaseModel.getInstance();
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                System.out.println("Exiting application");
+                System.exit(0);
+            }
+        });
     }
 
 

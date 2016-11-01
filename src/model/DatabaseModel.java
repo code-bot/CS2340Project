@@ -21,6 +21,7 @@ public class DatabaseModel {
     private Firebase rootRef;
 
     private ArrayList<WaterSourceReport> waterSourceReports;
+    private ArrayList<WaterQualityReport> waterQualityReports;
 
 
     DatabaseModel() {
@@ -33,6 +34,7 @@ public class DatabaseModel {
     public void initFirebase() {
         rootRef = new Firebase(DATABASE_URL);
         initWaterReports();
+        initQualityReports();
     }
 
 
@@ -111,11 +113,41 @@ public class DatabaseModel {
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 WaterSourceReport waterSourceReport = makeSourceReport(dataSnapshot);
-                for (WaterSourceReport report : waterSourceReports) {
-                    if (report.equals(waterSourceReport)) {
-                        waterSourceReports.remove(report);
-                    }
-                }
+                waterSourceReports.remove(waterSourceReport);
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println(firebaseError.getMessage());
+            }
+        });
+    }
+
+    public void initQualityReports() {
+        waterQualityReports = new ArrayList<WaterQualityReport>();
+        Firebase waterRepRef = rootRef.child("quality_reports");
+        waterRepRef.orderByKey().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                waterQualityReports.add(makeQualityReport(dataSnapshot));
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                WaterQualityReport waterQualityReport = makeQualityReport(dataSnapshot);
+                waterSourceReports.remove(waterQualityReport);
+
             }
 
             @Override
@@ -139,6 +171,24 @@ public class DatabaseModel {
         waterSourceReports.add(report);
     }
 
+    private WaterQualityReport makeQualityReport(DataSnapshot dataSnapshot) {
+        String date = (String) dataSnapshot.child("date").getValue();
+        double lat = (double) dataSnapshot.child("lat").getValue();
+        double lon = (double) dataSnapshot.child("long").getValue();
+        String time = (String) dataSnapshot.child("time").getValue();
+        String name = (String) dataSnapshot.child("name").getValue();
+        WaterQualityReport.WaterSafety safety =
+                WaterQualityReport.stringToSafety((String) dataSnapshot.child("safety").getValue());
+        double vppm = (double) dataSnapshot.child("vppm").getValue();
+        double cppm = (double) dataSnapshot.child("cppm").getValue();
+        return new WaterQualityReport(date, time, name, lat, lon, safety, vppm, cppm);
+    }
+
+    /**
+     * Create a water source report from the information stored in database
+     * @param dataSnapshot a DataSnapshot holding information from the Firebase database
+     * @return a WaterSourceReport created from the information attributes in the database
+     */
     private WaterSourceReport makeSourceReport(DataSnapshot dataSnapshot) {
         String date = (String) dataSnapshot.child("date").getValue();
         double lat = (double) dataSnapshot.child("lat").getValue();
@@ -154,6 +204,11 @@ public class DatabaseModel {
         return new WaterSourceReport(date, time, name, lat, lon, waterType, waterCondition);
     }
 
+    /**
+     * Add a WaterSourceReport to the waterSourceReports json tree in Firebase database
+     * @param waterSourceReport the source report to add to the database
+     * @return a boolean indicating whether the creation operation in the database has succeeded
+     */
     public boolean addReport(WaterSourceReport waterSourceReport) {
         Firebase reportsRef = rootRef.child("water_reports");
         try {
@@ -165,7 +220,26 @@ public class DatabaseModel {
         return true;
     }
 
-    public ArrayList<WaterSourceReport> getReports() {
+    /**
+     * Add a WaterSourceReport to the waterQualityReports json tree in Firebase database
+     * @param waterQualityReport the quality report to add to the database
+     * @return a boolean indicating whether the creation operation in the database has succeeded
+     */
+    public boolean addReport(WaterQualityReport waterQualityReport) {
+        Firebase qualityRef = rootRef.child("quality_reports");
+        try {
+            Firebase objRef = qualityRef.child(String.valueOf(waterQualityReport.getNum()));
+            objRef.setValue(waterQualityReport);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public ArrayList<WaterSourceReport> getSourceReports() {
         return waterSourceReports;
     }
+
+    public ArrayList<WaterQualityReport> getWaterQualityReports() { return waterQualityReports; }
 }
