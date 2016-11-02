@@ -1,9 +1,6 @@
 package model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -37,6 +34,12 @@ public class WaterQualityReport extends Report {
         return WaterSafety.UNSAFE;
     }
 
+    private static int num = 1;
+
+    private IntegerProperty reportNum = new SimpleIntegerProperty();
+    public int getNum() { return reportNum.get(); }
+    public void setNum(int num) { reportNum.set(num); }
+
     public ObjectProperty<WaterSafety> safety = new SimpleObjectProperty<>();
 
     public WaterSafety getSafety() { return safety.get(); }
@@ -48,9 +51,23 @@ public class WaterQualityReport extends Report {
     public WaterQualityReport(String date, String time, String name, double lat,
                               double lon, WaterSafety safety, double virusPPM, double contaminantPPM) {
         super(date, time, name, lat, lon);
+
         this.safety.set(safety);
         this.virusPPM.set(virusPPM);
         this.contaminantPPM.set(contaminantPPM);
+        this.reportNum.set(num);
+        num++;
+    }
+
+    public WaterQualityReport(int num, String date, String time, String name, double lat,
+                              double lon, WaterSafety safety, double virusPPM, double contaminantPPM) {
+        super(date, time, name, lat, lon);
+
+        this.safety.set(safety);
+        this.virusPPM.set(virusPPM);
+        this.contaminantPPM.set(contaminantPPM);
+        this.reportNum.set(num);
+        WaterQualityReport.num++;
     }
 
     public double getVppm() {
@@ -67,10 +84,30 @@ public class WaterQualityReport extends Report {
 
     @Override
     public String toString() {
-        return "Num: " + super.getNum() + "\n" + "Date: " + super.getDate() + "\n"
+        return "Num: " + this.getNum() + "\n" + "Date: " + super.getDate() + "\n"
                 + "Time: " + super.getTime() + "\n" + "Name: " + super.getName()
                 + "\n" + "Lat: " + super.getLat() + "\n" + "Long: " + super.getLong()
                 + "\n" + "Type: " + this.getSafety() + "\n" + "Virus PPM: " + virusPPM.get()
                 + "\n" + "Contaminant PPM: " + contaminantPPM.get();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (!other.getClass().equals(this.getClass())) {
+            return false;
+        }
+        WaterQualityReport that = (WaterQualityReport) other;
+        if (that.getNum() != this.getNum()) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return num;
     }
 }

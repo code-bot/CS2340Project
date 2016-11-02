@@ -62,15 +62,18 @@ public class MenuController {
                 }
             });
 
-            MenuItem viewQualityReport = new MenuItem("View Quality Reports");
-            viewQualityReport.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    viewQualityReports();
-                }
-            });
-            goToPage.getItems().addAll(viewSourceReport, createQualityReport,
-                    viewQualityReport);
+            goToPage.getItems().addAll(viewSourceReport, createQualityReport);
+
+            if (model.getCurrentUser().getUserLevel() != UserLevel.WORKER) {
+                MenuItem viewQualityReport = new MenuItem("View Quality Reports");
+                viewQualityReport.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        viewQualityReports();
+                    }
+                });
+                goToPage.getItems().addAll(viewQualityReport);
+            }
         }
 
         pageMenu.getMenus().addAll(goToPage);
