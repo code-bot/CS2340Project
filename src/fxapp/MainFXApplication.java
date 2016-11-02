@@ -9,7 +9,9 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import model.*;
+import org.apache.log4j.*;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -19,6 +21,13 @@ import java.io.IOException;
 public class MainFXApplication extends Application {
 
     /** Main container for the application window */
+
+
+    private static final Logger logger = Logger.getLogger(MainFXApplication.class);
+
+    private String log4jConfigFile = System.getProperty("user.dir")
+            + File.separator + "log4j.properties";
+
     private Stage mainStage;
 
     private BorderPane rootLayout;
@@ -47,6 +56,7 @@ public class MainFXApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        PropertyConfigurator.configure(log4jConfigFile);
         mainStage = primaryStage;
         mainStage.setResizable(false);
         initRootLayout(mainStage);
@@ -326,5 +336,9 @@ public class MainFXApplication extends Application {
         launch(args);
     }
 
+    public Logger getLogger() {
+        return logger;
+    }
 
     }
+

@@ -1,6 +1,7 @@
 package controller;
 
 import com.firebase.client.*;
+import com.firebase.client.Logger;
 import fxapp.MainFXApplication;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -10,7 +11,9 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import model.*;
+import org.apache.log4j.*;
 
+import java.io.File;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,6 +25,11 @@ public class LoginController {
 
     // Reference back to the main application if needed
     private MainFXApplication mainApplication;
+
+    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(LoginController.class);
+
+    private String log4jConfigFile = System.getProperty("user.dir")
+            + File.separator + "log4j.properties";
 
     private String _username;
 
@@ -58,6 +66,7 @@ public class LoginController {
     @FXML
     private void initialize() {
 
+        PropertyConfigurator.configure(log4jConfigFile);
         //Initialize temp username and password:
         _username = username.getText();
         _password = passwordField.getText();
@@ -127,14 +136,16 @@ public class LoginController {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                loginError();
+                                loginError(error.getMessage());
                             }
                         });
                     }
                 });
     }
 
-    public void loginError() {
+    public void loginError(String error) {
+        logger.info("Login attempt. Userid: \"" + username.getText() + "\" Bad Login Attempt -" +
+                " " + error);
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Login Error");
         alert.setHeaderText("Incorrect Information");

@@ -1,0 +1,5 @@
+2016-11-01 22:51:29 INFO  MainFXApplication:57 - This is my first log4j's statement
+2016-11-01 22:51:55 INFO  MainFXApplication:65 - Exiting application here
+2016-11-01 23:30:45 INFO  MainFXApplication:67 - info 
+2016-11-01 23:31:23 INFO  MainFXApplication:67 - info 
+2016-11-01 23:32:30 INFO  MainFXApplication:67 - info 
