@@ -6,6 +6,9 @@ import javafx.beans.property.SimpleObjectProperty;
 import java.util.ArrayList;
 import java.util.Map;
 
+import java.lang.reflect.Array;
+import java.util.*;
+
 /**
  * Created by Matt Sternberg on 10/7/2016.
  */
@@ -18,8 +21,8 @@ public class DatabaseModel {
     private Firebase rootRef;
     private String uid;
 
-    private ArrayList<WaterSourceReport> waterSourceReports;
-    private ArrayList<WaterQualityReport> waterQualityReports;
+    private Set<WaterSourceReport> waterSourceReports;
+    private Set<WaterQualityReport> waterQualityReports;
 
 
     DatabaseModel() {
@@ -103,13 +106,14 @@ public class DatabaseModel {
      * the information in the firebase database
      */
     public void initWaterReports() {
-        waterSourceReports = new ArrayList<WaterSourceReport>();
+        waterSourceReports = new HashSet<>();
         Firebase waterRepRef = rootRef.child("water_reports");
         waterRepRef.orderByKey().addChildEventListener(new ChildEventListener()
         {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 waterSourceReports.add(makeSourceReport(dataSnapshot));
+                System.out.println("Added source report");
             }
 
             @Override
@@ -138,13 +142,15 @@ public class DatabaseModel {
     }
 
     public void initQualityReports() {
-        waterQualityReports = new ArrayList<WaterQualityReport>();
+        waterQualityReports = new HashSet<>();
         Firebase waterRepRef = rootRef.child("quality_reports");
         waterRepRef.orderByKey().addChildEventListener(new ChildEventListener()
         {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
                 waterQualityReports.add(makeQualityReport(dataSnapshot));
+                System.out.println("Added quality report");
             }
 
             @Override
@@ -155,7 +161,7 @@ public class DatabaseModel {
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 WaterQualityReport waterQualityReport = makeQualityReport(dataSnapshot);
-                waterSourceReports.remove(waterQualityReport);
+                waterQualityReports.remove(waterQualityReport);
 
             }
 
@@ -172,15 +178,16 @@ public class DatabaseModel {
 
     }
 
-    /**
-     * Add the water source report to the database
-     * @param report the water source report to add to the database
-     */
-    public void submitWaterSourceReport(WaterSourceReport report) {
-        waterSourceReports.add(report);
-    }
+//    /**
+//     * Add the water source report to the database
+//     * @param report the water source report to add to the database
+//     */
+//    public void submitWaterSourceReport(WaterSourceReport report) {
+//        waterSourceReports.add(report);
+//    }
 
     private WaterQualityReport makeQualityReport(DataSnapshot dataSnapshot) {
+        int num = (int) (long) dataSnapshot.child("num").getValue();
         String date = (String) dataSnapshot.child("date").getValue();
         double lat = (double) dataSnapshot.child("lat").getValue();
         double lon = (double) dataSnapshot.child("long").getValue();
@@ -191,8 +198,7 @@ public class DatabaseModel {
                         dataSnapshot.child("safety").getValue());
         double vppm = (double) dataSnapshot.child("vppm").getValue();
         double cppm = (double) dataSnapshot.child("cppm").getValue();
-        return new WaterQualityReport(date, time, name, lat, lon, safety,
-                vppm, cppm);
+        return new WaterQualityReport(num, date, time, name, lat, lon, safety, vppm, cppm);
     }
 
     /**
@@ -201,6 +207,7 @@ public class DatabaseModel {
      * @return a WaterSourceReport created from the information attributes in the database
      */
     private WaterSourceReport makeSourceReport(DataSnapshot dataSnapshot) {
+        int num = (int) (long) dataSnapshot.child("num").getValue();
         String date = (String) dataSnapshot.child("date").getValue();
         double lat = (double) dataSnapshot.child("lat").getValue();
         double lon = (double) dataSnapshot.child("long").getValue();
@@ -214,8 +221,7 @@ public class DatabaseModel {
                 (String) dataSnapshot.child("type").getValue()
         );
         String name = (String) dataSnapshot.child("name").getValue();
-        return new WaterSourceReport(date, time, name, lat, lon,
-                waterType, waterCondition);
+        return new WaterSourceReport(num, date, time, name, lat, lon, waterType, waterCondition);
     }
 
     /**
@@ -228,8 +234,9 @@ public class DatabaseModel {
     public boolean addReport(WaterSourceReport waterSourceReport) {
         Firebase reportsRef = rootRef.child("water_reports");
         try {
-            reportsRef.child(String.valueOf(waterSourceReport.getNum()))
-                    .setValue(waterSourceReport);
+            System.out.println("trying source report");
+            reportsRef.child(String.valueOf(waterSourceReport.getNum())).setValue(waterSourceReport);
+            //waterSourceReports.add(waterSourceReport);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
@@ -247,9 +254,8 @@ public class DatabaseModel {
     public boolean addReport(WaterQualityReport waterQualityReport) {
         Firebase qualityRef = rootRef.child("quality_reports");
         try {
-            Firebase objRef = qualityRef
-                    .child(String.valueOf(waterQualityReport.getNum()));
-            objRef.setValue(waterQualityReport);
+            qualityRef.child(String.valueOf(waterQualityReport.getNum())).setValue(waterQualityReport);
+            //waterQualityReports.add(waterQualityReport);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
@@ -257,12 +263,12 @@ public class DatabaseModel {
         return true;
     }
 
-    public ArrayList<WaterSourceReport> getSourceReports() {
+    public Set<WaterSourceReport> getSourceReports() {
         return waterSourceReports;
     }
 
-    public ArrayList<WaterQualityReport> getWaterQualityReports()
-    { return waterQualityReports; }
+
+    public Set<WaterQualityReport> getWaterQualityReports() { return waterQualityReports; }
 
     public void forgotPassword(String email) {
         rootRef.resetPassword(email, new Firebase.ResultHandler() {

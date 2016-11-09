@@ -8,6 +8,9 @@ import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.*;
 import java.util.Set;
+
+import model.DatabaseModel;
+import model.WaterSourceReport;
 import netscape.javascript.JSObject;
 import fxapp.MainFXApplication;
 import com.lynden.gmapsfx.GoogleMapView;
@@ -67,8 +70,8 @@ public class MapViewController implements Initializable, MapComponentInitialized
 
         map = mapView.createMap(mapOptions);
 
-        Set<Report> reports = new HashSet<Report>();
-        reports = Model.getInstance().getReports();
+        Set<WaterSourceReport> reports = new HashSet<>();
+        reports = DatabaseModel.getInstance().getSourceReports();
         for (Report report : reports) {
             MarkerOptions markerOptions = new MarkerOptions();
             LatLong loc = new LatLong(report.getLat(), report.getLong());
