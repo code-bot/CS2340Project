@@ -11,6 +11,7 @@ import javafx.stage.WindowEvent;
 import model.*;
 
 import java.io.IOException;
+import java.io.SyncFailedException;
 
 /**
  * Main application class. Handles switching scenes throughout application
@@ -34,6 +35,8 @@ public class MainFXApplication extends Application {
     private AnchorPane viewReportsLayout;
 
     private AnchorPane qualityReportsLayout;
+
+    private AnchorPane historicalReportsLayout;
 
     private AnchorPane createReportsLayout;
 
@@ -301,6 +304,21 @@ public class MainFXApplication extends Application {
             QualityController controller = loader.getController();
             controller.setMainApp(this);
 
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public void initHistoricalGraphScreen(Stage mainStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/CreateHistoricalView.fxml"));
+            System.out.println("checkpt");
+            historicalReportsLayout = loader.load();
+
+            rootLayout.setCenter(historicalReportsLayout);
+            CreateHistoricalController controller = loader.getController();
+            controller.setMainApp(this);
         } catch (IOException e) {
             System.out.println(e.toString());
         }

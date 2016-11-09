@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Pagination;
 import model.DatabaseModel;
 import model.Model;
 import model.UserLevel;
@@ -62,15 +63,30 @@ public class MenuController {
                 }
             });
 
-            MenuItem viewQualityReport = new MenuItem("View Quality Reports");
-            viewQualityReport.setOnAction(new EventHandler<ActionEvent>() {
+            goToPage.getItems().addAll(viewSourceReport, createQualityReport);
+
+            if (model.getCurrentUser().getUserLevel() != UserLevel.WORKER) {
+                MenuItem viewQualityReport = new MenuItem("View Quality Reports");
+                viewQualityReport.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        viewQualityReports();
+                    }
+                });
+                goToPage.getItems().addAll(viewQualityReport);
+            }
+        }
+
+        if (model.getCurrentUser().getUserLevel() == UserLevel.MANAGER) {
+            MenuItem createHistoricalGraph
+                    = new MenuItem("Create Historical Report");
+            createHistoricalGraph.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    viewQualityReports();
+                    createHistoricalGraph();
                 }
             });
-            goToPage.getItems().addAll(viewSourceReport, createQualityReport,
-                    viewQualityReport);
+            goToPage.getItems().addAll(createHistoricalGraph);
         }
 
         pageMenu.getMenus().addAll(goToPage);
@@ -124,6 +140,12 @@ public class MenuController {
     @FXML
     public void viewQualityReports() {
         mainApplication.initQualityReportScreen(mainApplication.getMainStage());
+        mainApplication.initBackMenu(mainApplication.getMainStage());
+    }
+
+    @FXML
+    public void createHistoricalGraph() {
+        mainApplication.initHistoricalGraphScreen(mainApplication.getMainStage());
         mainApplication.initBackMenu(mainApplication.getMainStage());
     }
 }
