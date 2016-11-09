@@ -12,6 +12,8 @@ import model.DatabaseModel;
 import model.Model;
 import model.UserLevel;
 
+import java.util.ArrayList;
+
 /**
  * Created by Matt Sternberg on 9/21/16.
  */
@@ -73,20 +75,18 @@ public class MenuController {
                         viewQualityReports();
                     }
                 });
-                goToPage.getItems().addAll(viewQualityReport);
-            }
-        }
 
-        if (model.getCurrentUser().getUserLevel() == UserLevel.MANAGER) {
-            MenuItem createHistoricalGraph
-                    = new MenuItem("Create Historical Report");
-            createHistoricalGraph.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    createHistoricalGraph();
-                }
-            });
-            goToPage.getItems().addAll(createHistoricalGraph);
+                MenuItem createHistoricalGraph
+                        = new MenuItem("Create Historical Report");
+                createHistoricalGraph.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        createHistoricalGraph();
+                    }
+                });
+
+                goToPage.getItems().addAll(viewQualityReport, createHistoricalGraph);
+            }
         }
 
         pageMenu.getMenus().addAll(goToPage);
@@ -145,7 +145,8 @@ public class MenuController {
 
     @FXML
     public void createHistoricalGraph() {
-        mainApplication.initHistoricalGraphScreen(mainApplication.getMainStage());
+        //mainApplication.initGraphViewScreen(mainApplication.getMainStage(), new ArrayList(DatabaseModel.getInstance().getWaterQualityReports()), "Virus");
+        mainApplication.initCreateGraphScreen(mainApplication.getMainStage());
         mainApplication.initBackMenu(mainApplication.getMainStage());
     }
 }

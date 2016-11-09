@@ -36,8 +36,6 @@ public class MainFXApplication extends Application {
 
     private AnchorPane qualityReportsLayout;
 
-    private AnchorPane historicalReportsLayout;
-
     private AnchorPane createReportsLayout;
 
     private AnchorPane createQualityLayout;
@@ -47,6 +45,8 @@ public class MainFXApplication extends Application {
     private BorderPane menu;
 
     private AnchorPane viewGraphLayout;
+
+    private AnchorPane createGraphLayout;
 
     private DatabaseModel databaseModel;
 
@@ -311,21 +311,6 @@ public class MainFXApplication extends Application {
         }
     }
 
-    public void initHistoricalGraphScreen(Stage mainStage) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/CreateHistoricalView.fxml"));
-            System.out.println("checkpt");
-            historicalReportsLayout = loader.load();
-
-            rootLayout.setCenter(historicalReportsLayout);
-            CreateHistoricalController controller = loader.getController();
-            controller.setMainApp(this);
-        } catch (IOException e) {
-            System.out.println(e.toString());
-        }
-    }
-
     public void initMapViewScreen(Stage mainStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -346,15 +331,37 @@ public class MainFXApplication extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/GraphView.fxml"));
-            mapLayout = loader.load();
+            viewGraphLayout = loader.load();
 
             rootLayout.setCenter(viewGraphLayout);
 
-            GraphViewController controller = new GraphViewController(reports, type);
+            GraphViewController controller = loader.getController();
             controller.setMainApp(this);
-
-            loader.setController(controller);
+            controller.setReports(reports);
+            controller.setType(type);
+            controller.loadGraph();
         } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public void initCreateGraphScreen(Stage mainStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/CreateGraphView.fxml"));
+            System.out.println("RIP");
+            createGraphLayout = loader.load();
+
+            rootLayout.setCenter(createGraphLayout);
+
+            CreateHistoricalController controller = loader.getController();
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            for (StackTraceElement ayy : e.getStackTrace()) {
+                System.out.println(ayy);
+            }
+            System.out.println(e.getCause().getMessage());
+            //System.out.println(e.getStackTrace());
             System.out.println(e.toString());
         }
     }

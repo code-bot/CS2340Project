@@ -24,8 +24,7 @@ public class CreateHistoricalController {
     @FXML
     private ToggleButton contaminant;
 
-    @FXML
-    private TextField location;
+
 
     @FXML
     private TextField yearSelected;
@@ -42,7 +41,7 @@ public class CreateHistoricalController {
 
     @FXML
     public void createGraph() {
-        String loc = location.getText();
+        //String loc = location.getText();
         int year = Integer.parseInt(yearSelected.getText());
         boolean isVirus = false;
         boolean isContaminant = false;
@@ -65,6 +64,7 @@ public class CreateHistoricalController {
             alert.setContentText("Choose either virus or contaminant." +
                     " Currently you have picked both.");
         }
+
     }
 
     @FXML
