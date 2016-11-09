@@ -3,17 +3,14 @@ package model;
 import com.firebase.client.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Matt Sternberg on 10/7/2016.
  */
 public class DatabaseModel {
-    /** Set Model up as a singleton design pattern */
+    /** Set Model up as a singleton design pattern. */
     private static final DatabaseModel instance = new DatabaseModel();
     public static DatabaseModel getInstance() { return instance; }
 
@@ -30,7 +27,8 @@ public class DatabaseModel {
     }
 
     /**
-     * Initializes an instance of FirebaseDatabase to connect to the Firebase database
+     * Initializes an instance of FirebaseDatabase to connect to the Firebase
+     * database
      */
     public void initFirebase() {
         rootRef = new Firebase(DATABASE_URL);
@@ -40,7 +38,8 @@ public class DatabaseModel {
 
 
     /** Currently logged in user */
-    private static final ObjectProperty<User> currUser = new SimpleObjectProperty<>();
+    private static final ObjectProperty<User> currUser
+            = new SimpleObjectProperty<>();
 
 
     /** Getter and setter for the currUser */
@@ -52,7 +51,8 @@ public class DatabaseModel {
 
 
     public boolean setCurrentUser(User user) {
-        //Can only set the current user if there is no current user (Safety measure)
+        //Can only set the current user if there is no current user
+        // (Safety measure)
         if (currUser.get() == null) {
             currUser.set(user);
             return true;
@@ -68,7 +68,8 @@ public class DatabaseModel {
      * Create user
      */
     public boolean createUser(User newUser) {
-        rootRef.createUser(newUser.getEmail(), newUser.getPassword(), new Firebase.ValueResultHandler<Map<String, Object>>() {
+        rootRef.createUser(newUser.getEmail(), newUser.getPassword(),
+                new Firebase.ValueResultHandler<Map<String, Object>>() {
             @Override
             public void onSuccess(Map<String, Object> stringObjectMap) {
                 uid = (String) stringObjectMap.get("uid");
@@ -104,7 +105,8 @@ public class DatabaseModel {
     public void initWaterReports() {
         waterSourceReports = new ArrayList<WaterSourceReport>();
         Firebase waterRepRef = rootRef.child("water_reports");
-        waterRepRef.orderByKey().addChildEventListener(new ChildEventListener() {
+        waterRepRef.orderByKey().addChildEventListener(new ChildEventListener()
+        {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 waterSourceReports.add(makeSourceReport(dataSnapshot));
@@ -117,7 +119,8 @@ public class DatabaseModel {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                WaterSourceReport waterSourceReport = makeSourceReport(dataSnapshot);
+                WaterSourceReport waterSourceReport
+                        = makeSourceReport(dataSnapshot);
                 waterSourceReports.remove(waterSourceReport);
 
             }
@@ -137,7 +140,8 @@ public class DatabaseModel {
     public void initQualityReports() {
         waterQualityReports = new ArrayList<WaterQualityReport>();
         Firebase waterRepRef = rootRef.child("quality_reports");
-        waterRepRef.orderByKey().addChildEventListener(new ChildEventListener() {
+        waterRepRef.orderByKey().addChildEventListener(new ChildEventListener()
+        {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 waterQualityReports.add(makeQualityReport(dataSnapshot));
@@ -183,10 +187,12 @@ public class DatabaseModel {
         String time = (String) dataSnapshot.child("time").getValue();
         String name = (String) dataSnapshot.child("name").getValue();
         WaterQualityReport.WaterSafety safety =
-                WaterQualityReport.stringToSafety((String) dataSnapshot.child("safety").getValue());
+                WaterQualityReport.stringToSafety((String)
+                        dataSnapshot.child("safety").getValue());
         double vppm = (double) dataSnapshot.child("vppm").getValue();
         double cppm = (double) dataSnapshot.child("cppm").getValue();
-        return new WaterQualityReport(date, time, name, lat, lon, safety, vppm, cppm);
+        return new WaterQualityReport(date, time, name, lat, lon, safety,
+                vppm, cppm);
     }
 
     /**
@@ -199,25 +205,31 @@ public class DatabaseModel {
         double lat = (double) dataSnapshot.child("lat").getValue();
         double lon = (double) dataSnapshot.child("long").getValue();
         String time = (String) dataSnapshot.child("time").getValue();
-        WaterSourceReport.WaterCondition waterCondition = WaterSourceReport.stringToCondition(
+        WaterSourceReport.WaterCondition waterCondition
+                = WaterSourceReport.stringToCondition(
                 (String) dataSnapshot.child("condition").getValue()
         );
-        WaterSourceReport.WaterType waterType = WaterSourceReport.stringToWaterType(
+        WaterSourceReport.WaterType waterType
+                = WaterSourceReport.stringToWaterType(
                 (String) dataSnapshot.child("type").getValue()
         );
         String name = (String) dataSnapshot.child("name").getValue();
-        return new WaterSourceReport(date, time, name, lat, lon, waterType, waterCondition);
+        return new WaterSourceReport(date, time, name, lat, lon,
+                waterType, waterCondition);
     }
 
     /**
-     * Add a WaterSourceReport to the waterSourceReports json tree in Firebase database
+     * Add a WaterSourceReport to the waterSourceReports json tree in Firebase
+     * database.
      * @param waterSourceReport the source report to add to the database
-     * @return a boolean indicating whether the creation operation in the database has succeeded
+     * @return a boolean indicating whether the creation operation in the
+     * database has succeeded
      */
     public boolean addReport(WaterSourceReport waterSourceReport) {
         Firebase reportsRef = rootRef.child("water_reports");
         try {
-            reportsRef.child(String.valueOf(waterSourceReport.getNum())).setValue(waterSourceReport);
+            reportsRef.child(String.valueOf(waterSourceReport.getNum()))
+                    .setValue(waterSourceReport);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
@@ -226,14 +238,17 @@ public class DatabaseModel {
     }
 
     /**
-     * Add a WaterSourceReport to the waterQualityReports json tree in Firebase database
+     * Add a WaterSourceReport to the waterQualityReports json tree in Firebase
+     * database
      * @param waterQualityReport the quality report to add to the database
-     * @return a boolean indicating whether the creation operation in the database has succeeded
+     * @return a boolean indicating whether the creation operation in the
+     * database has succeeded
      */
     public boolean addReport(WaterQualityReport waterQualityReport) {
         Firebase qualityRef = rootRef.child("quality_reports");
         try {
-            Firebase objRef = qualityRef.child(String.valueOf(waterQualityReport.getNum()));
+            Firebase objRef = qualityRef
+                    .child(String.valueOf(waterQualityReport.getNum()));
             objRef.setValue(waterQualityReport);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -246,7 +261,8 @@ public class DatabaseModel {
         return waterSourceReports;
     }
 
-    public ArrayList<WaterQualityReport> getWaterQualityReports() { return waterQualityReports; }
+    public ArrayList<WaterQualityReport> getWaterQualityReports()
+    { return waterQualityReports; }
 
     public void forgotPassword(String email) {
         rootRef.resetPassword(email, new Firebase.ResultHandler() {
@@ -263,11 +279,14 @@ public class DatabaseModel {
     }
 
     public void changePassword(String email, String oldPass, String newPass) {
-        rootRef.changePassword(email, oldPass, newPass, new Firebase.ResultHandler() {
+        rootRef.changePassword(email, oldPass, newPass,
+                new Firebase.ResultHandler() {
             @Override
             public void onSuccess() {
-                System.out.println("Password successfully changed to " + newPass);
-                rootRef.child("users").child(uid).child("password").setValue(newPass);
+                System.out.println("Password successfully changed to "
+                        + newPass);
+                rootRef.child("users").child(uid).child("password")
+                        .setValue(newPass);
             }
 
             @Override
