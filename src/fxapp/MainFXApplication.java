@@ -11,6 +11,7 @@ import javafx.stage.WindowEvent;
 import model.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Main application class. Handles switching scenes throughout application
@@ -42,6 +43,8 @@ public class MainFXApplication extends Application {
     private AnchorPane mapLayout;
 
     private BorderPane menu;
+
+    private AnchorPane viewGraphLayout;
 
     private DatabaseModel databaseModel;
 
@@ -322,9 +325,26 @@ public class MainFXApplication extends Application {
         }
     }
 
+    public void initGraphViewScreen(Stage mainStage, ArrayList<WaterQualityReport> reports, String type) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/GraphView.fxml"));
+            mapLayout = loader.load();
+
+            rootLayout.setCenter(viewGraphLayout);
+
+            GraphViewController controller = new GraphViewController(reports, type);
+            controller.setMainApp(this);
+
+            loader.setController(controller);
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
 
 
-    }
+}
