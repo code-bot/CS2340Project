@@ -327,7 +327,7 @@ public class MainFXApplication extends Application {
         }
     }
 
-    public void initGraphViewScreen(Stage mainStage, ArrayList<WaterQualityReport> reports, String type) {
+    public void initGraphViewScreen(Stage mainStage, ArrayList<WaterQualityReport> reports, String type, String year) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/GraphView.fxml"));
@@ -339,7 +339,7 @@ public class MainFXApplication extends Application {
             controller.setMainApp(this);
             controller.setReports(reports);
             controller.setType(type);
-            controller.loadGraph();
+            controller.loadGraph(year);
         } catch (IOException e) {
             System.out.println(e.toString());
         }

@@ -8,6 +8,7 @@ import model.WaterQualityReport;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 
@@ -24,10 +25,17 @@ public class CreateHistoricalController {
     @FXML
     private ToggleButton contaminant;
 
-
-
     @FXML
     private TextField yearSelected;
+
+    @FXML
+    private ToggleButton currLocBtn;
+
+    @FXML
+    private TextField latField;
+
+    @FXML
+    private TextField longField;
 
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
@@ -41,8 +49,16 @@ public class CreateHistoricalController {
 
     @FXML
     public void createGraph() {
-        //String loc = location.getText();
-        int year = Integer.parseInt(yearSelected.getText());
+        boolean coordErr = false;
+        String lat = latField.getText();
+        double latNum = 33.7490;
+        String lon = longField.getText();
+        double lonNum = -84.3880;
+        String yearStr = yearSelected.getText();
+        String year = yearStr;
+        if (yearStr.length() == 4) {
+            year = yearStr.substring(2);
+        }
         boolean isVirus = false;
         boolean isContaminant = false;
         if (virus.isSelected()) {
@@ -63,6 +79,35 @@ public class CreateHistoricalController {
             alert.setHeaderText("Cannot Create Graph");
             alert.setContentText("Choose either virus or contaminant." +
                     " Currently you have picked both.");
+        } else if (lat.equals("") || lon.equals("")) {
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Submit Report?");
+            alert.setContentText("Lat and Long not provided, using current location! Make sure all information is accurate");
+        } else {
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Submit Report?");
+            alert.setContentText("Lat and Long provided. Make sure all information is accurate");
+            try {
+                latNum = Double.parseDouble(lat);
+                System.out.println(latNum);
+                lonNum = Double.parseDouble(lon);
+            } catch (NumberFormatException e) {     // User inputs incorrect format for latitude or longitude
+                coordError();
+                coordErr = true;
+            }
+        }
+
+        if (!coordErr) {
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                ArrayList<WaterQualityReport> reports = new ArrayList<>();
+                for (WaterQualityReport report : DatabaseModel.getInstance().getWaterQualityReports()) {
+                    if (report.getLat() == latNum && report.getLong() == lonNum && report.getDate().substring(6).equals(year)) {
+                        reports.add(report);
+                    }
+                }
+                mainApplication.initGraphViewScreen(mainApplication.getMainStage(), reports, isVirus ? "Virus" : "Contaminant", yearStr);
+            }
         }
 
     }
@@ -78,5 +123,13 @@ public class CreateHistoricalController {
         if (result.get() == ButtonType.OK){
             mainApplication.goToHomePage();
         }
+    }
+
+    public void coordError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setHeaderText("Latitude/Longitude Error");
+        alert.setContentText("Make sure the latitude and longitude are in the correct format");
+        Optional<ButtonType> result = alert.showAndWait();
     }
 }

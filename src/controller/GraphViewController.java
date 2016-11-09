@@ -49,34 +49,17 @@ public class GraphViewController {
 
     @FXML
     private void initialize() {
-        System.out.println(reports.get());
-        if (reports.get() != null) {
-            System.out.println("not null");
-            Series<Integer, Double> series = new Series<>();
-            xAxis.setLabel("Month");
-            yAxis.setLabel(type.get() + " (ppm)");
-            for (WaterQualityReport report : reports.get()) {
-                Double yVal;
-                if (type.get().equals("Virus")) {
-                    yVal = report.getVppm();
-                } else {
-                    yVal = report.getCppm();
-                }
-                Integer xVal = Integer.parseInt(report.getDate().substring(0, 2));
-                series.getData().add(new XYChart.Data<>(xVal, yVal));
-
-            }
-            chart.getData().add(series);
-        }
+        xAxis.setLabel("Month");
+        xAxis.setTickUnit(1);
+        xAxis.setLowerBound(1);
+        xAxis.setUpperBound(12);
     }
 
-    public void loadGraph() {
-        System.out.println(reports.get());
+    public void loadGraph(String year) {
+        yAxis.setLabel(type.get() + " (ppm)");
+        chart.setTitle("Monthly Change in Water Quality for " + year);
         if (reports.get() != null) {
-            System.out.println("not null");
             Series<Integer, Double> series = new Series<>();
-            xAxis.setLabel("Month");
-            yAxis.setLabel(type.get() + " (ppm)");
             for (WaterQualityReport report : reports.get()) {
                 Double yVal;
                 if (type.get().equals("Virus")) {
