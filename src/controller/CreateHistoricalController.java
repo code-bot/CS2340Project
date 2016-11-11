@@ -1,6 +1,8 @@
 package controller;
 
 import fxapp.MainFXApplication;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.DatabaseModel;
@@ -26,7 +28,7 @@ public class CreateHistoricalController {
     private ToggleButton contaminant;
 
     @FXML
-    private TextField yearSelected;
+    private ComboBox yearBox;
 
     @FXML
     private ToggleButton currLocBtn;
@@ -45,6 +47,37 @@ public class CreateHistoricalController {
     private void initialize() {
         virus.setSelected(true);
         contaminant.setSelected(false);
+        yearBox.getItems().addAll("2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025");
+        yearBox.getSelectionModel().select("2016");
+
+        ToggleGroup group = new ToggleGroup();
+        virus.setToggleGroup(group);
+        contaminant.setToggleGroup(group);
+        virus.setUserData("Virus");
+        contaminant.setUserData("Contaminant");
+
+        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+            public void changed(ObservableValue<? extends Toggle> ov,
+                                Toggle toggle, Toggle new_toggle) {
+                if (new_toggle != null) {
+                    if (group.getSelectedToggle().getUserData().equals("Virus")) {
+                        virus.setSelected(true);
+                        contaminant.setSelected(false);
+                    } else {
+                        virus.setSelected(false);
+                        contaminant.setSelected(true);
+                    }
+                } else {
+                    if (toggle.getUserData().equals("Virus")) {
+                        virus.setSelected(false);
+                        contaminant.setSelected(true);
+                    } else {
+                        virus.setSelected(true);
+                        contaminant.setSelected(false);
+                    }
+                }
+            }
+        });
     }
 
     @FXML
@@ -54,7 +87,7 @@ public class CreateHistoricalController {
         double latNum = 33.7490;
         String lon = longField.getText();
         double lonNum = -84.3880;
-        String yearStr = yearSelected.getText();
+        String yearStr = (String) yearBox.getSelectionModel().getSelectedItem();
         String year = yearStr;
         if (yearStr.length() == 4) {
             year = yearStr.substring(2);

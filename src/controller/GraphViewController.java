@@ -60,6 +60,12 @@ public class GraphViewController {
         chart.setTitle("Monthly Change in Water Quality for " + year);
         if (reports.get() != null) {
             Series<Integer, Double> series = new Series<>();
+            Double[] monthlyAverages = new Double[12];
+            int[] numMonthlyReports = new int[12];
+            for (int i = 0; i < 12; i++) {
+                monthlyAverages[i] = 0.0;
+                numMonthlyReports[i] = 0;
+            }
             for (WaterQualityReport report : reports.get()) {
                 Double yVal;
                 if (type.get().equals("Virus")) {
@@ -68,8 +74,17 @@ public class GraphViewController {
                     yVal = report.getCppm();
                 }
                 Integer xVal = Integer.parseInt(report.getDate().substring(0, 2));
-                series.getData().add(new XYChart.Data<>(xVal, yVal));
+                monthlyAverages[xVal] += yVal;
+                numMonthlyReports[xVal] += 1;
+                //series.getData().add(new XYChart.Data<>(xVal, yVal));
 
+            }
+            for (int i = 0; i < 12; i++) {
+                int numReports = numMonthlyReports[i];
+                if (numReports != 0) {
+                    monthlyAverages[i] /= numReports;
+                    series.getData().add(new XYChart.Data<>(i, monthlyAverages[i]));
+                }
             }
             chart.getData().add(series);
         }
