@@ -27,7 +27,7 @@ public class DatabaseModel {
     private Set<WaterQualityReport> waterQualityReports;
 
 
-    DatabaseModel() {
+    private DatabaseModel() {
         initFirebase();
     }
 
@@ -35,7 +35,7 @@ public class DatabaseModel {
      * Initializes an instance of FirebaseDatabase to connect to the Firebase
      * database
      */
-    public void initFirebase() {
+    private void initFirebase() {
         final String DATABASE_URL = "https://h2woah.firebaseio.com";
         rootRef = new Firebase(DATABASE_URL);
         initWaterReports();
@@ -153,7 +153,7 @@ public class DatabaseModel {
      * Initialize and populate the list of water source reports with
      * the information in the firebase database
      */
-    public void initWaterReports() {
+    private void initWaterReports() {
         waterSourceReports = new HashSet<>();
         Firebase waterRepRef = rootRef.child("water_reports");
         waterRepRef.orderByKey().addChildEventListener(new ChildEventListener()
@@ -191,7 +191,7 @@ public class DatabaseModel {
     /**
      * Initalizes quality Reports to include everything the user entered
      */
-    public void initQualityReports() {
+    private void initQualityReports() {
         waterQualityReports = new HashSet<>();
         Firebase waterRepRef = rootRef.child("quality_reports");
         waterRepRef.orderByKey().addChildEventListener(new ChildEventListener()
@@ -322,7 +322,7 @@ public class DatabaseModel {
      * Getter for Quality Reports
      * @return the set of water quality reports
      */
-    public Set<WaterQualityReport> getWaterQualityReports() { return waterQualityReports; }
+    public Iterable<WaterQualityReport> getWaterQualityReports() { return waterQualityReports; }
 
     /**
      * Method to reset the password for someone who has forgotten theirs

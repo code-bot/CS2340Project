@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.Collection;
 import java.util.Collections;
 
 /**
@@ -21,7 +22,7 @@ public class WaterSourceReport extends Report {
          * Transforms the enum into a list
          * @return  the final list
          */
-        public static ObservableList<WaterType> toList() {
+        public static Collection<WaterType> toList() {
             ObservableList<WaterType> list = FXCollections.observableArrayList();
 
             Collections.addAll(list, values());
@@ -36,7 +37,7 @@ public class WaterSourceReport extends Report {
          * Transforms the enum into a list
          * @return  the final list
          */
-        public static ObservableList<WaterCondition> toList() {
+        public static Collection<WaterCondition> toList() {
             ObservableList<WaterCondition> list = FXCollections.observableArrayList();
 
             Collections.addAll(list, values());
@@ -53,10 +54,10 @@ public class WaterSourceReport extends Report {
     private final ObjectProperty<WaterType> type = new SimpleObjectProperty<>();
     private final ObjectProperty<WaterCondition> condition = new SimpleObjectProperty<>();
 
-    public WaterType getType() { return type.get(); }
+    private WaterType getType() { return type.get(); }
     public void setType(WaterType waterType) { type.set(waterType); }
 
-    public WaterCondition getCondition() { return condition.get(); }
+    private WaterCondition getCondition() { return condition.get(); }
     public void setCondition(WaterCondition waterCondition) { condition.set(waterCondition); }
 
     public WaterSourceReport(String date, String time, String name,

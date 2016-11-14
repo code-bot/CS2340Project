@@ -177,7 +177,7 @@ public class CreateHistoricalController {
     /**
      * Creating dialogue for coordinate error
      */
-    public void coordError() {
+    private void coordError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error Dialog");
         alert.setHeaderText("Latitude/Longitude Error");

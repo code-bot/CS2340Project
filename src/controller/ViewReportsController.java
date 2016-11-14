@@ -20,7 +20,7 @@ public class ViewReportsController {
     @FXML
     private ListView<String> listOfReports;
     @FXML
-    public static final ObservableList items = FXCollections.observableArrayList();
+    private static final ObservableList items = FXCollections.observableArrayList();
 
 
     @FXML

@@ -129,7 +129,7 @@ public class CreateReportController {
     /**
      * Displays error because coordinates are wrong.
      */
-    public void coordError() {
+    private void coordError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error Dialog");
         alert.setHeaderText("Latitude/Longitude Error");

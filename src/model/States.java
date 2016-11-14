@@ -2,6 +2,8 @@ package model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.Collection;
+
 /**
  * Created by Aman on 9/28/16.
  */
@@ -67,7 +69,7 @@ public enum States {
         this.value = value;
     }
 
-    public String getValue() {
+    private String getValue() {
         return value;
     }
 
@@ -81,7 +83,7 @@ public enum States {
      * Transforms the ENUM into a list
      * @return  the final list
      */
-    public static ObservableList<String> toList() {
+    public static Collection<String> toList() {
         ObservableList<String> list = FXCollections.observableArrayList();
 
         for (States value: values()) {
