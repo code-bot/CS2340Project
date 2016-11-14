@@ -17,7 +17,10 @@ import javafx.collections.FXCollections;
  */
 public class ViewReportsController {
     private MainFXApplication mainApplication;
-
+    /**
+     * Set application to main application type.
+     * @param main application instance to set program to
+     */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
     }

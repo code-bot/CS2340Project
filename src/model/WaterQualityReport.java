@@ -78,6 +78,7 @@ public class WaterQualityReport extends Report {
         return contaminantPPM.get();
     }
 
+    @Override
     public String getTypeOfReport() {
         return "Quality Report";
     }

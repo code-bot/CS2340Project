@@ -26,7 +26,7 @@ public class EditProfileController {
     private String city;
     private String zipcode;
     private States state;
-
+    private final int LEFT_PADDING = 20;
     @FXML
     private PasswordField passwordField;
     @FXML
