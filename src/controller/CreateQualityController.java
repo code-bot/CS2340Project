@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.DatabaseModel;
 
+import model.User;
 import model.WaterQualityReport;
 
 
@@ -80,7 +81,8 @@ public class CreateQualityController {
         String date = df.format(dateObj);
         DateFormat tf = new SimpleDateFormat("HH:mm:ss");
         String time = tf.format(dateObj);
-        String name = databaseModel.getCurrentUser().getEmail();
+        User currUser = databaseModel.getCurrentUser();
+        String name = currUser.getEmail();
         String vPPMString = virusPPM.getText();
         String cPPMString = contaminantPPM.getText();
         double vPPM = Double.parseDouble(vPPMString);
@@ -88,7 +90,7 @@ public class CreateQualityController {
 
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        if (lat.equals("") || lon.equals("")) {
+        if ("".equals(lat)|| "".equals(lon)) {
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Submit Report?");
             alert.setContentText("Lat and Long not provided, using current location!" +
@@ -99,7 +101,6 @@ public class CreateQualityController {
             alert.setContentText("Lat and Long provided. Make sure all information is accurate");
             try {
                 latNum = Double.parseDouble(lat);
-                System.out.println(latNum);
                 lonNum = Double.parseDouble(lon);
             } catch (NumberFormatException e) {     // User inputs incorrect format for latitude or longitude
                 coordError();
@@ -112,7 +113,6 @@ public class CreateQualityController {
             if (result.get() == ButtonType.OK) {
                 WaterQualityReport report = new WaterQualityReport(date,
                         time, name, latNum, lonNum, safety, vPPM, cPPM);
-                System.out.println(report);
                 if (databaseModel.addReport(report)) {
                     mainApplication.goToHomePage();
                 }

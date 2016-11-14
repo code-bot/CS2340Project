@@ -4,6 +4,7 @@ import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.DatabaseModel;
+import model.User;
 import model.WaterSourceReport;
 
 import java.text.DateFormat;
@@ -32,6 +33,8 @@ public class CreateReportController {
     @FXML
     private ComboBox<WaterSourceReport.WaterCondition> conditionComboBox;
 
+    private DatabaseModel databaseModel;
+
     /**
      * Set application to main application type.
      * @param main application instance to set program to
@@ -47,6 +50,7 @@ public class CreateReportController {
         conditionComboBox.getItems().addAll(WaterSourceReport.WaterCondition.toList());
         conditionComboBox.getSelectionModel().selectFirst();
         currLocBtn.setSelected(true);
+        databaseModel = DatabaseModel.getInstance();
     }
 
     @FXML
@@ -65,11 +69,12 @@ public class CreateReportController {
         String date = df.format(dateObj);
         DateFormat tf = new SimpleDateFormat("HH:mm:ss");
         String time = tf.format(dateObj);
-        String name = DatabaseModel.getInstance().getCurrentUser().getEmail();
+        User currUser = databaseModel.getCurrentUser();
+        String name = currUser.getEmail();
 
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        if (lat.equals("") || lon.equals("")) {
+        if ("".equals(lat)|| "".equals(lon)) {
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Submit Report?");
             alert.setContentText("Lat and Long not provided, using current location! " +
@@ -80,7 +85,6 @@ public class CreateReportController {
             alert.setContentText("Lat and Long provided. Make sure all information is accurate");
             try {
                 latNum = Double.parseDouble(lat);
-                System.out.println(latNum);
                 lonNum = Double.parseDouble(lon);
             } catch (NumberFormatException e) {     // User inputs incorrect format for latitude or longitude
                 coordError();
@@ -92,8 +96,7 @@ public class CreateReportController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 WaterSourceReport report = new WaterSourceReport(date, time, name, latNum, lonNum, type, condition);
-                System.out.println(report);
-                if (DatabaseModel.getInstance().addReport(report)) {
+                if (databaseModel.addReport(report)) {
                     mainApplication.goToHomePage();
                 }
             }

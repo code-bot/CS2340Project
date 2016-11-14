@@ -23,7 +23,6 @@ public class BackMenuController {
      */
     @FXML
     private void signOut() {
-        System.out.println("Signing out...");
         mainApplication.logoutUser();
     }
 
@@ -32,7 +31,6 @@ public class BackMenuController {
      */
     @FXML
     private void goToHomePageView() {
-        System.out.println("going back...");
         mainApplication.goToHomePage();
     }
 }

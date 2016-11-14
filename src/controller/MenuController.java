@@ -102,7 +102,6 @@ public class MenuController {
      */
     @FXML
     private void signOut() {
-        System.out.println("Signing out...");
         mainApplication.logoutUser();
     }
 

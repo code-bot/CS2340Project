@@ -26,17 +26,9 @@ import model.Report;
 
 public class MapViewController implements Initializable, MapComponentInitializedListener {
 
-    private MainFXApplication mainApplication;
     private final double ATLLAT = 33.7490;
     private final double ATLLONG = -84.3880;
     private final int DEFAULT_ZOOM = 12;
-    /**
-     * Set application to main application type.
-     * @param main application instance to set program to
-     */
-    public void setMainApp(MainFXApplication main) {
-        mainApplication = main;
-    }
 
     @FXML
     private Button button;
@@ -53,6 +45,9 @@ public class MapViewController implements Initializable, MapComponentInitialized
 
     @Override
     public void mapInitialized() {
+        final double ATLLAT = 33.7490;
+        final double ATLLONG = -84.3880;
+        final int DEFAULT_ZOOM = 12;
 
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
@@ -69,7 +64,8 @@ public class MapViewController implements Initializable, MapComponentInitialized
 
         map = mapView.createMap(mapOptions);
 
-        Set<WaterSourceReport> reports = DatabaseModel.getInstance().getSourceReports();
+        DatabaseModel databaseModel = DatabaseModel.getInstance();
+        Set<WaterSourceReport> reports = databaseModel.getSourceReports();
         for (Report report : reports) {
             MarkerOptions markerOptions = new MarkerOptions();
             LatLong loc = new LatLong(report.getLat(), report.getLong());

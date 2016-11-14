@@ -125,10 +125,11 @@ public class RegisterController {
 
                 alert.showAndWait();
         } else {
+            DatabaseModel databaseModel = DatabaseModel.getInstance();
             User newUser = new User(email, password, userType, address, city, zipcode, States.valueOf(state));
-            boolean addedUser = DatabaseModel.getInstance().createUser(newUser);
+            boolean addedUser = databaseModel.createUser(newUser);
             if (addedUser) {
-                DatabaseModel.getInstance().setCurrentUser(newUser);
+                databaseModel.setCurrentUser(newUser);
                 mainApplication.goToHomePage();
             }
         }
