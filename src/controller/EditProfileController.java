@@ -116,7 +116,7 @@ public class EditProfileController {
 
             alert.showAndWait();
         } else {
-            User oldUser = Model.getInstance().getCurrentUser();
+            User oldUser = DatabaseModel.getInstance().getCurrentUser();
             boolean sameEmail = false;
             if ("".equals(email)) {
                 sameEmail = true;
@@ -137,7 +137,7 @@ public class EditProfileController {
 
             User newUser = new User(email, password, oldUser.getUserLevel(),
                     address, city, zipcode, state);
-            boolean updatedUser = Model.getInstance().updateUser(oldUser, newUser, sameEmail);
+            boolean updatedUser = DatabaseModel.getInstance().updateUser(oldUser, newUser, sameEmail);
             if (updatedUser) {
                 mainApplication.goToHomePage();
             }
