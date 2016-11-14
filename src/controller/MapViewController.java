@@ -3,35 +3,33 @@ package controller;
 /**
  * Created by Rahul on 10/23/16.
  */
-import com.lynden.gmapsfx.GoogleMapView;
-import com.lynden.gmapsfx.MapComponentInitializedListener;
+
 import com.lynden.gmapsfx.javascript.event.UIEventType;
-import com.lynden.gmapsfx.javascript.object.*;
+
 import java.util.Set;
+
+import com.lynden.gmapsfx.javascript.object.*;
+import model.DatabaseModel;
+import model.WaterSourceReport;
 import netscape.javascript.JSObject;
 import fxapp.MainFXApplication;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
-import com.lynden.gmapsfx.javascript.object.GoogleMap;
-import com.lynden.gmapsfx.javascript.object.LatLong;
-import com.lynden.gmapsfx.javascript.object.MapOptions;
-import com.lynden.gmapsfx.javascript.object.Marker;
-import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+
 import java.net.URL;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import model.Model;
 import model.Report;
-
 
 public class MapViewController implements Initializable, MapComponentInitializedListener {
 
     private MainFXApplication mainApplication;
-
+    private final double ATLLAT = 33.7490;
+    private final double ATLLONG = -84.3880;
+    private final int DEFAULT_ZOOM = 12;
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
     }
@@ -55,7 +53,7 @@ public class MapViewController implements Initializable, MapComponentInitialized
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
 
-        mapOptions.center(new LatLong(33.6097, -84.3331))
+        mapOptions.center(new LatLong(ATLLAT, ATLLONG))
                 .mapType(MapTypeIdEnum.ROADMAP)
                 .overviewMapControl(false)
                 .panControl(false)
@@ -63,12 +61,12 @@ public class MapViewController implements Initializable, MapComponentInitialized
                 .scaleControl(false)
                 .streetViewControl(false)
                 .zoomControl(false)
-                .zoom(12);
+                .zoom(DEFAULT_ZOOM);
 
         map = mapView.createMap(mapOptions);
 
-        Set<Report> reports = new HashSet<Report>();
-        reports = Model.getInstance().getReports();
+        Set<WaterSourceReport> reports = new HashSet<>();
+        reports = DatabaseModel.getInstance().getSourceReports();
         for (Report report : reports) {
             MarkerOptions markerOptions = new MarkerOptions();
             LatLong loc = new LatLong(report.getLat(), report.getLong());

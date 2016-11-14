@@ -11,7 +11,7 @@ public class BackMenuController {
     private MainFXApplication mainApplication;
 
     /**
-     * Set the main application reference
+     * Set the main application reference.
      * @param main  The main application
      */
     public void setMainApp(MainFXApplication main) {
@@ -19,7 +19,7 @@ public class BackMenuController {
     }
 
     /**
-     * Sign out the current user
+     * Sign out the current user.
      */
     @FXML
     private void signOut() {
@@ -28,7 +28,7 @@ public class BackMenuController {
     }
 
     /**
-     * Go to edit profile view
+     * Go to edit profile view.
      */
     @FXML
     private void goToHomePageView() {

@@ -27,3 +27,11 @@
     -fx-background-color: rgba(170, 219, 255,1.0);
     -fx-background-radius: 10;
 }
+
+.axis-label {
+  -fx-text-fill: rgba(256, 256, 256, 1.0);
+}
+
+.chart-title {
+  -fx-text-fill: rgba(256, 256, 256, 1.0);
+}

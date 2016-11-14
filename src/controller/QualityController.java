@@ -3,15 +3,11 @@ package controller;
 import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
 import java.util.Iterator;
-import javafx.scene.control.*;
-import model.Model;
+//import javafx.scene.control.*;
+import javafx.scene.control.ListView;
+import model.DatabaseModel;
 import model.Report;
-import model.WaterSourceReport;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Optional;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
@@ -34,7 +30,7 @@ public class QualityController {
     public void initialize() {
 //        listOfReports.getItems().clear();
         items.clear();
-        Iterator iter = Model.getInstance().getReports().iterator();
+        Iterator iter = DatabaseModel.getInstance().getWaterQualityReports().iterator();
         while (iter.hasNext()) {
             Report report = (Report)iter.next();
             if (report.getTypeOfReport().equals("Quality Report")) {

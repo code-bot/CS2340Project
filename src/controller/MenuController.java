@@ -8,7 +8,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import model.DatabaseModel;
-import model.Model;
 import model.UserLevel;
 
 /**
@@ -62,15 +61,28 @@ public class MenuController {
                 }
             });
 
-            MenuItem viewQualityReport = new MenuItem("View Quality Reports");
-            viewQualityReport.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    viewQualityReports();
-                }
-            });
-            goToPage.getItems().addAll(viewSourceReport, createQualityReport,
-                    viewQualityReport);
+            goToPage.getItems().addAll(viewSourceReport, createQualityReport);
+
+            if (model.getCurrentUser().getUserLevel() != UserLevel.WORKER) {
+                MenuItem viewQualityReport = new MenuItem("View Quality Reports");
+                viewQualityReport.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        viewQualityReports();
+                    }
+                });
+
+                MenuItem createHistoricalGraph
+                        = new MenuItem("Create Historical Report");
+                createHistoricalGraph.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        createHistoricalGraph();
+                    }
+                });
+
+                goToPage.getItems().addAll(viewQualityReport, createHistoricalGraph);
+            }
         }
 
         pageMenu.getMenus().addAll(goToPage);
@@ -124,6 +136,14 @@ public class MenuController {
     @FXML
     public void viewQualityReports() {
         mainApplication.initQualityReportScreen(mainApplication.getMainStage());
+        mainApplication.initBackMenu(mainApplication.getMainStage());
+    }
+
+    @FXML
+    public void createHistoricalGraph() {
+        //mainApplication.initGraphViewScreen(mainApplication.getMainStage(),
+        // new ArrayList(DatabaseModel.getInstance().getWaterQualityReports()), "Virus");
+        mainApplication.initCreateGraphScreen(mainApplication.getMainStage());
         mainApplication.initBackMenu(mainApplication.getMainStage());
     }
 }

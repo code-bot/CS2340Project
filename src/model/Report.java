@@ -7,17 +7,14 @@ import javafx.beans.property.*;
  */
 public abstract class Report {
 
-    private static int num = 1;
 
-    private IntegerProperty reportNum = new SimpleIntegerProperty();
     private StringProperty date = new SimpleStringProperty();
     private StringProperty time = new SimpleStringProperty();
     private StringProperty reporterName = new SimpleStringProperty();
     private DoubleProperty lat = new SimpleDoubleProperty();
     private DoubleProperty lon = new SimpleDoubleProperty();
 
-    public int getNum() { return reportNum.get(); }
-    public void setNum(int num) { reportNum.set(num); }
+
 
     public String getDate() { return date.get(); }
     public void setDate(String dateStr) { date.set(dateStr); }
@@ -37,38 +34,11 @@ public abstract class Report {
     public abstract String getTypeOfReport();
 
     Report(String date, String time, String name, double lat, double lon) {
-        this.reportNum.set(num);
         this.date.set(date);
         this.time.set(time);
         this.reporterName.set(name);
         this.lat.set(lat);
         this.lon.set(lon);
-        num++;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == null) {
-            return false;
-        }
-        if (!other.getClass().equals(this.getClass())) {
-            return false;
-        }
-        Report that = (Report) other;
-        if (that.getNum() != this.getNum()) {
-            return false;
-        }
-        return true;
-    }
-
-//    @Override
-//    public String toString() {
-//        return "Name: " + this.getName() + "Date: " + this.getDate() + "Time: " + this.getTime();
-//    }
-
-    @Override
-    public int hashCode() {
-        return num;
     }
 
 }

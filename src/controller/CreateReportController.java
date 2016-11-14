@@ -2,15 +2,11 @@ package controller;
 
 import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import model.DatabaseModel;
-import model.Model;
 import model.WaterSourceReport;
 
 import java.text.DateFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -21,7 +17,8 @@ import java.util.Optional;
 public class CreateReportController {
 
     private MainFXApplication mainApplication;
-
+    private final double ATLLAT = 33.7490;
+    private final double ATLLONG = -84.3880;
     @FXML
     private ToggleButton currLocBtn;
 
@@ -55,9 +52,9 @@ public class CreateReportController {
     public void createReport() {
         boolean coordErr = false;
         String lat = latField.getText();
-        double latNum = 33.7490;
+        double latNum = ATLLAT;
         String lon = longField.getText();
-        double lonNum = -84.3880;
+        double lonNum = ATLLONG;
         WaterSourceReport.WaterType type = typeComboBox.getValue();
         WaterSourceReport.WaterCondition condition = conditionComboBox.getValue();
         DateFormat df = new SimpleDateFormat("MM/dd/yy");
@@ -72,7 +69,8 @@ public class CreateReportController {
         if (lat.equals("") || lon.equals("")) {
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Submit Report?");
-            alert.setContentText("Lat and Long not provided, using current location! Make sure all information is accurate");
+            alert.setContentText("Lat and Long not provided, using current location! " +
+                    "Make sure all information is accurate");
         } else {
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Submit Report?");

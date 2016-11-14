@@ -1,11 +1,13 @@
 package model;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.Collections;
 
 /**
  * Created by sahajbot on 10/10/16.
@@ -22,9 +24,7 @@ public class WaterSourceReport extends Report {
         public static ObservableList<WaterType> toList() {
             ObservableList<WaterType> list = FXCollections.observableArrayList();
 
-            for (WaterType value : values()) {
-                list.add(value);
-            }
+            Collections.addAll(list, values());
             return list;
         }
     }
@@ -39,12 +39,16 @@ public class WaterSourceReport extends Report {
         public static ObservableList<WaterCondition> toList() {
             ObservableList<WaterCondition> list = FXCollections.observableArrayList();
 
-            for (WaterCondition value : values()) {
-                list.add(value);
-            }
+            Collections.addAll(list, values());
             return list;
         }
     }
+
+    private static int num = 1;
+
+    private IntegerProperty reportNum = new SimpleIntegerProperty();
+    public int getNum() { return reportNum.get(); }
+    public void setNum(int num) { reportNum.set(num); }
 
     private ObjectProperty<WaterType> type = new SimpleObjectProperty<>();
     private ObjectProperty<WaterCondition> condition = new SimpleObjectProperty<>();
@@ -55,10 +59,22 @@ public class WaterSourceReport extends Report {
     public WaterCondition getCondition() { return condition.get(); }
     public void setCondition(WaterCondition waterCondition) { condition.set(waterCondition); }
 
-    public WaterSourceReport(String date, String time, String name, double lat, double lon, WaterType type, WaterCondition condition) {
+    public WaterSourceReport(String date, String time, String name,
+                             double lat, double lon, WaterType type, WaterCondition condition) {
         super(date, time, name, lat, lon);
         this.type.set(type);
         this.condition.set(condition);
+        this.reportNum.set(num);
+        num++;
+    }
+
+    public WaterSourceReport(int num, String date, String time, String name,
+                             double lat, double lon, WaterType type, WaterCondition condition) {
+        super(date, time, name, lat, lon);
+        this.type.set(type);
+        this.condition.set(condition);
+        this.reportNum.set(num);
+        WaterSourceReport.num++;
     }
 
     public static WaterCondition stringToCondition(String s) {
@@ -100,25 +116,29 @@ public class WaterSourceReport extends Report {
 
     @Override
     public String toString() {
-        return "Num: " + super.getNum() + "\n" + "Date: " + super.getDate() + "\n"
+        return "Num: " + this.getNum() + "\n" + "Date: " + super.getDate() + "\n"
                 + "Time: " + super.getTime() + "\n" + "Name: " + super.getName()
                 + "\n" + "Lat: " + super.getLat() + "\n" + "Long: " + super.getLong()
                 + "\n" + "Type: " + this.getType() + "\n" + "Condition: " + this.getCondition();
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o instanceof WaterSourceReport) {
-            WaterSourceReport report = (WaterSourceReport) o;
-            if (this.getDate().equals(report.getDate())
-                    && this.getType().equals(report.getType())
-                    && this.getCondition().equals(report.getCondition())
-                    && this.getName().equals(report.getName())
-                    && this.getLat() == report.getLat()
-                    && this.getLong() == report.getLong()) {
-                return true;
-            }
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
         }
-        return false;
+        if (!other.getClass().equals(this.getClass())) {
+            return false;
+        }
+        WaterSourceReport that = (WaterSourceReport) other;
+        if (that.getNum() != this.getNum()) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return num;
     }
 }

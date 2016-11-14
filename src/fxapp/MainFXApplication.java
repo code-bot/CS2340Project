@@ -11,6 +11,7 @@ import javafx.stage.WindowEvent;
 import model.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Main application class. Handles switching scenes throughout application
@@ -42,6 +43,10 @@ public class MainFXApplication extends Application {
     private AnchorPane mapLayout;
 
     private BorderPane menu;
+
+    private AnchorPane viewGraphLayout;
+
+    private AnchorPane createGraphLayout;
 
     private DatabaseModel databaseModel;
 
@@ -322,9 +327,48 @@ public class MainFXApplication extends Application {
         }
     }
 
+    public void initGraphViewScreen(Stage mainStage, ArrayList<WaterQualityReport> reports, String type, String year) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/GraphView.fxml"));
+            viewGraphLayout = loader.load();
+
+            rootLayout.setCenter(viewGraphLayout);
+
+            GraphViewController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setReports(reports);
+            controller.setType(type);
+            controller.loadGraph(year);
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public void initCreateGraphScreen(Stage mainStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFXApplication.class.getResource("../view/CreateGraphView.fxml"));
+            System.out.println("RIP");
+            createGraphLayout = loader.load();
+
+            rootLayout.setCenter(createGraphLayout);
+
+            CreateHistoricalController controller = loader.getController();
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            for (StackTraceElement ayy : e.getStackTrace()) {
+                System.out.println(ayy);
+            }
+            System.out.println(e.getCause().getMessage());
+            //System.out.println(e.getStackTrace());
+            System.out.println(e.toString());
+        }
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
 
 
-    }
+}
