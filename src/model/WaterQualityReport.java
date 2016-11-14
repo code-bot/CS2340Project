@@ -36,7 +36,7 @@ public class WaterQualityReport extends Report {
 
     private static int num = 1;
 
-    private IntegerProperty reportNum = new SimpleIntegerProperty();
+    private final IntegerProperty reportNum = new SimpleIntegerProperty();
     public int getNum() { return reportNum.get(); }
     public void setNum(int num) { reportNum.set(num); }
 
@@ -45,8 +45,8 @@ public class WaterQualityReport extends Report {
     public WaterSafety getSafety() { return safety.get(); }
     public void setType(WaterSafety waterSafety) { safety.set(waterSafety); }
 
-    private DoubleProperty virusPPM = new SimpleDoubleProperty();
-    private DoubleProperty contaminantPPM = new SimpleDoubleProperty();
+    private final DoubleProperty virusPPM = new SimpleDoubleProperty();
+    private final DoubleProperty contaminantPPM = new SimpleDoubleProperty();
 
     public WaterQualityReport(String date, String time, String name, double lat,
                               double lon, WaterSafety safety, double virusPPM, double contaminantPPM) {

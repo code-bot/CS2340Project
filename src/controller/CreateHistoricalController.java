@@ -5,6 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import model.DatabaseModel;
 import model.WaterQualityReport;
@@ -28,9 +29,6 @@ public class CreateHistoricalController {
 
     @FXML
     private ComboBox yearBox;
-
-    @FXML
-    private ToggleButton currLocBtn;
 
     @FXML
     private TextField latField;
@@ -64,7 +62,7 @@ public class CreateHistoricalController {
             public void changed(ObservableValue<? extends Toggle> ov,
                                 Toggle toggle, Toggle new_toggle) {
                 if (new_toggle != null) {
-                    if (group.getSelectedToggle().getUserData().equals("Virus")) {
+                    if ("Virus".equals(group.getSelectedToggle().getUserData())) {
                         virus.setSelected(true);
                         contaminant.setSelected(false);
                     } else {
@@ -122,7 +120,7 @@ public class CreateHistoricalController {
             alert.setHeaderText("Cannot Create Graph");
             alert.setContentText("Choose either virus or contaminant." +
                     " Currently you have picked both.");
-        } else if (lat.equals("") || lon.equals("")) {
+        } else if ("".equals(lat)|| "".equals(lon)) {
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Submit Report?");
             alert.setContentText("Lat and Long not provided, using current location!" +
@@ -133,7 +131,6 @@ public class CreateHistoricalController {
             alert.setContentText("Lat and Long provided. Make sure all information is accurate");
             try {
                 latNum = Double.parseDouble(lat);
-                System.out.println(latNum);
                 lonNum = Double.parseDouble(lon);
             } catch (NumberFormatException e) {     // User inputs incorrect format for latitude or longitude
                 coordError();
@@ -141,11 +138,13 @@ public class CreateHistoricalController {
             }
         }
 
+
         if (!coordErr) {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
+                DatabaseModel databaseModel = DatabaseModel.getInstance();
                 ArrayList<WaterQualityReport> reports = new ArrayList<>();
-                for (WaterQualityReport report : DatabaseModel.getInstance().getWaterQualityReports()) {
+                for (WaterQualityReport report : databaseModel.getWaterQualityReports()) {
                     if (report.getLat() == latNum && report.getLong() == lonNum
                             && report.getDate().substring(6).equals(year)) {
                         reports.add(report);

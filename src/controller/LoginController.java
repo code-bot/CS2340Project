@@ -27,7 +27,7 @@ public class LoginController {
 
     private String _password;
 
-    private DatabaseModel model;
+    private final DatabaseModel model;
 
     @FXML
     private Hyperlink signUp;
@@ -105,8 +105,8 @@ public class LoginController {
                                 String city = (String) uid.child("city").getValue();
                                 String zipcode = (String) uid.child("zipcode").getValue();
                                 States state = States.stringToState((String) uid.child("state").getValue());
-                                System.out.println(model.setCurrentUser(
-                                        new User(uname, pass, userLevel, address, city, zipcode, state)));
+                                model.setCurrentUser(
+                                        new User(uname, pass, userLevel, address, city, zipcode, state));
                                 model.setUid(authData.getUid());
                                 Platform.runLater(new Runnable() {
                                     @Override
@@ -152,7 +152,7 @@ public class LoginController {
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
             if (isValidEmail(result.get())) {
-                DatabaseModel.getInstance().forgotPassword(result.get());
+               model.forgotPassword(result.get());
             } else {
                 incorrectResetEmail();
             }

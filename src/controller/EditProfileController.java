@@ -18,6 +18,7 @@ import java.util.Optional;
 public class EditProfileController {
     private MainFXApplication mainApplication;
 
+
     @FXML
     private PasswordField passwordField;
     @FXML
@@ -117,20 +118,20 @@ public class EditProfileController {
         } else {
             User oldUser = Model.getInstance().getCurrentUser();
             boolean sameEmail = false;
-            if (email.equals("")) {
+            if ("".equals(email)) {
                 sameEmail = true;
                 email = oldUser.getEmail();
             }
-            if (password.equals("")) {
+            if ("".equals(password)) {
                 password = oldUser.getPassword();
             }
-            if (address.equals("")) {
+            if ("".equals(address)) {
                 address = oldUser.getAddress();
             }
-            if (city.equals("")) {
+            if ("".equals(city)) {
                 city = oldUser.getCity();
             }
-            if (zipcode.equals("")) {
+            if ("".equals(zipcode)) {
                 zipcode = oldUser.getZipcode();
             }
 
@@ -177,7 +178,9 @@ public class EditProfileController {
         if (result.isPresent()) {
             if (pword.getText().equals(confirm.getText())) {
                 String password = pword.getText();
-                DatabaseModel.getInstance().getCurrentUser().resetPassword(password);
+                DatabaseModel databaseModel = DatabaseModel.getInstance();
+                User currUser = databaseModel.getCurrentUser();
+                currUser.resetPassword(password);
             } else {
                 incorrectPasswordSubmit();
             }

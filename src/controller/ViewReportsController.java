@@ -16,14 +16,7 @@ import javafx.collections.FXCollections;
  * Created by karanlakhani on 10/11/16.
  */
 public class ViewReportsController {
-    private MainFXApplication mainApplication;
-    /**
-     * Set application to main application type.
-     * @param main application instance to set program to
-     */
-    public void setMainApp(MainFXApplication main) {
-        mainApplication = main;
-    }
+
     @FXML
     private ListView<String> listOfReports;
     @FXML
@@ -34,15 +27,14 @@ public class ViewReportsController {
     public void initialize() {
 //        listOfReports.getItems().clear();
         items.clear();
-        Iterator iter = DatabaseModel.getInstance().getSourceReports().iterator();
+        DatabaseModel databaseModel = DatabaseModel.getInstance();
+        Iterator iter = databaseModel.getSourceReports().iterator();
         while (iter.hasNext()) {
             Report report = (Report)iter.next();
-            if (report.getTypeOfReport().equals("Source Report")) {
+            if ("Source Report".equals(report.getTypeOfReport())) {
                 items.add(report);
             }
-//            System.out.println(iter.next());
         }
-//        listOfReports.getItems().removeAll(items);
         listOfReports.setItems(items);
     }
 }

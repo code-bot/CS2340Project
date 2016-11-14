@@ -128,7 +128,6 @@ public class DatabaseModel {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 waterSourceReports.add(makeSourceReport(dataSnapshot));
-                System.out.println("Added source report");
             }
 
             @Override
@@ -168,7 +167,6 @@ public class DatabaseModel {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 waterQualityReports.add(makeQualityReport(dataSnapshot));
-                System.out.println("Added quality report");
             }
 
             @Override
@@ -252,9 +250,7 @@ public class DatabaseModel {
     public boolean addReport(WaterSourceReport waterSourceReport) {
         Firebase reportsRef = rootRef.child("water_reports");
         try {
-            System.out.println("trying source report");
             reportsRef.child(String.valueOf(waterSourceReport.getNum())).setValue(waterSourceReport);
-            //waterSourceReports.add(waterSourceReport);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
@@ -324,8 +320,6 @@ public class DatabaseModel {
                 new Firebase.ResultHandler() {
             @Override
             public void onSuccess() {
-                System.out.println("Password successfully changed to "
-                        + newPass);
                 rootRef.child("users").child(uid).child("password")
                         .setValue(newPass);
             }

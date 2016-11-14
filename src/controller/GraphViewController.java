@@ -24,7 +24,6 @@ public class GraphViewController {
 
     public void setReports(ArrayList<WaterQualityReport> r) {
         reports.set(r);
-        System.out.println(reports.get());
     }
 
     private final StringProperty type = new SimpleStringProperty();
@@ -62,7 +61,7 @@ public class GraphViewController {
             }
             for (WaterQualityReport report : reports.get()) {
                 Double yVal;
-                if (type.get().equals("Virus")) {
+                if ("Virus".equals(type.get())) {
                     yVal = report.getVppm();
                 } else {
                     yVal = report.getCppm();

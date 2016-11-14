@@ -46,12 +46,12 @@ public class WaterSourceReport extends Report {
 
     private static int num = 1;
 
-    private IntegerProperty reportNum = new SimpleIntegerProperty();
+    private final IntegerProperty reportNum = new SimpleIntegerProperty();
     public int getNum() { return reportNum.get(); }
     public void setNum(int num) { reportNum.set(num); }
 
-    private ObjectProperty<WaterType> type = new SimpleObjectProperty<>();
-    private ObjectProperty<WaterCondition> condition = new SimpleObjectProperty<>();
+    private final ObjectProperty<WaterType> type = new SimpleObjectProperty<>();
+    private final ObjectProperty<WaterCondition> condition = new SimpleObjectProperty<>();
 
     public WaterType getType() { return type.get(); }
     public void setType(WaterType waterType) { type.set(waterType); }
