@@ -22,8 +22,6 @@ import java.util.Optional;
 public class CreateQualityController {
 
     private MainFXApplication mainApplication;
-    private final double ATLLAT = 33.7490;
-    private final double ATLLONG = -84.3880;
     @FXML
     private ToggleButton currLocBtn;
 
@@ -42,6 +40,9 @@ public class CreateQualityController {
     @FXML
     private TextField contaminantPPM;
 
+
+    private DatabaseModel databaseModel;
+
     /**
      * Set application to main application type.
      * @param main application instance to set program to
@@ -58,6 +59,7 @@ public class CreateQualityController {
         conditionComboBox.getItems().addAll(WaterQualityReport.WaterSafety.toList());
         conditionComboBox.getSelectionModel().selectFirst();
         currLocBtn.setSelected(true);
+        databaseModel = DatabaseModel.getInstance();
     }
 
     /**
@@ -65,6 +67,8 @@ public class CreateQualityController {
      */
     @FXML
     public void createReport() {
+        final double ATLLAT = 33.7490;
+        final double ATLLONG = -84.3880;
         boolean coordErr = false;
         String lat = latField.getText();
         double latNum = ATLLAT;
@@ -76,7 +80,7 @@ public class CreateQualityController {
         String date = df.format(dateObj);
         DateFormat tf = new SimpleDateFormat("HH:mm:ss");
         String time = tf.format(dateObj);
-        String name = DatabaseModel.getInstance().getCurrentUser().getEmail();
+        String name = databaseModel.getCurrentUser().getEmail();
         String vPPMString = virusPPM.getText();
         String cPPMString = contaminantPPM.getText();
         double vPPM = Double.parseDouble(vPPMString);
@@ -109,7 +113,7 @@ public class CreateQualityController {
                 WaterQualityReport report = new WaterQualityReport(date,
                         time, name, latNum, lonNum, safety, vPPM, cPPM);
                 System.out.println(report);
-                if (DatabaseModel.getInstance().addReport(report)) {
+                if (databaseModel.addReport(report)) {
                     mainApplication.goToHomePage();
                 }
             }

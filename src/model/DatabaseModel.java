@@ -18,7 +18,6 @@ public class DatabaseModel {
      */
     public static DatabaseModel getInstance() { return instance; }
 
-    private final String DATABASE_URL = "https://h2woah.firebaseio.com";
     private Firebase rootRef;
     private String uid;
 
@@ -35,6 +34,7 @@ public class DatabaseModel {
      * database
      */
     public void initFirebase() {
+        final String DATABASE_URL = "https://h2woah.firebaseio.com";
         rootRef = new Firebase(DATABASE_URL);
         initWaterReports();
         initQualityReports();
@@ -156,6 +156,9 @@ public class DatabaseModel {
         });
     }
 
+    /**
+     * Initalizes quality Reports to include everything the user entered
+     */
     public void initQualityReports() {
         waterQualityReports = new HashSet<>();
         Firebase waterRepRef = rootRef.child("quality_reports");
@@ -278,13 +281,24 @@ public class DatabaseModel {
         return true;
     }
 
+    /**
+     * Get source Reports in the form of a set of reports
+     * @return the set of source reports
+     */
     public Set<WaterSourceReport> getSourceReports() {
         return waterSourceReports;
     }
 
-
+    /**
+     * Getter for Quality Reports
+     * @return the set of water quality reports
+     */
     public Set<WaterQualityReport> getWaterQualityReports() { return waterQualityReports; }
 
+    /**
+     * Method to reset the password for someone who has forgotten theirs
+     * @param email the email of the person who forgot their password
+     */
     public void forgotPassword(String email) {
         rootRef.resetPassword(email, new Firebase.ResultHandler() {
             @Override
@@ -299,6 +313,12 @@ public class DatabaseModel {
         });
     }
 
+    /**
+     * Method to change password for someone
+     * @param email the email of the user who forgot password
+     * @param oldPass old password of the user
+     * @param newPass the new password they want it to be set to
+     */
     public void changePassword(String email, String oldPass, String newPass) {
         rootRef.changePassword(email, oldPass, newPass,
                 new Firebase.ResultHandler() {

@@ -34,7 +34,6 @@ public class Model {
      * Add default stored data
      */
     Model() {
-        //TODO: Add additional default data
     }
 
     /** Getter and setter for the currUser */

@@ -18,15 +18,6 @@ import java.util.Optional;
 public class EditProfileController {
     private MainFXApplication mainApplication;
 
-    private String passwordConfirm;
-    private String email;
-    private String password;
-    private String emailConfirm;
-    private String address;
-    private String city;
-    private String zipcode;
-    private States state;
-    private final int LEFT_PADDING = 20;
     @FXML
     private PasswordField passwordField;
     @FXML
@@ -90,6 +81,14 @@ public class EditProfileController {
      */
     @FXML
     private void updateUser() {
+        String passwordConfirm;
+        String email;
+        String password;
+        String emailConfirm;
+        String address;
+        String city;
+        String zipcode;
+        States state;
         password = passwordField.getText();
         passwordConfirm = confirmPasswordField.getText();
         email = emailField.getText();
@@ -157,6 +156,7 @@ public class EditProfileController {
 
         // Create the password and confirm labels and fields.
         GridPane grid = new GridPane();
+
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
@@ -184,6 +184,9 @@ public class EditProfileController {
         }
     }
 
+    /**
+     * Error message for incorrect password submission
+     */
     public void incorrectPasswordSubmit() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("New Password Error");
