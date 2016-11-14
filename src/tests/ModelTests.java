@@ -1,5 +1,7 @@
 package tests;
 import model.WaterQualityReport;
+import model.WaterSourceReport;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
@@ -19,5 +21,30 @@ public class ModelTests {
             assertEquals(safetyLevel, WaterQualityReport.WaterSafety.UNSAFE);
         safetyLevel = WaterQualityReport.stringToSafety("dangerous");
             assertEquals(safetyLevel, WaterQualityReport.WaterSafety.UNSAFE);
+    }
+
+    @Test
+    public void waterSourceEqualsTests() {
+        final double ATLLAT = 33.7490;
+        final double ATLLONG = -84.3880;
+
+        WaterSourceReport sourceReport1 = new WaterSourceReport("11/14/16", "12:12:12", "Sahaj",
+        ATLLAT, ATLLONG, WaterSourceReport.WaterType.BOTTLED, WaterSourceReport.WaterCondition.POTABLE);
+        WaterSourceReport sourceReport2 = new WaterSourceReport("11/14/16", "12:12:12", "Sahaj",
+                ATLLAT, ATLLONG, WaterSourceReport.WaterType.BOTTLED, WaterSourceReport.WaterCondition.POTABLE);
+        WaterSourceReport sameNumSourceReport = new WaterSourceReport(1, "11/13/16", "11:11:11", "Not Sahaj",
+                ATLLAT * -1, ATLLONG * -1, WaterSourceReport.WaterType.LAKE, WaterSourceReport.WaterCondition.TREATABLECLEAR);
+
+        Assert.assertTrue(!sourceReport1.equals(null),
+                "A WaterSourceReport cannot be equal to a null object");
+        Assert.assertTrue(!sourceReport1.equals("Not a WaterSourceReport"),
+                "A WaterSourceReport can only be compared to other WaterSourceReports");
+        Assert.assertEquals(sourceReport1.getNum(), sourceReport2.getNum() - 1,
+                "A new WaterSourceReport created without a num parameter should automatically increment the reportNum");
+        Assert.assertTrue(!sourceReport1.equals(sourceReport2),
+                "WaterSourceReports with different report numbers are different WaterSourceReports");
+        Assert.assertTrue(sourceReport1.equals(sameNumSourceReport),
+                "WaterSourceReports with the same report numbers are considered equal even if the other data is different");
+
     }
 }
