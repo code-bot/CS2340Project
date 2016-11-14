@@ -22,6 +22,10 @@ public class GraphViewController {
 
     private final ObjectProperty<ArrayList<WaterQualityReport>> reports = new SimpleObjectProperty<>();
 
+    /**
+     * Sets the reports to be a part of the graph
+     * @param r the reports to be viewed
+     */
     public void setReports(ArrayList<WaterQualityReport> r) {
         reports.set(r);
     }
@@ -40,6 +44,10 @@ public class GraphViewController {
     private final int months = 12;
 
 
+
+    /**
+     * initalize the graphs
+     */
     @FXML
     private void initialize() {
         xAxis.setLabel("Month");
@@ -48,6 +56,10 @@ public class GraphViewController {
         xAxis.setUpperBound(months);
     }
 
+    /**
+     * The graphs to load
+     * @param year the year to start with
+     */
     public void loadGraph(String year) {
         yAxis.setLabel(type.get() + " (ppm)");
         chart.setTitle("Monthly Change in Water Quality for " + year);
