@@ -13,7 +13,6 @@ public class DatabaseModel {
     private static final DatabaseModel instance = new DatabaseModel();
     public static DatabaseModel getInstance() { return instance; }
 
-    private final String DATABASE_URL = "https://h2woah.firebaseio.com";
     private Firebase rootRef;
     private String uid;
 
@@ -30,6 +29,7 @@ public class DatabaseModel {
      * database
      */
     public void initFirebase() {
+        final String DATABASE_URL = "https://h2woah.firebaseio.com";
         rootRef = new Firebase(DATABASE_URL);
         initWaterReports();
         initQualityReports();

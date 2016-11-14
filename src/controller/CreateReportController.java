@@ -17,8 +17,6 @@ import java.util.Optional;
 public class CreateReportController {
 
     private MainFXApplication mainApplication;
-    private final double ATLLAT = 33.7490;
-    private final double ATLLONG = -84.3880;
     @FXML
     private ToggleButton currLocBtn;
 
@@ -50,6 +48,8 @@ public class CreateReportController {
 
     @FXML
     public void createReport() {
+        final double ATLLAT = 33.7490;
+        final double ATLLONG = -84.3880;
         boolean coordErr = false;
         String lat = latField.getText();
         double latNum = ATLLAT;

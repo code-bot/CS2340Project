@@ -48,15 +48,12 @@ public class MainFXApplication extends Application {
 
     private AnchorPane createGraphLayout;
 
-    private DatabaseModel databaseModel;
-
     @Override
     public void start(Stage primaryStage) {
         mainStage = primaryStage;
         mainStage.setResizable(false);
         initRootLayout(mainStage);
         initLoginScreen(mainStage);
-        databaseModel = DatabaseModel.getInstance();
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
@@ -102,7 +99,6 @@ public class MainFXApplication extends Application {
      * Log out the user and remove nav bar
      */
     public void logoutUser() {
-        //TODO: Store user information before logging out
         DatabaseModel.getInstance().clearCurrentUser();
         initLoginScreen(mainStage);
         rootLayout.setTop(null);
@@ -336,7 +332,6 @@ public class MainFXApplication extends Application {
             rootLayout.setCenter(viewGraphLayout);
 
             GraphViewController controller = loader.getController();
-            controller.setMainApp(this);
             controller.setReports(reports);
             controller.setType(type);
             controller.loadGraph(year);
