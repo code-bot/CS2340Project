@@ -1,15 +1,13 @@
 package controller;
 
 import com.firebase.client.utilities.Pair;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import fxapp.MainFXApplication;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
+
 import model.*;
 
 import java.util.Optional;
@@ -20,14 +18,6 @@ import java.util.Optional;
 public class EditProfileController {
     private MainFXApplication mainApplication;
 
-    private String passwordConfirm;
-    private String email;
-    private String password;
-    private String emailConfirm;
-    private String address;
-    private String city;
-    private String zipcode;
-    private States state;
 
     @FXML
     private PasswordField passwordField;
@@ -84,8 +74,6 @@ public class EditProfileController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
             mainApplication.goToHomePage();
-        } else {
-
         }
     }
 
@@ -94,6 +82,14 @@ public class EditProfileController {
      */
     @FXML
     private void updateUser() {
+        String passwordConfirm;
+        String email;
+        String password;
+        String emailConfirm;
+        String address;
+        String city;
+        String zipcode;
+        States state;
         password = passwordField.getText();
         passwordConfirm = confirmPasswordField.getText();
         email = emailField.getText();
@@ -107,33 +103,35 @@ public class EditProfileController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Registration Error!");
             alert.setHeaderText("Email Does Not Match");
-            alert.setContentText("The emails provided are not the same. Please ensure you have entered the same email address.");
+            alert.setContentText("The emails provided are not the same. " +
+                    "Please ensure you have entered the same email address.");
 
             alert.showAndWait();
         } else if (!(password.equals(passwordConfirm))) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Registration Error!");
             alert.setHeaderText("Password Does Not Match");
-            alert.setContentText("The passwords provided are not the same. Please ensure you have entered the same password.");
+            alert.setContentText("The passwords provided are not the same. " +
+                    "Please ensure you have entered the same password.");
 
             alert.showAndWait();
         } else {
             User oldUser = Model.getInstance().getCurrentUser();
             boolean sameEmail = false;
-            if (email.equals("")) {
+            if ("".equals(email)) {
                 sameEmail = true;
                 email = oldUser.getEmail();
             }
-            if (password.equals("")) {
+            if ("".equals(password)) {
                 password = oldUser.getPassword();
             }
-            if (address.equals("")) {
+            if ("".equals(address)) {
                 address = oldUser.getAddress();
             }
-            if (city.equals("")) {
+            if ("".equals(city)) {
                 city = oldUser.getCity();
             }
-            if (zipcode.equals("")) {
+            if ("".equals(zipcode)) {
                 zipcode = oldUser.getZipcode();
             }
 
@@ -159,6 +157,7 @@ public class EditProfileController {
 
         // Create the password and confirm labels and fields.
         GridPane grid = new GridPane();
+
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
@@ -179,13 +178,18 @@ public class EditProfileController {
         if (result.isPresent()) {
             if (pword.getText().equals(confirm.getText())) {
                 String password = pword.getText();
-                DatabaseModel.getInstance().getCurrentUser().resetPassword(password);
+                DatabaseModel databaseModel = DatabaseModel.getInstance();
+                User currUser = databaseModel.getCurrentUser();
+                currUser.resetPassword(password);
             } else {
                 incorrectPasswordSubmit();
             }
         }
     }
 
+    /**
+     * Error message for incorrect password submission
+     */
     public void incorrectPasswordSubmit() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("New Password Error");

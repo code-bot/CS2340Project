@@ -98,6 +98,7 @@ public class User {
     }
 
     public void resetPassword(String newPassword) {
-        DatabaseModel.getInstance().changePassword(getEmail(), getPassword(), newPassword);
+        DatabaseModel databaseModel = DatabaseModel.getInstance();
+        databaseModel.changePassword(getEmail(), getPassword(), newPassword);
     }
 }

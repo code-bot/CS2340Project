@@ -4,6 +4,8 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.Collections;
+
 /**
  * Created by Rahul on 10/28/16.
  */
@@ -15,9 +17,7 @@ public class WaterQualityReport extends Report {
         public static ObservableList<WaterSafety> toList() {
             ObservableList<WaterSafety> list = FXCollections.observableArrayList();
 
-            for (WaterSafety value : values()) {
-                list.add(value);
-            }
+            Collections.addAll(list, values());
             return list;
         }
     }
@@ -36,7 +36,7 @@ public class WaterQualityReport extends Report {
 
     private static int num = 1;
 
-    private IntegerProperty reportNum = new SimpleIntegerProperty();
+    private final IntegerProperty reportNum = new SimpleIntegerProperty();
     public int getNum() { return reportNum.get(); }
     public void setNum(int num) { reportNum.set(num); }
 
@@ -45,8 +45,8 @@ public class WaterQualityReport extends Report {
     public WaterSafety getSafety() { return safety.get(); }
     public void setType(WaterSafety waterSafety) { safety.set(waterSafety); }
 
-    private DoubleProperty virusPPM = new SimpleDoubleProperty();
-    private DoubleProperty contaminantPPM = new SimpleDoubleProperty();
+    private final DoubleProperty virusPPM = new SimpleDoubleProperty();
+    private final DoubleProperty contaminantPPM = new SimpleDoubleProperty();
 
     public WaterQualityReport(String date, String time, String name, double lat,
                               double lon, WaterSafety safety, double virusPPM, double contaminantPPM) {
@@ -78,6 +78,7 @@ public class WaterQualityReport extends Report {
         return contaminantPPM.get();
     }
 
+    @Override
     public String getTypeOfReport() {
         return "Quality Report";
     }

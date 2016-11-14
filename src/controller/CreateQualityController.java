@@ -2,16 +2,16 @@ package controller;
 
 import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
+
 import javafx.scene.control.*;
 import model.DatabaseModel;
-import model.Model;
+
+import model.User;
 import model.WaterQualityReport;
-import model.WaterSourceReport;
+
 
 import java.text.DateFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -23,7 +23,6 @@ import java.util.Optional;
 public class CreateQualityController {
 
     private MainFXApplication mainApplication;
-
     @FXML
     private ToggleButton currLocBtn;
 
@@ -43,31 +42,47 @@ public class CreateQualityController {
     private TextField contaminantPPM;
 
 
+    private DatabaseModel databaseModel;
+
+    /**
+     * Set application to main application type.
+     * @param main application instance to set program to
+     */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
     }
 
+    /**
+     * put items into the comboboxes so that user can select from existing enum
+     */
     @FXML
     public void initialize() {
         conditionComboBox.getItems().addAll(WaterQualityReport.WaterSafety.toList());
         conditionComboBox.getSelectionModel().selectFirst();
         currLocBtn.setSelected(true);
+        databaseModel = DatabaseModel.getInstance();
     }
 
+    /**
+     * Create report with information given from the user
+     */
     @FXML
     public void createReport() {
+        final double ATLLAT = 33.7490;
+        final double ATLLONG = -84.3880;
         boolean coordErr = false;
         String lat = latField.getText();
-        double latNum = 33.7490;
+        double latNum = ATLLAT;
         String lon = longField.getText();
-        double lonNum = -84.3880;
+        double lonNum = ATLLONG;
         WaterQualityReport.WaterSafety safety = conditionComboBox.getValue();
         DateFormat df = new SimpleDateFormat("MM/dd/yy");
         Date dateObj =  new Date();
         String date = df.format(dateObj);
         DateFormat tf = new SimpleDateFormat("HH:mm:ss");
         String time = tf.format(dateObj);
-        String name = DatabaseModel.getInstance().getCurrentUser().getEmail();
+        User currUser = databaseModel.getCurrentUser();
+        String name = currUser.getEmail();
         String vPPMString = virusPPM.getText();
         String cPPMString = contaminantPPM.getText();
         double vPPM = Double.parseDouble(vPPMString);
@@ -75,17 +90,17 @@ public class CreateQualityController {
 
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        if (lat.equals("") || lon.equals("")) {
+        if ("".equals(lat)|| "".equals(lon)) {
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Submit Report?");
-            alert.setContentText("Lat and Long not provided, using current location! Make sure all information is accurate");
+            alert.setContentText("Lat and Long not provided, using current location!" +
+                    " Make sure all information is accurate");
         } else {
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Submit Report?");
             alert.setContentText("Lat and Long provided. Make sure all information is accurate");
             try {
                 latNum = Double.parseDouble(lat);
-                System.out.println(latNum);
                 lonNum = Double.parseDouble(lon);
             } catch (NumberFormatException e) {     // User inputs incorrect format for latitude or longitude
                 coordError();
@@ -96,15 +111,18 @@ public class CreateQualityController {
         if (!coordErr) {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                WaterQualityReport report = new WaterQualityReport(date, time, name, latNum, lonNum, safety, vPPM, cPPM);
-                System.out.println(report);
-                if (DatabaseModel.getInstance().addReport(report)) {
+                WaterQualityReport report = new WaterQualityReport(date,
+                        time, name, latNum, lonNum, safety, vPPM, cPPM);
+                if (databaseModel.addReport(report)) {
                     mainApplication.goToHomePage();
                 }
             }
         }
     }
 
+    /**
+     * Stop creating the quality report and confirm you want to cancel creation
+     */
     @FXML
     public void cancel() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -118,11 +136,14 @@ public class CreateQualityController {
         }
     }
 
+    /**
+     * Throw an error if there is a coordinate error
+     */
     public void coordError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error Dialog");
         alert.setHeaderText("Latitude/Longitude Error");
         alert.setContentText("Make sure the latitude and longitude are in the correct format");
-        Optional<ButtonType> result = alert.showAndWait();
+        alert.showAndWait();
     }
 }

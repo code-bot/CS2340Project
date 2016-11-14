@@ -2,15 +2,12 @@ package controller;
 
 import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import model.DatabaseModel;
-import model.Model;
+import model.User;
 import model.WaterSourceReport;
 
 import java.text.DateFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -21,7 +18,6 @@ import java.util.Optional;
 public class CreateReportController {
 
     private MainFXApplication mainApplication;
-
     @FXML
     private ToggleButton currLocBtn;
 
@@ -37,11 +33,20 @@ public class CreateReportController {
     @FXML
     private ComboBox<WaterSourceReport.WaterCondition> conditionComboBox;
 
+    private DatabaseModel databaseModel;
 
+    /**
+     * Set application to main application type.
+     * @param main application instance to set program to
+     */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
     }
 
+
+    /**
+     * Sets variables in the combo boxes to include enum values
+     */
     @FXML
     public void initialize() {
         typeComboBox.getItems().addAll(WaterSourceReport.WaterType.toList());
@@ -49,15 +54,21 @@ public class CreateReportController {
         conditionComboBox.getItems().addAll(WaterSourceReport.WaterCondition.toList());
         conditionComboBox.getSelectionModel().selectFirst();
         currLocBtn.setSelected(true);
+        databaseModel = DatabaseModel.getInstance();
     }
 
+    /**
+     * Adds report to the database
+     */
     @FXML
     public void createReport() {
+        final double ATLLAT = 33.7490;
+        final double ATLLONG = -84.3880;
         boolean coordErr = false;
         String lat = latField.getText();
-        double latNum = 33.7490;
+        double latNum = ATLLAT;
         String lon = longField.getText();
-        double lonNum = -84.3880;
+        double lonNum = ATLLONG;
         WaterSourceReport.WaterType type = typeComboBox.getValue();
         WaterSourceReport.WaterCondition condition = conditionComboBox.getValue();
         DateFormat df = new SimpleDateFormat("MM/dd/yy");
@@ -65,21 +76,22 @@ public class CreateReportController {
         String date = df.format(dateObj);
         DateFormat tf = new SimpleDateFormat("HH:mm:ss");
         String time = tf.format(dateObj);
-        String name = DatabaseModel.getInstance().getCurrentUser().getEmail();
+        User currUser = databaseModel.getCurrentUser();
+        String name = currUser.getEmail();
 
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        if (lat.equals("") || lon.equals("")) {
+        if ("".equals(lat)|| "".equals(lon)) {
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Submit Report?");
-            alert.setContentText("Lat and Long not provided, using current location! Make sure all information is accurate");
+            alert.setContentText("Lat and Long not provided, using current location! " +
+                    "Make sure all information is accurate");
         } else {
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Submit Report?");
             alert.setContentText("Lat and Long provided. Make sure all information is accurate");
             try {
                 latNum = Double.parseDouble(lat);
-                System.out.println(latNum);
                 lonNum = Double.parseDouble(lon);
             } catch (NumberFormatException e) {     // User inputs incorrect format for latitude or longitude
                 coordError();
@@ -91,14 +103,16 @@ public class CreateReportController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 WaterSourceReport report = new WaterSourceReport(date, time, name, latNum, lonNum, type, condition);
-                System.out.println(report);
-                if (DatabaseModel.getInstance().addReport(report)) {
+                if (databaseModel.addReport(report)) {
                     mainApplication.goToHomePage();
                 }
             }
         }
     }
 
+    /**
+     * Cancels and confirms not creating the report
+     */
     @FXML
     public void cancel() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -112,11 +126,14 @@ public class CreateReportController {
         }
     }
 
+    /**
+     * Displays error because coordinates are wrong.
+     */
     public void coordError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error Dialog");
         alert.setHeaderText("Latitude/Longitude Error");
         alert.setContentText("Make sure the latitude and longitude are in the correct format");
-        Optional<ButtonType> result = alert.showAndWait();
+        alert.showAndWait();
 
     }}

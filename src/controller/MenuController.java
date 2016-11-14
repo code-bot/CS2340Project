@@ -7,9 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Pagination;
 import model.DatabaseModel;
-import model.Model;
 import model.UserLevel;
 
 /**
@@ -73,20 +71,18 @@ public class MenuController {
                         viewQualityReports();
                     }
                 });
-                goToPage.getItems().addAll(viewQualityReport);
-            }
-        }
 
-        if (model.getCurrentUser().getUserLevel() == UserLevel.MANAGER) {
-            MenuItem createHistoricalGraph
-                    = new MenuItem("Create Historical Report");
-            createHistoricalGraph.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    createHistoricalGraph();
-                }
-            });
-            goToPage.getItems().addAll(createHistoricalGraph);
+                MenuItem createHistoricalGraph
+                        = new MenuItem("Create Historical Report");
+                createHistoricalGraph.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        createHistoricalGraph();
+                    }
+                });
+
+                goToPage.getItems().addAll(viewQualityReport, createHistoricalGraph);
+            }
         }
 
         pageMenu.getMenus().addAll(goToPage);
@@ -106,7 +102,6 @@ public class MenuController {
      */
     @FXML
     private void signOut() {
-        System.out.println("Signing out...");
         mainApplication.logoutUser();
     }
 
@@ -145,7 +140,9 @@ public class MenuController {
 
     @FXML
     public void createHistoricalGraph() {
-        mainApplication.initHistoricalGraphScreen(mainApplication.getMainStage());
+        //mainApplication.initGraphViewScreen(mainApplication.getMainStage(),
+        // new ArrayList(DatabaseModel.getInstance().getWaterQualityReports()), "Virus");
+        mainApplication.initCreateGraphScreen(mainApplication.getMainStage());
         mainApplication.initBackMenu(mainApplication.getMainStage());
     }
 }
