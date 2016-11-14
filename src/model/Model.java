@@ -26,8 +26,8 @@ public class Model {
      is created */
     public User testUser;
 
-    private static Map<String, User>  userMap;
-    private static Set<Report> reports;
+    private static Map<String, User>  userMap = new HashMap<String, User>();;
+    private static Set<Report> reports = new HashSet<>();
 
     /**
      * Create a new model
@@ -35,8 +35,6 @@ public class Model {
      */
     Model() {
         //TODO: Add additional default data
-        userMap = new HashMap<String, User>();
-        reports = new HashSet<>();
     }
 
     /** Getter and setter for the currUser */
