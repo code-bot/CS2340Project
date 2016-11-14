@@ -1,5 +1,6 @@
 package tests;
 import model.WaterQualityReport;
+import model.WaterSourceReport;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
@@ -19,5 +20,22 @@ public class ModelTests {
             assertEquals(safetyLevel, WaterQualityReport.WaterSafety.UNSAFE);
         safetyLevel = WaterQualityReport.stringToSafety("dangerous");
             assertEquals(safetyLevel, WaterQualityReport.WaterSafety.UNSAFE);
+    }
+
+    @Test
+    public void waterSourceReportStringToWaterTypeTest() {
+        WaterSourceReport.WaterType waterType;
+        waterType = WaterSourceReport.stringToWaterType("BOTTLED");
+        assertEquals(waterType, WaterSourceReport.WaterType.BOTTLED);
+        waterType = WaterSourceReport.stringToWaterType("WELL");
+        assertEquals(waterType, WaterSourceReport.WaterType.WELL);
+        waterType = WaterSourceReport.stringToWaterType("STREAM");
+        assertEquals(waterType, WaterSourceReport.WaterType.STREAM);
+        waterType = WaterSourceReport.stringToWaterType("LAKE");
+        assertEquals(waterType, WaterSourceReport.WaterType.LAKE);
+        waterType = WaterSourceReport.stringToWaterType("SPRING");
+        assertEquals(waterType, WaterSourceReport.WaterType.SPRING);
+        waterType = WaterSourceReport.stringToWaterType("OTHER");
+        assertEquals(waterType, WaterSourceReport.WaterType.OTHER);
     }
 }
