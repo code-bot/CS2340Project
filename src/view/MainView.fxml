@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
          xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainViewController">
-   <children>
+
       <Label layoutX="241.0" layoutY="192.0" text="You are signed in!" />
       <Button fx:id="createReportBtn" layoutX="245.0" layoutY="273.0" mnemonicParsing="false"
               onAction="#createReport" text="Create Report" />
@@ -16,5 +16,4 @@
       <Button fx:id="viewMapBtn" layoutX="270.0" layoutY="350.0" mnemonicParsing="false"
               onAction="#goToMap" text="Go To Map" />
 
-   </children>
 </AnchorPane>

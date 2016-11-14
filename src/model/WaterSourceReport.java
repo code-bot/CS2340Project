@@ -110,6 +110,7 @@ public class WaterSourceReport extends Report {
         }
     }
 
+    @Override
     public String getTypeOfReport() {
         return "Source Report";
     }

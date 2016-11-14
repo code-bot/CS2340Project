@@ -40,13 +40,20 @@ public class CreateQualityController {
     @FXML
     private TextField contaminantPPM;
 
+
     private DatabaseModel databaseModel;
 
-
+    /**
+     * Set application to main application type.
+     * @param main application instance to set program to
+     */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
     }
 
+    /**
+     * put items into the comboboxes so that user can select from existing enum
+     */
     @FXML
     public void initialize() {
         conditionComboBox.getItems().addAll(WaterQualityReport.WaterSafety.toList());
@@ -55,6 +62,9 @@ public class CreateQualityController {
         databaseModel = DatabaseModel.getInstance();
     }
 
+    /**
+     * Create report with information given from the user
+     */
     @FXML
     public void createReport() {
         final double ATLLAT = 33.7490;
@@ -110,6 +120,9 @@ public class CreateQualityController {
         }
     }
 
+    /**
+     * Stop creating the quality report and confirm you want to cancel creation
+     */
     @FXML
     public void cancel() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -123,11 +136,14 @@ public class CreateQualityController {
         }
     }
 
+    /**
+     * Throw an error if there is a coordinate error
+     */
     public void coordError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error Dialog");
         alert.setHeaderText("Latitude/Longitude Error");
         alert.setContentText("Make sure the latitude and longitude are in the correct format");
-        Optional<ButtonType> result = alert.showAndWait();
+        alert.showAndWait();
     }
 }

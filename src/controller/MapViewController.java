@@ -30,6 +30,10 @@ public class MapViewController implements Initializable, MapComponentInitialized
     private final double ATLLAT = 33.7490;
     private final double ATLLONG = -84.3880;
     private final int DEFAULT_ZOOM = 12;
+    /**
+     * Set application to main application type.
+     * @param main application instance to set program to
+     */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
     }
@@ -65,8 +69,7 @@ public class MapViewController implements Initializable, MapComponentInitialized
 
         map = mapView.createMap(mapOptions);
 
-        Set<WaterSourceReport> reports = new HashSet<>();
-        reports = DatabaseModel.getInstance().getSourceReports();
+        Set<WaterSourceReport> reports = DatabaseModel.getInstance().getSourceReports();
         for (Report report : reports) {
             MarkerOptions markerOptions = new MarkerOptions();
             LatLong loc = new LatLong(report.getLat(), report.getLong());

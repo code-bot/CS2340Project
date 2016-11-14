@@ -32,7 +32,10 @@ public class CreateReportController {
     @FXML
     private ComboBox<WaterSourceReport.WaterCondition> conditionComboBox;
 
-
+    /**
+     * Set application to main application type.
+     * @param main application instance to set program to
+     */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
     }
@@ -115,6 +118,6 @@ public class CreateReportController {
         alert.setTitle("Error Dialog");
         alert.setHeaderText("Latitude/Longitude Error");
         alert.setContentText("Make sure the latitude and longitude are in the correct format");
-        Optional<ButtonType> result = alert.showAndWait();
+        alert.showAndWait();
 
     }}

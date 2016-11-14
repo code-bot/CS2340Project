@@ -60,6 +60,7 @@ public class CreateHistoricalController {
         contaminant.setUserData("Contaminant");
 
         group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+            @Override
             public void changed(ObservableValue<? extends Toggle> ov,
                                 Toggle toggle, Toggle new_toggle) {
                 if (new_toggle != null) {
@@ -83,10 +84,11 @@ public class CreateHistoricalController {
         });
     }
 
-    @FXML
+
     /**
-     * Method called to set variables and create graph
+     * Create Graph based on the variables in the instance of historical graph
      */
+    @FXML
     public void createGraph() {
         final double ATLLAT = 33.7490;
         final double ATLLONG = -84.3880;
@@ -156,10 +158,11 @@ public class CreateHistoricalController {
 
     }
 
-    @FXML
+
     /**
      * Method called to confirm a cancel of creating graph
      */
+    @FXML
     public void cancel() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Dialog");
@@ -180,6 +183,6 @@ public class CreateHistoricalController {
         alert.setTitle("Error Dialog");
         alert.setHeaderText("Latitude/Longitude Error");
         alert.setContentText("Make sure the latitude and longitude are in the correct format");
-        Optional<ButtonType> result = alert.showAndWait();
+        alert.showAndWait();
     }
 }
