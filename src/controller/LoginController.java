@@ -136,7 +136,7 @@ public class LoginController {
                 });
     }
 
-    public void loginError() {
+    private void loginError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Login Error");
         alert.setHeaderText("Incorrect Information");
@@ -159,7 +159,7 @@ public class LoginController {
         }
     }
 
-    public void incorrectResetEmail() {
+    private void incorrectResetEmail() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Password Reset Error");
         alert.setHeaderText("Incorrect Email Format");
@@ -167,7 +167,7 @@ public class LoginController {
         alert.showAndWait();
     }
 
-    public static boolean isValidEmail(String emailAddress) {
+    private static boolean isValidEmail(String emailAddress) {
         return emailAddress.contains(" ") == false && emailAddress.matches(".+@.+\\.[a-z]+");
     }
 

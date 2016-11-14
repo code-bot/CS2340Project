@@ -148,7 +148,7 @@ public class EditProfileController {
      * Allows the user to change their password
      */
     @FXML
-    public void changePassword() {
+    private void changePassword() {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Change Password Dialog");
         dialog.setHeaderText("Change your password");
@@ -190,7 +190,7 @@ public class EditProfileController {
     /**
      * Error message for incorrect password submission
      */
-    public void incorrectPasswordSubmit() {
+    private void incorrectPasswordSubmit() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("New Password Error");
         alert.setHeaderText("The two password fields do not match");
