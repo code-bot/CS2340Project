@@ -3,10 +3,6 @@ package model;
 import com.firebase.client.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import java.util.ArrayList;
-import java.util.Map;
-
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**

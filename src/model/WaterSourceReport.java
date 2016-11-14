@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.Collections;
 
 /**
  * Created by sahajbot on 10/10/16.
@@ -24,9 +24,7 @@ public class WaterSourceReport extends Report {
         public static ObservableList<WaterType> toList() {
             ObservableList<WaterType> list = FXCollections.observableArrayList();
 
-            for (WaterType value : values()) {
-                list.add(value);
-            }
+            Collections.addAll(list, values());
             return list;
         }
     }
@@ -41,9 +39,7 @@ public class WaterSourceReport extends Report {
         public static ObservableList<WaterCondition> toList() {
             ObservableList<WaterCondition> list = FXCollections.observableArrayList();
 
-            for (WaterCondition value : values()) {
-                list.add(value);
-            }
+            Collections.addAll(list, values());
             return list;
         }
     }
@@ -63,7 +59,8 @@ public class WaterSourceReport extends Report {
     public WaterCondition getCondition() { return condition.get(); }
     public void setCondition(WaterCondition waterCondition) { condition.set(waterCondition); }
 
-    public WaterSourceReport(String date, String time, String name, double lat, double lon, WaterType type, WaterCondition condition) {
+    public WaterSourceReport(String date, String time, String name,
+                             double lat, double lon, WaterType type, WaterCondition condition) {
         super(date, time, name, lat, lon);
         this.type.set(type);
         this.condition.set(condition);
@@ -71,7 +68,8 @@ public class WaterSourceReport extends Report {
         num++;
     }
 
-    public WaterSourceReport(int num, String date, String time, String name, double lat, double lon, WaterType type, WaterCondition condition) {
+    public WaterSourceReport(int num, String date, String time, String name,
+                             double lat, double lon, WaterType type, WaterCondition condition) {
         super(date, time, name, lat, lon);
         this.type.set(type);
         this.condition.set(condition);

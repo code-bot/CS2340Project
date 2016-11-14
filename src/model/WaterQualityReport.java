@@ -4,6 +4,8 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.Collections;
+
 /**
  * Created by Rahul on 10/28/16.
  */
@@ -15,9 +17,7 @@ public class WaterQualityReport extends Report {
         public static ObservableList<WaterSafety> toList() {
             ObservableList<WaterSafety> list = FXCollections.observableArrayList();
 
-            for (WaterSafety value : values()) {
-                list.add(value);
-            }
+            Collections.addAll(list, values());
             return list;
         }
     }

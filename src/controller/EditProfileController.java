@@ -1,15 +1,13 @@
 package controller;
 
 import com.firebase.client.utilities.Pair;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import fxapp.MainFXApplication;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
+
 import model.*;
 
 import java.util.Optional;
@@ -84,8 +82,6 @@ public class EditProfileController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
             mainApplication.goToHomePage();
-        } else {
-
         }
     }
 
@@ -107,14 +103,16 @@ public class EditProfileController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Registration Error!");
             alert.setHeaderText("Email Does Not Match");
-            alert.setContentText("The emails provided are not the same. Please ensure you have entered the same email address.");
+            alert.setContentText("The emails provided are not the same. " +
+                    "Please ensure you have entered the same email address.");
 
             alert.showAndWait();
         } else if (!(password.equals(passwordConfirm))) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Registration Error!");
             alert.setHeaderText("Password Does Not Match");
-            alert.setContentText("The passwords provided are not the same. Please ensure you have entered the same password.");
+            alert.setContentText("The passwords provided are not the same. " +
+                    "Please ensure you have entered the same password.");
 
             alert.showAndWait();
         } else {

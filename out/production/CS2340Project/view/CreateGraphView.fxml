@@ -9,29 +9,45 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="600.0" styleClass="background-frame" stylesheets="@css/CreateReport.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateHistoricalController">
-    <Label alignment="CENTER" layoutX="134.0" layoutY="35.0" prefHeight="39.0" prefWidth="335.0" text="Show Historical Graph" textAlignment="CENTER" textFill="WHITE">
+<AnchorPane prefHeight="550.0" prefWidth="600.0" styleClass="background-frame" stylesheets="@css/CreateReport.css"
+            xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CreateHistoricalController">
+    <Label alignment="CENTER" layoutX="134.0" layoutY="35.0" prefHeight="39.0" prefWidth="335.0"
+           text="Show Historical Graph" textAlignment="CENTER" textFill="WHITE">
         <font>
             <Font size="25.0" />
         </font>
     </Label>
-    <AnchorPane layoutX="200.0" layoutY="74.0" prefHeight="184.0" prefWidth="200.0" styleClass="location-selection" stylesheets="@css/CreateReport.css">
+    <AnchorPane layoutX="200.0" layoutY="74.0" prefHeight="184.0" prefWidth="200.0" styleClass="location-selection"
+                stylesheets="@css/CreateReport.css">
         <children>
-            <ToggleButton fx:id="currLocBtn" layoutX="11.0" layoutY="24.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="179.0" selected="true" text="Use Current Location" />
-            <Label alignment="CENTER" layoutX="84.0" layoutY="61.0" prefHeight="39.0" prefWidth="32.0" styleClass="focus-label" stylesheets="@css/CreateReport.css" text="-OR-" textAlignment="CENTER" textFill="WHITE">
+            <ToggleButton fx:id="currLocBtn" layoutX="11.0" layoutY="24.0" mnemonicParsing="false" prefHeight="29.0"
+                          prefWidth="179.0" selected="true" text="Use Current Location" />
+            <Label alignment="CENTER" layoutX="84.0" layoutY="61.0" prefHeight="39.0" prefWidth="32.0"
+                   styleClass="focus-label" stylesheets="@css/CreateReport.css" text="-OR-" textAlignment="CENTER"
+                   textFill="WHITE">
                 <font>
                     <Font size="12.0" />
                 </font>
             </Label>
-            <TextField fx:id="latField" alignment="CENTER" layoutX="11.0" layoutY="100.0" prefHeight="28.0" prefWidth="179.0" promptText="Enter source latitude" styleClass="text-field" stylesheets="@css/CreateReport.css" />
-            <TextField fx:id="longField" alignment="CENTER" layoutX="11.0" layoutY="139.0" prefWidth="179.0" promptText="Enter source longitude" styleClass="text-field" stylesheets="@css/CreateReport.css" />
+            <TextField fx:id="latField" alignment="CENTER" layoutX="11.0" layoutY="100.0" prefHeight="28.0"
+                       prefWidth="179.0" promptText="Enter source latitude" styleClass="text-field"
+                       stylesheets="@css/CreateReport.css" />
+            <TextField fx:id="longField" alignment="CENTER" layoutX="11.0" layoutY="139.0"
+                       prefWidth="179.0" promptText="Enter source longitude" styleClass="text-field"
+                       stylesheets="@css/CreateReport.css" />
         </children>
     </AnchorPane>
-    <AnchorPane layoutX="70.0" layoutY="257.0" prefHeight="177.0" prefWidth="464.0" styleClass="location-selection" stylesheets="@css/CreateReport.css">
+    <AnchorPane layoutX="70.0" layoutY="257.0" prefHeight="177.0" prefWidth="464.0" styleClass="location-selection"
+                stylesheets="@css/CreateReport.css">
         <children>
-            <ToggleButton fx:id="virus" layoutX="143.0" layoutY="14.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="179.0" selected="true" text="Virus" />
-            <ToggleButton fx:id="contaminant" layoutX="143.0" layoutY="82.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="179.0" selected="true" text="Contaminant" />
-         <Label alignment="CENTER" layoutX="216.0" layoutY="43.0" prefHeight="39.0" prefWidth="32.0" styleClass="focus-label" stylesheets="@css/CreateReport.css" text="-OR-" textAlignment="CENTER" textFill="WHITE">
+            <ToggleButton fx:id="virus" layoutX="143.0" layoutY="14.0" mnemonicParsing="false" prefHeight="29.0"
+                          prefWidth="179.0" selected="true" text="Virus" />
+            <ToggleButton fx:id="contaminant" layoutX="143.0" layoutY="82.0" mnemonicParsing="false"
+                          prefHeight="29.0" prefWidth="179.0" selected="true" text="Contaminant" />
+         <Label alignment="CENTER" layoutX="216.0" layoutY="43.0" prefHeight="39.0" prefWidth="32.0"
+                styleClass="focus-label" stylesheets="@css/CreateReport.css" text="-OR-" textAlignment="CENTER"
+                textFill="WHITE">
             <font>
                <Font size="12.0" />
             </font>
@@ -39,6 +55,9 @@
          <ComboBox fx:id="yearBox" layoutX="157.0" layoutY="136.0" prefWidth="150.0" promptText="Year" />
         </children>
     </AnchorPane>
-    <Button ellipsisString="" layoutX="267.0" layoutY="451.0" mnemonicParsing="false" onAction="#createGraph" prefHeight="27.0" prefWidth="69.0" style="-fx-background-radius: 10;" styleClass="create-button" stylesheets="@css/Register.css" text="Create Graph" textFill="#005580" />
-    <Hyperlink alignment="CENTER" layoutX="267.0" layoutY="487.0" onAction="#cancel" prefHeight="25.0" prefWidth="69.0" styleClass="hyper-link" stylesheets="@css/Register.css" text="Cancel" />
+    <Button ellipsisString="" layoutX="267.0" layoutY="451.0" mnemonicParsing="false"
+            onAction="#createGraph" prefHeight="27.0" prefWidth="69.0" style="-fx-background-radius: 10;"
+            styleClass="create-button" stylesheets="@css/Register.css" text="Create Graph" textFill="#005580" />
+    <Hyperlink alignment="CENTER" layoutX="267.0" layoutY="487.0" onAction="#cancel" prefHeight="25.0"
+               prefWidth="69.0" styleClass="hyper-link" stylesheets="@css/Register.css" text="Cancel" />
 </AnchorPane>

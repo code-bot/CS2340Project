@@ -12,7 +12,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import model.WaterQualityReport;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 
 /**

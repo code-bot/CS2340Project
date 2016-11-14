@@ -4,14 +4,14 @@ import fxapp.MainFXApplication;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+
 import javafx.scene.control.*;
 import model.DatabaseModel;
 import model.WaterQualityReport;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.Optional;
 
 /**
@@ -20,7 +20,8 @@ import java.util.Optional;
 public class CreateHistoricalController {
 
     private MainFXApplication mainApplication;
-
+    private final double ATLLAT = 33.7490;
+    private final double ATLLONG = -84.3880;
     @FXML
     private ToggleButton virus;
 
@@ -39,6 +40,10 @@ public class CreateHistoricalController {
     @FXML
     private TextField longField;
 
+    /**
+     * Make the main application the application instance passed in
+     * @param main the application instance to set the program to
+     */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
     }
@@ -81,12 +86,15 @@ public class CreateHistoricalController {
     }
 
     @FXML
+    /**
+     * Method called to set variables and create graph
+     */
     public void createGraph() {
         boolean coordErr = false;
         String lat = latField.getText();
-        double latNum = 33.7490;
+        double latNum = ATLLAT;
         String lon = longField.getText();
-        double lonNum = -84.3880;
+        double lonNum = ATLLONG;
         String yearStr = (String) yearBox.getSelectionModel().getSelectedItem();
         String year = yearStr;
         if (yearStr.length() == 4) {
@@ -115,7 +123,8 @@ public class CreateHistoricalController {
         } else if (lat.equals("") || lon.equals("")) {
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Submit Report?");
-            alert.setContentText("Lat and Long not provided, using current location! Make sure all information is accurate");
+            alert.setContentText("Lat and Long not provided, using current location!" +
+                    " Make sure all information is accurate");
         } else {
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Submit Report?");
@@ -135,17 +144,22 @@ public class CreateHistoricalController {
             if (result.get() == ButtonType.OK) {
                 ArrayList<WaterQualityReport> reports = new ArrayList<>();
                 for (WaterQualityReport report : DatabaseModel.getInstance().getWaterQualityReports()) {
-                    if (report.getLat() == latNum && report.getLong() == lonNum && report.getDate().substring(6).equals(year)) {
+                    if (report.getLat() == latNum && report.getLong() == lonNum
+                            && report.getDate().substring(6).equals(year)) {
                         reports.add(report);
                     }
                 }
-                mainApplication.initGraphViewScreen(mainApplication.getMainStage(), reports, isVirus ? "Virus" : "Contaminant", yearStr);
+                mainApplication.initGraphViewScreen(mainApplication.getMainStage(),
+                        reports, isVirus ? "Virus" : "Contaminant", yearStr);
             }
         }
 
     }
 
     @FXML
+    /**
+     * Method called to confirm a cancel of creating graph
+     */
     public void cancel() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Dialog");
@@ -158,6 +172,9 @@ public class CreateHistoricalController {
         }
     }
 
+    /**
+     * Creating dialogue for coordinate error
+     */
     public void coordError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error Dialog");
