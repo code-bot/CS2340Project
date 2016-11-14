@@ -4,6 +4,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.Collection;
 import java.util.Collections;
 
 /**
@@ -14,7 +15,7 @@ public class WaterQualityReport extends Report {
     public enum WaterSafety {
         SAFE, TREATABLE, UNSAFE;
 
-        public static ObservableList<WaterSafety> toList() {
+        public static Collection<WaterSafety> toList() {
             ObservableList<WaterSafety> list = FXCollections.observableArrayList();
 
             Collections.addAll(list, values());
@@ -40,9 +41,9 @@ public class WaterQualityReport extends Report {
     public int getNum() { return reportNum.get(); }
     public void setNum(int num) { reportNum.set(num); }
 
-    public ObjectProperty<WaterSafety> safety = new SimpleObjectProperty<>();
+    private ObjectProperty<WaterSafety> safety = new SimpleObjectProperty<>();
 
-    public WaterSafety getSafety() { return safety.get(); }
+    private WaterSafety getSafety() { return safety.get(); }
     public void setType(WaterSafety waterSafety) { safety.set(waterSafety); }
 
     private final DoubleProperty virusPPM = new SimpleDoubleProperty();

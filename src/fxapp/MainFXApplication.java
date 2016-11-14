@@ -58,7 +58,7 @@ public class MainFXApplication extends Application {
      * Initializes the root border pane
      * @param mainStage The stage to add the layout to
      */
-    public void initRootLayout(Stage mainStage) {
+    private void initRootLayout(Stage mainStage) {
 
         try {
             // Load root layout from fxml file.
@@ -123,7 +123,7 @@ public class MainFXApplication extends Application {
      * Initialize navigation bar
      * @param mainStage the stage to add the layout to
      */
-    public void initMenu(Stage mainStage) {
+    private void initMenu(Stage mainStage) {
         try {
             //Load layout from fxml file
             FXMLLoader loader = new FXMLLoader();
@@ -208,7 +208,7 @@ public class MainFXApplication extends Application {
      * Initialize the edit profile screen
      * @param mainStage the stage to add the layout to
      */
-    public void initEditRegisterScreen(Stage mainStage) {
+    private void initEditRegisterScreen(Stage mainStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/EditProfileView.fxml"));

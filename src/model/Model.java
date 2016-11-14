@@ -33,7 +33,7 @@ public class Model {
      * Create a new model
      * Add default stored data
      */
-    Model() {
+    private Model() {
     }
 
     /** Getter and setter for the currUser */
