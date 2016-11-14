@@ -8,11 +8,11 @@ import javafx.beans.property.*;
 public abstract class Report {
 
 
-    private StringProperty date = new SimpleStringProperty();
-    private StringProperty time = new SimpleStringProperty();
-    private StringProperty reporterName = new SimpleStringProperty();
-    private DoubleProperty lat = new SimpleDoubleProperty();
-    private DoubleProperty lon = new SimpleDoubleProperty();
+    private final StringProperty date = new SimpleStringProperty();
+    private final StringProperty time = new SimpleStringProperty();
+    private final StringProperty reporterName = new SimpleStringProperty();
+    private final DoubleProperty lat = new SimpleDoubleProperty();
+    private final DoubleProperty lon = new SimpleDoubleProperty();
 
 
 

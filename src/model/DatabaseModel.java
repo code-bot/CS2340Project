@@ -3,10 +3,6 @@ package model;
 import com.firebase.client.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import java.util.ArrayList;
-import java.util.Map;
-
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -15,9 +11,13 @@ import java.util.*;
 public class DatabaseModel {
     /** Set Model up as a singleton design pattern. */
     private static final DatabaseModel instance = new DatabaseModel();
+
+    /**
+     * Gets instance of database model we are currently working in
+     * @return instance of DatabaseModel
+     */
     public static DatabaseModel getInstance() { return instance; }
 
-    private final String DATABASE_URL = "https://h2woah.firebaseio.com";
     private Firebase rootRef;
     private String uid;
 
@@ -34,6 +34,7 @@ public class DatabaseModel {
      * database
      */
     public void initFirebase() {
+        final String DATABASE_URL = "https://h2woah.firebaseio.com";
         rootRef = new Firebase(DATABASE_URL);
         initWaterReports();
         initQualityReports();
@@ -45,14 +46,25 @@ public class DatabaseModel {
             = new SimpleObjectProperty<>();
 
 
-    /** Getter and setter for the currUser */
+    /**
+     * Getter for the current user
+     * @return current user
+     */
     public User getCurrentUser() { return currUser.get(); }
 
+    /**
+     * Sets the user id to the current user
+     * @param uid id of current user
+     */
     public void setUid(String uid) {
         this.uid = uid;
     }
 
-
+    /**
+     * Sets the current user to the person who just logged in. Null if logging out
+     * @param user the User instance who just logged in
+     * @return whether the user is set or not
+     */
     public boolean setCurrentUser(User user) {
         //Can only set the current user if there is no current user
         // (Safety measure)
@@ -68,7 +80,9 @@ public class DatabaseModel {
     }
 
     /**
-     * Create user
+     * Create User
+     * @param newUser the user information we want to store in database
+     * @return whether the user was correctly added or not
      */
     public boolean createUser(User newUser) {
         rootRef.createUser(newUser.getEmail(), newUser.getPassword(),
@@ -89,6 +103,7 @@ public class DatabaseModel {
 
     /**
      * Get the root reference to the firebase database
+     * @return the Firebase reference
      */
     public Firebase getRootRef() {
         return rootRef;
@@ -113,7 +128,6 @@ public class DatabaseModel {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 waterSourceReports.add(makeSourceReport(dataSnapshot));
-                System.out.println("Added source report");
             }
 
             @Override
@@ -141,6 +155,9 @@ public class DatabaseModel {
         });
     }
 
+    /**
+     * Initalizes quality Reports to include everything the user entered
+     */
     public void initQualityReports() {
         waterQualityReports = new HashSet<>();
         Firebase waterRepRef = rootRef.child("quality_reports");
@@ -150,7 +167,6 @@ public class DatabaseModel {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 waterQualityReports.add(makeQualityReport(dataSnapshot));
-                System.out.println("Added quality report");
             }
 
             @Override
@@ -234,9 +250,7 @@ public class DatabaseModel {
     public boolean addReport(WaterSourceReport waterSourceReport) {
         Firebase reportsRef = rootRef.child("water_reports");
         try {
-            System.out.println("trying source report");
             reportsRef.child(String.valueOf(waterSourceReport.getNum())).setValue(waterSourceReport);
-            //waterSourceReports.add(waterSourceReport);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
@@ -263,13 +277,24 @@ public class DatabaseModel {
         return true;
     }
 
+    /**
+     * Get source Reports in the form of a set of reports
+     * @return the set of source reports
+     */
     public Set<WaterSourceReport> getSourceReports() {
         return waterSourceReports;
     }
 
-
+    /**
+     * Getter for Quality Reports
+     * @return the set of water quality reports
+     */
     public Set<WaterQualityReport> getWaterQualityReports() { return waterQualityReports; }
 
+    /**
+     * Method to reset the password for someone who has forgotten theirs
+     * @param email the email of the person who forgot their password
+     */
     public void forgotPassword(String email) {
         rootRef.resetPassword(email, new Firebase.ResultHandler() {
             @Override
@@ -284,13 +309,17 @@ public class DatabaseModel {
         });
     }
 
+    /**
+     * Method to change password for someone
+     * @param email the email of the user who forgot password
+     * @param oldPass old password of the user
+     * @param newPass the new password they want it to be set to
+     */
     public void changePassword(String email, String oldPass, String newPass) {
         rootRef.changePassword(email, oldPass, newPass,
                 new Firebase.ResultHandler() {
             @Override
             public void onSuccess() {
-                System.out.println("Password successfully changed to "
-                        + newPass);
                 rootRef.child("users").child(uid).child("password")
                         .setValue(newPass);
             }

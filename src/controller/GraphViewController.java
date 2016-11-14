@@ -12,20 +12,18 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import model.WaterQualityReport;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 
 /**
  * Created by sahajbot on 11/8/16.
  */
 public class GraphViewController {
-    private MainFXApplication mainApplication;
 
     private final ObjectProperty<ArrayList<WaterQualityReport>> reports = new SimpleObjectProperty<>();
 
     public void setReports(ArrayList<WaterQualityReport> r) {
         reports.set(r);
-        System.out.println(reports.get());
     }
 
     private final StringProperty type = new SimpleStringProperty();
@@ -39,20 +37,15 @@ public class GraphViewController {
     @FXML
     private NumberAxis yAxis;
 
-    /**
-     * Set the main application reference
-     * @param main  The main application
-     */
-    public void setMainApp(MainFXApplication main) {
-        mainApplication = main;
-    }
+    private final int months = 12;
+
 
     @FXML
     private void initialize() {
         xAxis.setLabel("Month");
         xAxis.setTickUnit(1);
         xAxis.setLowerBound(1);
-        xAxis.setUpperBound(12);
+        xAxis.setUpperBound(months);
     }
 
     public void loadGraph(String year) {
@@ -60,15 +53,15 @@ public class GraphViewController {
         chart.setTitle("Monthly Change in Water Quality for " + year);
         if (reports.get() != null) {
             Series<Integer, Double> series = new Series<>();
-            Double[] monthlyAverages = new Double[12];
-            int[] numMonthlyReports = new int[12];
-            for (int i = 0; i < 12; i++) {
+            Double[] monthlyAverages = new Double[months];
+            int[] numMonthlyReports = new int[months];
+            for (int i = 0; i < months; i++) {
                 monthlyAverages[i] = 0.0;
                 numMonthlyReports[i] = 0;
             }
             for (WaterQualityReport report : reports.get()) {
                 Double yVal;
-                if (type.get().equals("Virus")) {
+                if ("Virus".equals(type.get())) {
                     yVal = report.getVppm();
                 } else {
                     yVal = report.getCppm();
@@ -79,7 +72,7 @@ public class GraphViewController {
                 //series.getData().add(new XYChart.Data<>(xVal, yVal));
 
             }
-            for (int i = 0; i < 12; i++) {
+            for (int i = 0; i < months; i++) {
                 int numReports = numMonthlyReports[i];
                 if (numReports != 0) {
                     monthlyAverages[i] /= numReports;

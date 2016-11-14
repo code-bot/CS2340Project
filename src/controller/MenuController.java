@@ -7,12 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Pagination;
 import model.DatabaseModel;
-import model.Model;
 import model.UserLevel;
-
-import java.util.ArrayList;
 
 /**
  * Created by Matt Sternberg on 9/21/16.
@@ -106,7 +102,6 @@ public class MenuController {
      */
     @FXML
     private void signOut() {
-        System.out.println("Signing out...");
         mainApplication.logoutUser();
     }
 
@@ -145,7 +140,8 @@ public class MenuController {
 
     @FXML
     public void createHistoricalGraph() {
-        //mainApplication.initGraphViewScreen(mainApplication.getMainStage(), new ArrayList(DatabaseModel.getInstance().getWaterQualityReports()), "Virus");
+        //mainApplication.initGraphViewScreen(mainApplication.getMainStage(),
+        // new ArrayList(DatabaseModel.getInstance().getWaterQualityReports()), "Virus");
         mainApplication.initCreateGraphScreen(mainApplication.getMainStage());
         mainApplication.initBackMenu(mainApplication.getMainStage());
     }

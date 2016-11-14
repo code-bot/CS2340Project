@@ -3,17 +3,16 @@ package controller;
 /**
  * Created by Aman on 9/28/16.
  */
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import fxapp.MainFXApplication;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
-import javafx.scene.control.*;
-import javafx.scene.text.Text;
-import model.*;
 
-import java.util.ArrayList;
+import fxapp.MainFXApplication;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import model.DatabaseModel;
+import model.States;
+import model.User;
+import model.UserLevel;
+
 import java.util.Optional;
 
 public class RegisterController {
@@ -113,21 +112,24 @@ public class RegisterController {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Registration Error!");
                 alert.setHeaderText("Email Does Not Match");
-                alert.setContentText("The emails provided are not the same. Please ensure you have entered the same email address.");
+                alert.setContentText("The emails provided are not the same. " +
+                        "Please ensure you have entered the same email address.");
 
                 alert.showAndWait();
             } else if (!(password.equals(passwordConfirm))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Registration Error!");
                 alert.setHeaderText("Password Does Not Match");
-                alert.setContentText("The passwords provided are not the same. Please ensure you have entered the same password.");
+                alert.setContentText("The passwords provided are not the same. " +
+                        "Please ensure you have entered the same password.");
 
                 alert.showAndWait();
         } else {
+            DatabaseModel databaseModel = DatabaseModel.getInstance();
             User newUser = new User(email, password, userType, address, city, zipcode, States.valueOf(state));
-            boolean addedUser = DatabaseModel.getInstance().createUser(newUser);
+            boolean addedUser = databaseModel.createUser(newUser);
             if (addedUser) {
-                DatabaseModel.getInstance().setCurrentUser(newUser);
+                databaseModel.setCurrentUser(newUser);
                 mainApplication.goToHomePage();
             }
         }
@@ -150,12 +152,12 @@ public class RegisterController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Dialog");
         alert.setHeaderText("Are you sure you want to cancel?");
-        alert.setContentText("If you cancel, the information will not be stored and you will be returned to the login page");
+        alert.setContentText("If you cancel, the information will not be stored " +
+                "and you will be returned to the login page");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             mainApplication.initLoginScreen(mainApplication.getMainStage());
-        } else {
         }
     }
 

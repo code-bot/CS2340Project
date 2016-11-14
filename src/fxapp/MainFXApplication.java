@@ -5,10 +5,12 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import model.*;
+import sun.plugin.javascript.navig.Anchor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,29 +28,10 @@ public class MainFXApplication extends Application {
 
     private AnchorPane loginLayout;
 
-    private AnchorPane homeLayout;
-
-    private AnchorPane profileLayout;
-
-    private AnchorPane editProfileLayout;
-
-    private AnchorPane viewReportsLayout;
-
-    private AnchorPane qualityReportsLayout;
-
-    private AnchorPane createReportsLayout;
-
-    private AnchorPane createQualityLayout;
-
-    private AnchorPane mapLayout;
-
     private BorderPane menu;
 
-    private AnchorPane viewGraphLayout;
-
-    private AnchorPane createGraphLayout;
-
     private DatabaseModel databaseModel;
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -56,14 +39,13 @@ public class MainFXApplication extends Application {
         mainStage.setResizable(false);
         initRootLayout(mainStage);
         initLoginScreen(mainStage);
-        databaseModel = DatabaseModel.getInstance();
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                System.out.println("Exiting application");
                 System.exit(0);
             }
         });
+        databaseModel = DatabaseModel.getInstance();
     }
 
 
@@ -71,7 +53,6 @@ public class MainFXApplication extends Application {
         return mainStage;
     }
 
-    public Pane getRootLayout() { return rootLayout; }
 
     /**
      * Initializes the root border pane
@@ -102,11 +83,10 @@ public class MainFXApplication extends Application {
      * Log out the user and remove nav bar
      */
     public void logoutUser() {
-        //TODO: Store user information before logging out
-        DatabaseModel.getInstance().clearCurrentUser();
+        databaseModel.clearCurrentUser();
         initLoginScreen(mainStage);
         rootLayout.setTop(null);
-        DatabaseModel.getInstance().logout();
+        databaseModel.logout();
     }
 
     public void goToEditProfile() {
@@ -117,8 +97,8 @@ public class MainFXApplication extends Application {
     public void goToHomePage() {
         initMenu(mainStage);
         initMapViewScreen(mainStage);
-        //initHomeScreen(mainStage);
     }
+
     /**
      * Initialize login screen on the main stage
      * @param mainStage the stage to add the layouts to
@@ -192,7 +172,7 @@ public class MainFXApplication extends Application {
             //Load layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/MainView.fxml"));
-            homeLayout = loader.load();
+            AnchorPane homeLayout = loader.load();
 
             rootLayout.setCenter(homeLayout);
 
@@ -211,7 +191,7 @@ public class MainFXApplication extends Application {
             //Load layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/RegisterView.fxml"));
-            profileLayout = loader.load();
+            AnchorPane profileLayout = loader.load();
 
             rootLayout.setCenter(profileLayout);
 
@@ -232,12 +212,12 @@ public class MainFXApplication extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/EditProfileView.fxml"));
-            editProfileLayout = loader.load();
+            AnchorPane editProfileLayout = loader.load();
 
             rootLayout.setCenter(editProfileLayout);
 
             EditProfileController controller = loader.getController();
-            controller.setDefaultInfo(DatabaseModel.getInstance().getCurrentUser());
+            controller.setDefaultInfo(databaseModel.getCurrentUser());
             controller.setMainApp(this);
 
         } catch (IOException e) {
@@ -249,7 +229,7 @@ public class MainFXApplication extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/CreateReportView.fxml"));
-            createReportsLayout = loader.load();
+            AnchorPane createReportsLayout = loader.load();
 
             rootLayout.setCenter(createReportsLayout);
 
@@ -262,11 +242,10 @@ public class MainFXApplication extends Application {
     }
 
     public void initCreateQualityScreen(Stage mainStage) {
-        System.out.println("Make Quality");
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/CreateQualityView.fxml"));
-            createQualityLayout = loader.load();
+            AnchorPane createQualityLayout = loader.load();
 
             rootLayout.setCenter(createQualityLayout);
 
@@ -282,12 +261,11 @@ public class MainFXApplication extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/ViewReportsView.fxml"));
-            viewReportsLayout = loader.load();
+            AnchorPane viewReportsLayout = loader.load();
 
             rootLayout.setCenter(viewReportsLayout);
 
             ViewReportsController controller = loader.getController();
-            controller.setMainApp(this);
 
         } catch (IOException e) {
             System.out.println(e.toString());
@@ -295,16 +273,14 @@ public class MainFXApplication extends Application {
     }
 
     public void initQualityReportScreen(Stage mainStage) {
-        System.out.println("Quality");
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/QualityView.fxml"));
-            qualityReportsLayout = loader.load();
+            AnchorPane qualityReportsLayout = loader.load();
 
             rootLayout.setCenter(qualityReportsLayout);
 
             QualityController controller = loader.getController();
-            controller.setMainApp(this);
 
         } catch (IOException e) {
             System.out.println(e.toString());
@@ -315,12 +291,11 @@ public class MainFXApplication extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/MapView.fxml"));
-            mapLayout = loader.load();
+            AnchorPane mapLayout = loader.load();
 
             rootLayout.setCenter(mapLayout);
 
             MapViewController controller = loader.getController();
-            controller.setMainApp(this);
 
         } catch (IOException e) {
             System.out.println(e.toString());
@@ -331,12 +306,11 @@ public class MainFXApplication extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/GraphView.fxml"));
-            viewGraphLayout = loader.load();
+            AnchorPane viewGraphLayout = loader.load();
 
             rootLayout.setCenter(viewGraphLayout);
 
             GraphViewController controller = loader.getController();
-            controller.setMainApp(this);
             controller.setReports(reports);
             controller.setType(type);
             controller.loadGraph(year);
@@ -349,20 +323,14 @@ public class MainFXApplication extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/CreateGraphView.fxml"));
-            System.out.println("RIP");
-            createGraphLayout = loader.load();
+            AnchorPane createGraphLayout = loader.load();
 
             rootLayout.setCenter(createGraphLayout);
 
             CreateHistoricalController controller = loader.getController();
             controller.setMainApp(this);
         } catch (IOException e) {
-            for (StackTraceElement ayy : e.getStackTrace()) {
-                System.out.println(ayy);
-            }
-            System.out.println(e.getCause().getMessage());
-            //System.out.println(e.getStackTrace());
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
         }
     }
 

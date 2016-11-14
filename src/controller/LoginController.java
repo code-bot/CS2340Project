@@ -6,14 +6,14 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
+
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import model.*;
 
-import java.util.Map;
+
 import java.util.Optional;
-import java.util.UUID;
+
 
 /**
  * Created by Matt Sternberg on 9/18/16.
@@ -27,7 +27,7 @@ public class LoginController {
 
     private String _password;
 
-    private DatabaseModel model;
+    private final DatabaseModel model;
 
     @FXML
     private Hyperlink signUp;
@@ -92,19 +92,21 @@ public class LoginController {
                     public void onAuthenticated(AuthData authData) {
                         // Authentication just completed successfully :)
                         Firebase users = rootRef.child("users");
-                        users.orderByKey().equalTo(authData.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        users.orderByKey().equalTo(authData.getUid()).addListenerForSingleValueEvent(
+                                new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 DataSnapshot uid = dataSnapshot.child(authData.getUid());
                                 String uname = (String) uid.child("email").getValue();
                                 String pass = (String) uid.child("password").getValue();
-                                UserLevel userLevel = UserLevel.stringToUserLevel((String) uid.child("userLevel").getValue());
+                                UserLevel userLevel = UserLevel.stringToUserLevel((String) uid.child(
+                                        "userLevel").getValue());
                                 String address = (String) uid.child("address").getValue();
                                 String city = (String) uid.child("city").getValue();
                                 String zipcode = (String) uid.child("zipcode").getValue();
                                 States state = States.stringToState((String) uid.child("state").getValue());
-                                System.out.println(model.setCurrentUser(
-                                        new User(uname, pass, userLevel, address, city, zipcode, state)));
+                                model.setCurrentUser(
+                                        new User(uname, pass, userLevel, address, city, zipcode, state));
                                 model.setUid(authData.getUid());
                                 Platform.runLater(new Runnable() {
                                     @Override
@@ -150,7 +152,7 @@ public class LoginController {
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
             if (isValidEmail(result.get())) {
-                DatabaseModel.getInstance().forgotPassword(result.get());
+               model.forgotPassword(result.get());
             } else {
                 incorrectResetEmail();
             }

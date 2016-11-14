@@ -6,8 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="600.0" styleClass="background-frame" stylesheets="@css/Register.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GraphViewController">
-    <Label alignment="CENTER" layoutX="209.0" layoutY="33.0" prefHeight="39.0" prefWidth="179.0" text="Historical Graph" textAlignment="CENTER" textFill="WHITE">
+<AnchorPane prefHeight="550.0" prefWidth="600.0" styleClass="background-frame" stylesheets="@css/Register.css"
+            xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.GraphViewController">
+    <Label alignment="CENTER" layoutX="209.0" layoutY="33.0" prefHeight="39.0" prefWidth="179.0"
+           text="Historical Graph" textAlignment="CENTER" textFill="WHITE">
         <font>
             <Font size="20.0" />
         </font>
