@@ -11,6 +11,11 @@ import java.util.*;
 public class DatabaseModel {
     /** Set Model up as a singleton design pattern. */
     private static final DatabaseModel instance = new DatabaseModel();
+
+    /**
+     * Gets instance of database model we are currently working in
+     * @return instance of DatabaseModel
+     */
     public static DatabaseModel getInstance() { return instance; }
 
     private final String DATABASE_URL = "https://h2woah.firebaseio.com";
@@ -41,14 +46,25 @@ public class DatabaseModel {
             = new SimpleObjectProperty<>();
 
 
-    /** Getter and setter for the currUser */
+    /**
+     * Getter for the current user
+     * @return current user
+     */
     public User getCurrentUser() { return currUser.get(); }
 
+    /**
+     * Sets the user id to the current user
+     * @param uid id of current user
+     */
     public void setUid(String uid) {
         this.uid = uid;
     }
 
-
+    /**
+     * Sets the current user to the person who just logged in. Null if logging out
+     * @param user the User instance who just logged in
+     * @return whether the user is set or not
+     */
     public boolean setCurrentUser(User user) {
         //Can only set the current user if there is no current user
         // (Safety measure)
@@ -64,7 +80,9 @@ public class DatabaseModel {
     }
 
     /**
-     * Create user
+     * Create User
+     * @param newUser the user information we want to store in database
+     * @return whether the user was correctly added or not
      */
     public boolean createUser(User newUser) {
         rootRef.createUser(newUser.getEmail(), newUser.getPassword(),
@@ -85,6 +103,7 @@ public class DatabaseModel {
 
     /**
      * Get the root reference to the firebase database
+     * @return the Firebase reference
      */
     public Firebase getRootRef() {
         return rootRef;

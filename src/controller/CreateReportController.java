@@ -42,6 +42,10 @@ public class CreateReportController {
         mainApplication = main;
     }
 
+
+    /**
+     * Sets variables in the combo boxes to include enum values
+     */
     @FXML
     public void initialize() {
         typeComboBox.getItems().addAll(WaterSourceReport.WaterType.toList());
@@ -51,6 +55,9 @@ public class CreateReportController {
         currLocBtn.setSelected(true);
     }
 
+    /**
+     * Adds report to the database
+     */
     @FXML
     public void createReport() {
         boolean coordErr = false;
@@ -100,6 +107,9 @@ public class CreateReportController {
         }
     }
 
+    /**
+     * Cancels and confirms not creating the report
+     */
     @FXML
     public void cancel() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -113,6 +123,9 @@ public class CreateReportController {
         }
     }
 
+    /**
+     * Displays error because coordinates are wrong.
+     */
     public void coordError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error Dialog");
