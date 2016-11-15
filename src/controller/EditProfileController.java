@@ -2,19 +2,26 @@ package controller;
 
 import com.firebase.client.utilities.Pair;
 import fxapp.MainFXApplication;
-
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import model.DatabaseModel;
+import model.User;
 
-import model.*;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import java.util.Optional;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.Label;
+import model.States;
+import javafx.scene.control.Dialog;
 
 /**
  * Created by Rahul on 10/2/16.
  */
+@SuppressWarnings("ALL")
 public class EditProfileController {
     private MainFXApplication mainApplication;
 

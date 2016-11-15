@@ -1,13 +1,16 @@
 package controller;
 
-/**
- * Created by Aman on 9/28/16.
- */
+
 
 import fxapp.MainFXApplication;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import model.DatabaseModel;
 import model.States;
 import model.User;
@@ -15,6 +18,9 @@ import model.UserLevel;
 
 import java.util.Optional;
 
+/**
+ * Created by Aman on 9/28/16.
+ */
 public class RegisterController {
 
 

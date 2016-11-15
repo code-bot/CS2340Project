@@ -1,15 +1,27 @@
 package controller;
 
-import com.firebase.client.*;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.AuthData;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.ValueEventListener;
 import fxapp.MainFXApplication;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
-import javafx.scene.control.*;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import model.*;
+import javafx.scene.control.TextInputDialog;
+import model.DatabaseModel;
+import model.States;
+import model.User;
+import model.UserLevel;
 
 
 import java.util.Optional;
@@ -18,6 +30,7 @@ import java.util.Optional;
 /**
  * Created by Matt Sternberg on 9/18/16.
  */
+@SuppressWarnings("ALL")
 public class LoginController {
 
     // Reference back to the main application if needed
@@ -38,7 +51,9 @@ public class LoginController {
     @FXML
     private PasswordField passwordField;
 
-
+    /**
+     * controller for login
+     */
     public LoginController() {
         model = DatabaseModel.getInstance();
     }

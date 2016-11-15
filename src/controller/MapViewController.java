@@ -1,29 +1,34 @@
 package controller;
 
-/**
- * Created by Rahul on 10/23/16.
- */
 
-import com.lynden.gmapsfx.javascript.event.UIEventType;
 
-import java.util.Set;
-
-import com.lynden.gmapsfx.javascript.object.*;
-import model.DatabaseModel;
-import model.WaterSourceReport;
-import netscape.javascript.JSObject;
-import fxapp.MainFXApplication;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
+import com.lynden.gmapsfx.javascript.event.UIEventType;
+import com.lynden.gmapsfx.javascript.object.GoogleMap;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.MapOptions;
+import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
+import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+import com.lynden.gmapsfx.javascript.object.Marker;
+import com.lynden.gmapsfx.javascript.object.InfoWindow;
+import com.lynden.gmapsfx.javascript.object.InfoWindowOptions;
 
-import java.net.URL;
-import java.util.HashSet;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import model.DatabaseModel;
 import model.Report;
+import model.WaterSourceReport;
+import netscape.javascript.JSObject;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Set;
+
+/**
+ * Created by Rahul on 10/23/16.
+ */
 public class MapViewController implements Initializable, MapComponentInitializedListener {
 
     @FXML

@@ -1,6 +1,5 @@
 package controller;
 
-import fxapp.MainFXApplication;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,12 +11,12 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import model.WaterQualityReport;
 
-
 import java.util.ArrayList;
 
 /**
  * Created by sahajbot on 11/8/16.
  */
+@SuppressWarnings("ALL")
 public class GraphViewController {
 
     private final ObjectProperty<ArrayList<WaterQualityReport>> reports = new SimpleObjectProperty<>();
@@ -32,6 +31,10 @@ public class GraphViewController {
 
     private final StringProperty type = new SimpleStringProperty();
 
+    /**
+     * Sets the type
+     * @param t String indicating the type
+     */
     public void setType(String t) { type.set(t); }
 
     @FXML

@@ -2,7 +2,11 @@ package controller;
 
 import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ButtonType;
 import model.DatabaseModel;
 import model.User;
 import model.WaterSourceReport;
@@ -15,6 +19,7 @@ import java.util.Optional;
 /**
  * Created by sahajbot on 10/10/16.
  */
+@SuppressWarnings("ALL")
 public class CreateReportController {
 
     private MainFXApplication mainApplication;

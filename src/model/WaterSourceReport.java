@@ -13,6 +13,7 @@ import java.util.Collections;
 /**
  * Created by sahajbot on 10/10/16.
  */
+@SuppressWarnings("ALL")
 public class WaterSourceReport extends Report {
 
     public enum WaterType {

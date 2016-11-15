@@ -1,16 +1,24 @@
 package fxapp;
 
-import controller.*;
+import controller.BackMenuController;
+import controller.CreateHistoricalController;
+import controller.CreateQualityController;
+import controller.CreateReportController;
+import controller.EditProfileController;
+import controller.GraphViewController;
+import controller.LoginController;
+import controller.MenuController;
+import controller.RegisterController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import model.*;
-import sun.plugin.javascript.navig.Anchor;
+import model.DatabaseModel;
+import model.WaterQualityReport;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,7 +53,6 @@ public class MainFXApplication extends Application {
         });
         databaseModel = DatabaseModel.getInstance();
     }
-
 
     /**
      * Initializes the root border pane
@@ -82,11 +89,17 @@ public class MainFXApplication extends Application {
         databaseModel.logout();
     }
 
+    /**
+     * goes to edit profile page
+     */
     public void goToEditProfile() {
         initBackMenu();
         initEditRegisterScreen();
     }
 
+    /**
+     * goes to home page
+     */
     public void goToHomePage() {
         initMenu();
         initMapViewScreen();
@@ -192,6 +205,9 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Initializes the create report screen
+     */
     public void initCreateReportScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -208,6 +224,9 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Initializes the create quality screen
+     */
     public void initCreateQualityScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -224,6 +243,9 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Initializes the view reports screen
+     */
     public void initViewReportsScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -237,6 +259,9 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Initializes the quality report screen
+     */
     public void initQualityReportScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -250,6 +275,9 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Initializes the map view screen
+     */
     public void initMapViewScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -263,6 +291,12 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Initializes the graph view screen
+     * @param reports list of quality reports passed in
+     * @param type type of data
+     * @param year year of report
+     */
     public void initGraphViewScreen(ArrayList<WaterQualityReport> reports, String type, String year) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -280,6 +314,9 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Initializes the create graph screen
+     */
     public void initCreateGraphScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -295,6 +332,10 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * main method
+     * @param args main method
+     */
     public static void main(String[] args) {
         launch(args);
     }
