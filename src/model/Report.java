@@ -19,10 +19,10 @@ public abstract class Report {
     public String getDate() { return date.get(); }
     public void setDate(String dateStr) { date.set(dateStr); }
 
-    public String getTime() { return time.get(); }
+    String getTime() { return time.get(); }
     public void setTime(String timeStr) { time.set(timeStr); }
 
-    public String getName() { return reporterName.get(); }
+    String getName() { return reporterName.get(); }
     public void setName(String name) { reporterName.set(name); }
 
     public double getLat() { return lat.get(); }

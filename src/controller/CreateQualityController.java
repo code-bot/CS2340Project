@@ -139,7 +139,7 @@ public class CreateQualityController {
     /**
      * Throw an error if there is a coordinate error
      */
-    public void coordError() {
+    private void coordError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error Dialog");
         alert.setHeaderText("Latitude/Longitude Error");
