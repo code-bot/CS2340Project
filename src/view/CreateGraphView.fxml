@@ -21,7 +21,7 @@
     <AnchorPane layoutX="200.0" layoutY="74.0" prefHeight="184.0" prefWidth="200.0" styleClass="location-selection"
                 stylesheets="@css/CreateReport.css">
 
-        <ToggleButton fx:id="currLocBtn" layoutX="11.0" layoutY="24.0" mnemonicParsing="false" prefHeight="29.0"
+        <ToggleButton layoutX="11.0" layoutY="24.0" mnemonicParsing="false" prefHeight="29.0"
                       prefWidth="179.0" selected="true" text="Use Current Location" />
         <Label alignment="CENTER" layoutX="84.0" layoutY="61.0" prefHeight="39.0" prefWidth="32.0"
                styleClass="focus-label" stylesheets="@css/CreateReport.css" text="-OR-" textAlignment="CENTER"
