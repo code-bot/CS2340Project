@@ -116,7 +116,7 @@ public class EditProfileController {
 
             alert.showAndWait();
         } else {
-            User oldUser = Model.getInstance().getCurrentUser();
+            User oldUser = DatabaseModel.getInstance().getCurrentUser();
             boolean sameEmail = false;
             if ("".equals(email)) {
                 sameEmail = true;

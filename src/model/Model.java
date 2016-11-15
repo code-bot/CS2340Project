@@ -26,7 +26,7 @@ public class Model {
      is created */
     public User testUser;
 
-    private final static Map<String, User> userMap = new HashMap<String, User>();;
+    private final static Map<String, User> userMap = new HashMap<String, User>();
     private final static Set<Report> reports = new HashSet<>();
 
     /**
