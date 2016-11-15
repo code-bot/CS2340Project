@@ -49,16 +49,13 @@ public class WaterSourceReport extends Report {
 
     private final IntegerProperty reportNum = new SimpleIntegerProperty();
     public int getNum() { return reportNum.get(); }
-    public void setNum(int num) { reportNum.set(num); }
 
     private final ObjectProperty<WaterType> type = new SimpleObjectProperty<>();
     private final ObjectProperty<WaterCondition> condition = new SimpleObjectProperty<>();
 
     private WaterType getType() { return type.get(); }
-    public void setType(WaterType waterType) { type.set(waterType); }
 
     private WaterCondition getCondition() { return condition.get(); }
-    public void setCondition(WaterCondition waterCondition) { condition.set(waterCondition); }
 
     public WaterSourceReport(String date, String time, String name,
                              double lat, double lon, WaterType type, WaterCondition condition) {

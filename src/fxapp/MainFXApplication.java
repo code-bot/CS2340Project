@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class MainFXApplication extends Application {
 
     /** Main container for the application window */
-    private Stage mainStage;
 
     private BorderPane rootLayout;
 
@@ -35,10 +34,9 @@ public class MainFXApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        mainStage = primaryStage;
-        mainStage.setResizable(false);
-        initRootLayout(mainStage);
-        initLoginScreen(mainStage);
+        primaryStage.setResizable(false);
+        initRootLayout(primaryStage);
+        initLoginScreen();
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
@@ -46,11 +44,6 @@ public class MainFXApplication extends Application {
             }
         });
         databaseModel = DatabaseModel.getInstance();
-    }
-
-
-    public Stage getMainStage() {
-        return mainStage;
     }
 
 
@@ -84,26 +77,25 @@ public class MainFXApplication extends Application {
      */
     public void logoutUser() {
         databaseModel.clearCurrentUser();
-        initLoginScreen(mainStage);
+        initLoginScreen();
         rootLayout.setTop(null);
         databaseModel.logout();
     }
 
     public void goToEditProfile() {
-        initBackMenu(mainStage);
-        initEditRegisterScreen(mainStage);
+        initBackMenu();
+        initEditRegisterScreen();
     }
 
     public void goToHomePage() {
-        initMenu(mainStage);
-        initMapViewScreen(mainStage);
+        initMenu();
+        initMapViewScreen();
     }
 
     /**
      * Initialize login screen on the main stage
-     * @param mainStage the stage to add the layouts to
      */
-    public void initLoginScreen(Stage mainStage) {
+    public void initLoginScreen() {
         try {
             //Load layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
@@ -121,9 +113,8 @@ public class MainFXApplication extends Application {
 
     /**
      * Initialize navigation bar
-     * @param mainStage the stage to add the layout to
      */
-    private void initMenu(Stage mainStage) {
+    private void initMenu() {
         try {
             //Load layout from fxml file
             FXMLLoader loader = new FXMLLoader();
@@ -142,9 +133,8 @@ public class MainFXApplication extends Application {
 
     /**
      * Initialize navigation bar
-     * @param mainStage the stage to add the layout to
      */
-    public void initBackMenu(Stage mainStage) {
+    public void initBackMenu() {
         try {
             //Load layout from fxml file
             FXMLLoader loader = new FXMLLoader();
@@ -161,32 +151,10 @@ public class MainFXApplication extends Application {
 
     }
 
-
-
-    /**
-     * Initialize the home screen
-     * @param mainStage the stage to add the layout to
-     */
-    public void initHomeScreen(Stage mainStage) {
-        try {
-            //Load layout from fxml file.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/MainView.fxml"));
-            AnchorPane homeLayout = loader.load();
-
-            rootLayout.setCenter(homeLayout);
-
-            MainViewController controller = loader.getController();
-            controller.setMainApp(this);
-
-        } catch (IOException e) {}
-    }
-
     /**
      * Initialize the registration screen
-     * @param mainStage the stage to add the layout to
      */
-    public void initRegisterScreen(Stage mainStage) {
+    public void initRegisterScreen() {
         try {
             //Load layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
@@ -206,9 +174,8 @@ public class MainFXApplication extends Application {
 
     /**
      * Initialize the edit profile screen
-     * @param mainStage the stage to add the layout to
      */
-    private void initEditRegisterScreen(Stage mainStage) {
+    private void initEditRegisterScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/EditProfileView.fxml"));
@@ -225,7 +192,7 @@ public class MainFXApplication extends Application {
         }
     }
 
-    public void initCreateReportScreen(Stage mainStage) {
+    public void initCreateReportScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/CreateReportView.fxml"));
@@ -241,7 +208,7 @@ public class MainFXApplication extends Application {
         }
     }
 
-    public void initCreateQualityScreen(Stage mainStage) {
+    public void initCreateQualityScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/CreateQualityView.fxml"));
@@ -257,7 +224,7 @@ public class MainFXApplication extends Application {
         }
     }
 
-    public void initViewReportsScreen(Stage mainStage) {
+    public void initViewReportsScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/ViewReportsView.fxml"));
@@ -265,14 +232,12 @@ public class MainFXApplication extends Application {
 
             rootLayout.setCenter(viewReportsLayout);
 
-            ViewReportsController controller = loader.getController();
-
         } catch (IOException e) {
             System.out.println(e.toString());
         }
     }
 
-    public void initQualityReportScreen(Stage mainStage) {
+    public void initQualityReportScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/QualityView.fxml"));
@@ -280,14 +245,12 @@ public class MainFXApplication extends Application {
 
             rootLayout.setCenter(qualityReportsLayout);
 
-            QualityController controller = loader.getController();
-
         } catch (IOException e) {
             System.out.println(e.toString());
         }
     }
 
-    public void initMapViewScreen(Stage mainStage) {
+    public void initMapViewScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/MapView.fxml"));
@@ -295,14 +258,12 @@ public class MainFXApplication extends Application {
 
             rootLayout.setCenter(mapLayout);
 
-            MapViewController controller = loader.getController();
-
         } catch (IOException e) {
             System.out.println(e.toString());
         }
     }
 
-    public void initGraphViewScreen(Stage mainStage, ArrayList<WaterQualityReport> reports, String type, String year) {
+    public void initGraphViewScreen(ArrayList<WaterQualityReport> reports, String type, String year) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/GraphView.fxml"));
@@ -319,7 +280,7 @@ public class MainFXApplication extends Application {
         }
     }
 
-    public void initCreateGraphScreen(Stage mainStage) {
+    public void initCreateGraphScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource("../view/CreateGraphView.fxml"));

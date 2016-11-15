@@ -39,12 +39,10 @@ public class WaterQualityReport extends Report {
 
     private final IntegerProperty reportNum = new SimpleIntegerProperty();
     public int getNum() { return reportNum.get(); }
-    public void setNum(int num) { reportNum.set(num); }
 
-    private ObjectProperty<WaterSafety> safety = new SimpleObjectProperty<>();
+    private final ObjectProperty<WaterSafety> safety = new SimpleObjectProperty<>();
 
     private WaterSafety getSafety() { return safety.get(); }
-    public void setType(WaterSafety waterSafety) { safety.set(waterSafety); }
 
     private final DoubleProperty virusPPM = new SimpleDoubleProperty();
     private final DoubleProperty contaminantPPM = new SimpleDoubleProperty();

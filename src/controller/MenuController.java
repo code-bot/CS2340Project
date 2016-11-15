@@ -115,34 +115,34 @@ public class MenuController {
 
     @FXML
     private void createSourceReport() {
-        mainApplication.initCreateReportScreen(mainApplication.getMainStage());
-        mainApplication.initBackMenu(mainApplication.getMainStage());
+        mainApplication.initCreateReportScreen();
+        mainApplication.initBackMenu();
     }
 
     @FXML
     private void viewSourceReports() {
-        mainApplication.initViewReportsScreen(mainApplication.getMainStage());
-        mainApplication.initBackMenu(mainApplication.getMainStage());
+        mainApplication.initViewReportsScreen();
+        mainApplication.initBackMenu();
 
     }
 
     @FXML
     private void createQualityReport() {
-        mainApplication.initCreateQualityScreen(mainApplication.getMainStage());
-        mainApplication.initBackMenu(mainApplication.getMainStage());
+        mainApplication.initCreateQualityScreen();
+        mainApplication.initBackMenu();
     }
 
     @FXML
     private void viewQualityReports() {
-        mainApplication.initQualityReportScreen(mainApplication.getMainStage());
-        mainApplication.initBackMenu(mainApplication.getMainStage());
+        mainApplication.initQualityReportScreen();
+        mainApplication.initBackMenu();
     }
 
     @FXML
     private void createHistoricalGraph() {
         //mainApplication.initGraphViewScreen(mainApplication.getMainStage(),
         // new ArrayList(DatabaseModel.getInstance().getWaterQualityReports()), "Virus");
-        mainApplication.initCreateGraphScreen(mainApplication.getMainStage());
-        mainApplication.initBackMenu(mainApplication.getMainStage());
+        mainApplication.initCreateGraphScreen();
+        mainApplication.initBackMenu();
     }
 }

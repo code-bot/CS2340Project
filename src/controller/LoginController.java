@@ -64,7 +64,7 @@ public class LoginController {
         signUp.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                mainApplication.initRegisterScreen(mainApplication.getMainStage());
+                mainApplication.initRegisterScreen();
             }
         });
         //You can press enter while in TextField to initiate login
@@ -144,6 +144,7 @@ public class LoginController {
         alert.showAndWait();
     }
 
+    @FXML
     public void resetPassword() {
         TextInputDialog dialog = new TextInputDialog(username.getText());
         dialog.setTitle("Forgot Password Dialog");

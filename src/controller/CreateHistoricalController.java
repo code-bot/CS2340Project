@@ -150,8 +150,8 @@ public class CreateHistoricalController {
                         reports.add(report);
                     }
                 }
-                mainApplication.initGraphViewScreen(mainApplication.getMainStage(),
-                        reports, isVirus ? "Virus" : "Contaminant", yearStr);
+                mainApplication.initGraphViewScreen(reports,
+                        isVirus ? "Virus" : "Contaminant", yearStr);
             }
         }
 

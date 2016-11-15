@@ -39,7 +39,10 @@
     </properties>
   </component>
   <component name="EntryPointsManager">
-    <entry_points version="2.0" />
+    <entry_points version="2.0">
+      <entry_point TYPE="method" FQNAME="controller.CreateQualityController void initialize()" />
+      <entry_point TYPE="method" FQNAME="controller.CreateQualityController void createReport()" />
+    </entry_points>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />

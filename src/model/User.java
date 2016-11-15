@@ -24,17 +24,11 @@ public class User {
     /** Can only get the username, setting username only happens during user
      * creation */
     public String getEmail() { return email.get(); }
-    public void setEmail(String email) {
-        this.email.set(email);
-    }
 
     /** Can only get the password, setting password only happens during user
      * creation */
     public String getPassword() {
         return password.get();
-    }
-    public void setPassword(String password) {
-        this.password.set(password);
     }
 
     /** Can only get the user level, setting level only happens during user
@@ -68,22 +62,6 @@ public class User {
         email.set(uname);
         password.set(pass);
         this.level.set(level);
-        this.city.set(city);
-        this.address.set(address);
-        this.zipcode.set(zipcode);
-        this.state.set(state);
-    }
-
-    /**
-     * Additonal constructor to create user with default NORMAL capabilities
-     * @param uname     Username
-     * @param pass      Password
-     */
-    public User(String uname, String pass, String address,
-                String city, String zipcode, States state) {
-        email.set(uname);
-        password.set(pass);
-        this.level.set(UserLevel.NORMAL);
         this.city.set(city);
         this.address.set(address);
         this.zipcode.set(zipcode);

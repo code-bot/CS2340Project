@@ -17,19 +17,14 @@ public abstract class Report {
 
 
     public String getDate() { return date.get(); }
-    public void setDate(String dateStr) { date.set(dateStr); }
 
     String getTime() { return time.get(); }
-    public void setTime(String timeStr) { time.set(timeStr); }
 
     String getName() { return reporterName.get(); }
-    public void setName(String name) { reporterName.set(name); }
 
     public double getLat() { return lat.get(); }
-    public void setLat(double latitude) { lat.set(latitude); }
 
     public double getLong() { return lon.get(); }
-    public void setLong(double longitude) { lon.set(longitude); }
 
     public abstract String getTypeOfReport();
 

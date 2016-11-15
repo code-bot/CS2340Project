@@ -26,13 +26,6 @@ import model.Report;
 
 public class MapViewController implements Initializable, MapComponentInitializedListener {
 
-    private final double ATLLAT = 33.7490;
-    private final double ATLLONG = -84.3880;
-    private final int DEFAULT_ZOOM = 12;
-
-    @FXML
-    private Button button;
-
     @FXML
     private GoogleMapView mapView;
 

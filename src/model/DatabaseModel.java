@@ -86,7 +86,7 @@ public class DatabaseModel {
      * @param newUser the user information we want to store in database
      * @return whether the user was correctly added or not
      */
-    public boolean createUser(User newUser) {
+    public void createUser(User newUser) {
         rootRef.createUser(newUser.getEmail(), newUser.getPassword(),
                 new Firebase.ValueResultHandler<Map<String, Object>>() {
             @Override
@@ -100,7 +100,7 @@ public class DatabaseModel {
                 System.out.println(firebaseError.getMessage());
             }
         });
-        return true;
+        
     }
 
     /**

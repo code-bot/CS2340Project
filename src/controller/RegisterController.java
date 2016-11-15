@@ -127,11 +127,9 @@ public class RegisterController {
         } else {
             DatabaseModel databaseModel = DatabaseModel.getInstance();
             User newUser = new User(email, password, userType, address, city, zipcode, States.valueOf(state));
-            boolean addedUser = databaseModel.createUser(newUser);
-            if (addedUser) {
-                databaseModel.setCurrentUser(newUser);
-                mainApplication.goToHomePage();
-            }
+            databaseModel.createUser(newUser);
+            databaseModel.setCurrentUser(newUser);
+            mainApplication.goToHomePage();
         }
     }
 
@@ -157,7 +155,7 @@ public class RegisterController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            mainApplication.initLoginScreen(mainApplication.getMainStage());
+            mainApplication.initLoginScreen();
         }
     }
 
