@@ -53,7 +53,10 @@ public class MainFXApplication extends Application {
         databaseModel = DatabaseModel.getInstance();
     }
 
-
+    /**
+     * gets the mainstage
+     * @return Stage The stage
+     */
     public Stage getMainStage() {
         return mainStage;
     }
@@ -94,11 +97,17 @@ public class MainFXApplication extends Application {
         databaseModel.logout();
     }
 
+    /**
+     * goes to edit profile page
+     */
     public void goToEditProfile() {
         initBackMenu(mainStage);
         initEditRegisterScreen(mainStage);
     }
 
+    /**
+     * goes to home page
+     */
     public void goToHomePage() {
         initMenu(mainStage);
         initMapViewScreen(mainStage);
@@ -230,6 +239,10 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Initializes the create report screen
+     * @param mainStage the stage to add the layout to
+     */
     public void initCreateReportScreen(Stage mainStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -246,6 +259,10 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Initializes the create quality screen
+     * @param mainStage the stage to add the layout to
+     */
     public void initCreateQualityScreen(Stage mainStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -262,6 +279,10 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Initializes the view reports screen
+     * @param mainStage the stage to add the layout to
+     */
     public void initViewReportsScreen(Stage mainStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -276,7 +297,10 @@ public class MainFXApplication extends Application {
             System.out.println(e.toString());
         }
     }
-
+    /**
+     * Initializes the quality report screen
+     * @param mainStage the stage to add the layout to
+     */
     public void initQualityReportScreen(Stage mainStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -292,6 +316,10 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Initializes the map view screen
+     * @param mainStage the stage to add the layout to
+     */
     public void initMapViewScreen(Stage mainStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -307,6 +335,13 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Initializes the graph view screen
+     * @param mainStage the stage to add the layout to
+     * @param reports list of quality reports passed in
+     * @param type type of data
+     * @param year year of report
+     */
     public void initGraphViewScreen(Stage mainStage, ArrayList<WaterQualityReport> reports, String type, String year) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -324,6 +359,10 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Initializes the create graph screen
+     * @param mainStage the stage to add the layout to
+     */
     public void initCreateGraphScreen(Stage mainStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -339,6 +378,10 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * main method
+     * @param args main method
+     */
     public static void main(String[] args) {
         launch(args);
     }

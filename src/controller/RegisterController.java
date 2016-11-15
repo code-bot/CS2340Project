@@ -1,8 +1,6 @@
 package controller;
 
-/**
- * Created by Aman on 9/28/16.
- */
+
 
 import fxapp.MainFXApplication;
 
@@ -20,6 +18,9 @@ import model.UserLevel;
 
 import java.util.Optional;
 
+/**
+ * Created by Aman on 9/28/16.
+ */
 public class RegisterController {
 
 

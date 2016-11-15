@@ -1,8 +1,6 @@
 package controller;
 
-/**
- * Created by Rahul on 10/23/16.
- */
+
 
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
@@ -28,6 +26,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+/**
+ * Created by Rahul on 10/23/16.
+ */
 public class MapViewController implements Initializable, MapComponentInitializedListener {
 
     private final double ATLLAT = 33.7490;

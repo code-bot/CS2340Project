@@ -23,36 +23,58 @@ public class User {
 
     /** Can only get the username, setting username only happens during user
      * creation */
+    /**
+     * gets the email
+     * @return String containing the email
+     */
     public String getEmail() { return email.get(); }
-    public void setEmail(String email) {
-        this.email.set(email);
-    }
 
     /** Can only get the password, setting password only happens during user
      * creation */
+    /**
+     * gets the password
+     * @return String containing the password
+     */
     public String getPassword() {
         return password.get();
-    }
-    public void setPassword(String password) {
-        this.password.set(password);
     }
 
     /** Can only get the user level, setting level only happens during user
      * creation */
+    /**
+     * Gets the user level
+     * @return UserLevel containing the user's level
+     */
     public UserLevel getUserLevel() { return level.get(); }
 
+    /**
+     * gets the address
+     * @return String containing the address
+     */
     public String getAddress() {
         return address.get();
     }
 
+    /**
+     * gets the zip code
+     * @return String containing the zip code
+     */
     public String getZipcode() {
         return zipcode.get();
     }
 
+    /**
+     * gets the city
+     * @return String containing the city
+     */
     public String getCity() {
         return city.get();
     }
 
+    /**
+     * gets the state
+     * @return String containing the state
+     */
     public States getState() {
         return state.get();
     }
@@ -62,6 +84,10 @@ public class User {
      * @param uname     Username
      * @param pass      Password
      * @param level     Authority level
+     * @param address   Address
+     * @param city      City
+     * @param zipcode   Zip Code
+     * @param state     State
      */
     public User(String uname, String pass, UserLevel level, String address,
                 String city, String zipcode, States state) {
@@ -78,7 +104,11 @@ public class User {
      * Additonal constructor to create user with default NORMAL capabilities
      * @param uname     Username
      * @param pass      Password
-     */
+     * @param address   Address
+     * @param city      City
+     * @param zipcode   Zip Code
+     * @param state     State
+     * */
     public User(String uname, String pass, String address,
                 String city, String zipcode, States state) {
         email.set(uname);
@@ -97,6 +127,10 @@ public class User {
                 " " + state.get().name();
     }
 
+    /**
+     * Resets the password
+     * @param newPassword new password to set
+     */
     public void resetPassword(String newPassword) {
         DatabaseModel databaseModel = DatabaseModel.getInstance();
         databaseModel.changePassword(getEmail(), getPassword(), newPassword);

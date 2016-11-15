@@ -25,6 +25,11 @@ public enum UserLevel {
         return list;
     }
 
+    /**
+     * Changes inputted string to a userlevel enum
+     * @param level the string level passed in
+     * @return UserLevel the user level created
+     */
     public static UserLevel stringToUserLevel(String level) {
         switch(level) {
             case "NORMAL":
