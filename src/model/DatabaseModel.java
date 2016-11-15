@@ -3,6 +3,8 @@ package model;
 import com.firebase.client.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.control.Alert;
+
 import java.util.*;
 
 /**
@@ -99,6 +101,37 @@ public class DatabaseModel {
             }
         });
         return true;
+    }
+
+    /**
+     * Update a user that exists in the hashmap
+     * @param previous  the user in the hashmap to update
+     * @param user      the updated user
+     * @param sameEmail whether the email changed or not
+     * @return  successfully updated or not
+     */
+    public boolean updateUser(User previous, User user, boolean sameEmail) {
+//        if (!userMap.containsKey(previous.getEmail())) {
+//            System.out.println("Email does not exist");
+//            return false;
+//        } else if (!sameEmail && userMap.containsKey(user.getEmail())) {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setTitle("Registration Error");
+//            alert.setHeaderText("Email already exists in system");
+//            alert.setContentText("Please go to login page to login or use forgot password feature");
+//            alert.showAndWait();
+//            return false;
+//        } else if (sameEmail) {
+//            userMap.put(previous.getEmail(), user);
+//            currUser.set(user);
+//            return true;
+//        } else {
+//            userMap.remove(previous.getEmail(), previous);
+//            userMap.put(user.getEmail(), user);
+//            currUser.set(user);
+//            return true;
+//        }
+        return false;
     }
 
     /**

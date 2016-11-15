@@ -137,7 +137,7 @@ public class EditProfileController {
 
             User newUser = new User(email, password, oldUser.getUserLevel(),
                     address, city, zipcode, state);
-            boolean updatedUser = Model.getInstance().updateUser(oldUser, newUser, sameEmail);
+            boolean updatedUser = DatabaseModel.getInstance().updateUser(oldUser, newUser, sameEmail);
             if (updatedUser) {
                 mainApplication.goToHomePage();
             }
