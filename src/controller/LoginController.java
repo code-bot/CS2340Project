@@ -38,7 +38,9 @@ public class LoginController {
     @FXML
     private PasswordField passwordField;
 
-
+    /**
+     * controller for login
+     */
     public LoginController() {
         model = DatabaseModel.getInstance();
     }

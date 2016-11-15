@@ -32,6 +32,10 @@ public class GraphViewController {
 
     private final StringProperty type = new SimpleStringProperty();
 
+    /**
+     * Sets the type
+     * @param t String indicating the type
+     */
     public void setType(String t) { type.set(t); }
 
     @FXML
