@@ -1,16 +1,26 @@
 package fxapp;
 
-import controller.*;
+import controller.BackMenuController;
+import controller.CreateHistoricalController;
+import controller.CreateQualityController;
+import controller.CreateReportController;
+import controller.EditProfileController;
+import controller.GraphViewController;
+import controller.LoginController;
+import controller.MainViewController;
+import controller.MapViewController;
+import controller.MenuController;
+import controller.QualityController;
+import controller.RegisterController;
+import controller.ViewReportsController;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import model.*;
-import sun.plugin.javascript.navig.Anchor;
+import model.DatabaseModel;
+import model.WaterQualityReport;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,12 +49,7 @@ public class MainFXApplication extends Application {
         mainStage.setResizable(false);
         initRootLayout(mainStage);
         initLoginScreen(mainStage);
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                System.exit(0);
-            }
-        });
+        primaryStage.setOnCloseRequest((event) -> System.exit(0));
         databaseModel = DatabaseModel.getInstance();
     }
 

@@ -7,7 +7,12 @@ package controller;
 import fxapp.MainFXApplication;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import model.DatabaseModel;
 import model.States;
 import model.User;

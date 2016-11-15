@@ -1,15 +1,20 @@
 package model;
 
-import com.firebase.client.*;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.scene.control.Alert;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Matt Sternberg on 10/7/2016.
  */
+@SuppressWarnings("ALL")
 public class DatabaseModel {
     /** Set Model up as a singleton design pattern. */
     private static final DatabaseModel instance = new DatabaseModel();

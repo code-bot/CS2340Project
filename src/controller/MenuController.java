@@ -13,6 +13,7 @@ import model.UserLevel;
 /**
  * Created by Matt Sternberg on 9/21/16.
  */
+@SuppressWarnings("ALL")
 public class MenuController {
 
     private MainFXApplication mainApplication;

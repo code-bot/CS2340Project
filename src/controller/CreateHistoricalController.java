@@ -4,20 +4,23 @@ import fxapp.MainFXApplication;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-
-import javafx.scene.chart.PieChart;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Toggle;
 import model.DatabaseModel;
 import model.WaterQualityReport;
 
-
 import java.util.ArrayList;
-
 import java.util.Optional;
 
 /**
  * Created by Rahul on 11/8/16.
  */
+@SuppressWarnings("ALL")
 public class CreateHistoricalController {
 
     private MainFXApplication mainApplication;

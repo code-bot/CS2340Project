@@ -15,11 +15,11 @@
                stylesheets="@css/Login.css" />
     <PasswordField fx:id="passwordField" layoutX="229.0" layoutY="286.0" promptText="Password"
                    styleClass="text-field" stylesheets="@css/Login.css" />
-    <Button fx:id="loginButton" layoutX="285.0" layoutY="341.0" mnemonicParsing="false" onAction="#login"
+    <Button layoutX="285.0" layoutY="341.0" mnemonicParsing="false" onAction="#login"
             prefHeight="27.0" prefWidth="54.0" styleClass="login-button" stylesheets="@css/Login.css" text="Login" />
     <Hyperlink fx:id="signUp" layoutX="282.0" layoutY="397.0" styleClass="hyper-link"
                stylesheets="@css/Login.css" text="Sign Up" />
-    <Hyperlink fx:id="forgotYourPassword" layoutX="236.0" layoutY="429.0" styleClass="hyper-link"
+    <Hyperlink layoutX="236.0" layoutY="429.0" styleClass="hyper-link"
                stylesheets="@css/Login.css" text="Forgot your password?" onAction="#resetPassword" />
     <ImageView fitHeight="232.0" fitWidth="400.0" layoutX="112.0" layoutY="99.0" pickOnBounds="true"
                preserveRatio="true">

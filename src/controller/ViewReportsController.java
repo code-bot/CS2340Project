@@ -1,20 +1,18 @@
 package controller;
 
-import fxapp.MainFXApplication;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import java.util.Iterator;
-import javafx.scene.control.*;
+import javafx.scene.control.ListView;
 import model.DatabaseModel;
-
 import model.Report;
 
-
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
+import java.util.Iterator;
 
 /**
  * Created by karanlakhani on 10/11/16.
  */
+@SuppressWarnings("ALL")
 public class ViewReportsController {
 
     @FXML

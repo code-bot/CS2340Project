@@ -1,10 +1,15 @@
 package model;
 
-import javafx.beans.property.*;
+
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
 /**
  * Created by sahajbot on 10/10/16.
  */
+@SuppressWarnings("ALL")
 public abstract class Report {
 
 
