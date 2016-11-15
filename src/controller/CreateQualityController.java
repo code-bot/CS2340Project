@@ -2,24 +2,27 @@ package controller;
 
 import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
-
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import model.DatabaseModel;
-
 import model.User;
 import model.WaterQualityReport;
 
-
 import java.text.DateFormat;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import java.util.Optional;
+
+
 
 /**
  * Created by Rahul on 10/28/16.
  */
 
+@SuppressWarnings("ALL")
 public class CreateQualityController {
 
     private MainFXApplication mainApplication;

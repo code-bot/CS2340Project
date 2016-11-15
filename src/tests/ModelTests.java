@@ -6,6 +6,7 @@ import static org.testng.Assert.assertEquals;
 /**
  * Created by msternberg on 11/13/16.
  */
+@SuppressWarnings("ALL")
 public class ModelTests {
 
     @Test

@@ -7,6 +7,7 @@ import java.util.Collection;
 /**
  * Created by Aman on 9/28/16.
  */
+@SuppressWarnings("ALL")
 public enum States {
 
     AL("AL"),

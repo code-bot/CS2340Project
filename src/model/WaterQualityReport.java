@@ -1,6 +1,12 @@
 package model;
 
-import javafx.beans.property.*;
+
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,6 +16,7 @@ import java.util.Collections;
 /**
  * Created by Rahul on 10/28/16.
  */
+@SuppressWarnings("ALL")
 public class WaterQualityReport extends Report {
 
     public enum WaterSafety {

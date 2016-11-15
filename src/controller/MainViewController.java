@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 /**
  * Created by sahajbot on 10/10/16.
  */
+@SuppressWarnings("ALL")
 public class MainViewController {
 
     private MainFXApplication mainApplication;

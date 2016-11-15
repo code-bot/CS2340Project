@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 /**
  * Created by Karan Lakhani on 10/13/16.
  */
+@SuppressWarnings("ALL")
 public class BackMenuController {
 
     private MainFXApplication mainApplication;
