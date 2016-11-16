@@ -1,9 +1,11 @@
 package tests;
+import model.UserLevel;
 import model.WaterQualityReport;
 import model.WaterSourceReport;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertEqualsNoOrder;
 
 /**
  * Created by msternberg on 11/13/16.
@@ -63,5 +65,22 @@ public class ModelTests {
         assertEquals(waterType, WaterSourceReport.WaterType.SPRING);
         waterType = WaterSourceReport.stringToWaterType("OTHER");
         assertEquals(waterType, WaterSourceReport.WaterType.OTHER);
+    }
+
+    @Test
+    public void userLevelStringToUserLevel() {
+        UserLevel level;
+        level = UserLevel.stringToUserLevel("NORMAL");
+        assertEquals(level, UserLevel.NORMAL);
+        level = UserLevel.stringToUserLevel("ADMIN");
+        assertEquals(level, UserLevel.ADMIN);
+        level = UserLevel.stringToUserLevel("WORKER");
+        assertEquals(level, UserLevel.WORKER);
+        level = UserLevel.stringToUserLevel("MANAGER");
+        assertEquals(level, UserLevel.MANAGER);
+        level = UserLevel.stringToUserLevel("Aman");
+        assertEquals(level, null);
+        level = UserLevel.stringToUserLevel(null);
+        assertEquals(level, null);
     }
 }
