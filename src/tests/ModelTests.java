@@ -68,6 +68,7 @@ public class ModelTests {
     }
 
     @Test
+
     public void userLevelStringToUserLevel() {
         UserLevel level;
         level = UserLevel.stringToUserLevel("NORMAL");
@@ -82,5 +83,20 @@ public class ModelTests {
         assertEquals(level, null);
         level = UserLevel.stringToUserLevel(null);
         assertEquals(level, null);
+    }
+    @Test
+    public void waterSourceStringToConditionTest() {
+        WaterSourceReport.WaterCondition waterCond;
+        waterCond = WaterSourceReport.stringToCondition("WASTE");
+        assertEquals(waterCond, WaterSourceReport.WaterCondition.WASTE);
+        waterCond = WaterSourceReport.stringToCondition("TREATEABLECLEAR");
+        assertEquals(waterCond, WaterSourceReport.WaterCondition.TREATABLECLEAR);
+        waterCond = WaterSourceReport.stringToCondition("TREATABLEMUDDLY");
+        assertEquals(waterCond, WaterSourceReport.WaterCondition.TREATABLEMUDDY);
+        waterCond = WaterSourceReport.stringToCondition("POTABLE");
+        assertEquals(waterCond, WaterSourceReport.WaterCondition.POTABLE);
+        waterCond = WaterSourceReport.stringToCondition("OTHER");
+        assertEquals(waterCond, WaterSourceReport.WaterCondition.WASTE);
+
     }
 }

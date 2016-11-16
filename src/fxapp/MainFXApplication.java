@@ -10,13 +10,11 @@ import controller.LoginController;
 import controller.MenuController;
 import controller.RegisterController;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import model.DatabaseModel;
 import model.WaterQualityReport;
 
@@ -52,12 +50,7 @@ public class MainFXApplication extends Application {
         primaryStage.setResizable(false);
         initRootLayout(primaryStage);
         initLoginScreen();
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                System.exit(0);
-            }
-        });
+        primaryStage.setOnCloseRequest((event) -> {System.exit(0);});
         databaseModel = DatabaseModel.getInstance();
     }
 

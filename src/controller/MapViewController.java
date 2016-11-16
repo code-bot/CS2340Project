@@ -16,7 +16,6 @@ import com.lynden.gmapsfx.javascript.object.InfoWindowOptions;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import model.DatabaseModel;
 import model.Report;
 import model.WaterSourceReport;
