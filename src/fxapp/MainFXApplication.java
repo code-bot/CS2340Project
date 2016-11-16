@@ -311,7 +311,7 @@ public class MainFXApplication extends Application {
     /**
      * Initializes the map view screen
      */
-    public void initMapViewScreen() {
+    private void initMapViewScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainFXApplication.class.getResource(

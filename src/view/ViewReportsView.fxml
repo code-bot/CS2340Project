@@ -7,15 +7,19 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="550.0" prefWidth="600.0" styleClass="background-frame"
-            stylesheets="@css/CreateReport.css" xmlns="http://javafx.com/javafx/null"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewReportsController">
+            stylesheets="@css/CreateReport.css"
+            xmlns="http://javafx.com/javafx/null"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ViewReportsController">
     <Label alignment="CENTER" layoutX="134.0" layoutY="35.0" prefHeight="39.0"
-           prefWidth="335.0" text="Water Source Report View" textAlignment="CENTER" textFill="WHITE">
+           prefWidth="335.0" text="Water Source Report View"
+           textAlignment="CENTER" textFill="WHITE">
         <font>
             <Font size="25.0" />
         </font>
     </Label>
-   <ListView fx:id="listOfReports" layoutX="40.0" layoutY="89.0" prefHeight="427.0"
+   <ListView fx:id="listOfReports" layoutX="40.0" layoutY="89.0"
+             prefHeight="427.0"
              prefWidth="537.0" stylesheets="@css/ViewReportsView.css">
       <styleClass>
          <String fx:value="backgroundColor" />
