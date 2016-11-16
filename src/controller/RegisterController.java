@@ -167,7 +167,7 @@ public class RegisterController {
                 "and you will be returned to the login page");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
+        if (result.isPresent() && (result.get() == ButtonType.OK)) {
             mainApplication.initLoginScreen();
         }
     }

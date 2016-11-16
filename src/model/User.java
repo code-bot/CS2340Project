@@ -11,27 +11,30 @@ import javafx.beans.property.StringProperty;
  */
 public class User {
 
+    /** Can only get the username, setting username only happens during user
+     * creation */
     private final StringProperty email = new SimpleStringProperty();
+
+    /** Can only get the password, setting password only happens during user
+     * creation */
     private final StringProperty password = new SimpleStringProperty();
     private final StringProperty address = new SimpleStringProperty();
     private final StringProperty zipcode = new SimpleStringProperty();
     private final StringProperty city = new SimpleStringProperty();
     private final ObjectProperty<States> state = new SimpleObjectProperty();
 
-    /** Authority level of user */
+    /** Authority level of user
+     * Can only get the user level, setting level only happens during user
+     * creation */
     private final ObjectProperty<UserLevel> level =
             new SimpleObjectProperty<>();
 
-    /** Can only get the username, setting username only happens during user
-     * creation */
     /**
      * gets the email
      * @return String containing the email
      */
     public String getEmail() { return email.get(); }
 
-    /** Can only get the password, setting password only happens during user
-     * creation */
     /**
      * gets the password
      * @return String containing the password
@@ -40,8 +43,6 @@ public class User {
         return password.get();
     }
 
-    /** Can only get the user level, setting level only happens during user
-     * creation */
     /**
      * Gets the user level
      * @return UserLevel containing the user's level
