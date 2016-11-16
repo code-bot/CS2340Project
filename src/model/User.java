@@ -19,7 +19,8 @@ public class User {
     private final ObjectProperty<States> state = new SimpleObjectProperty();
 
     /** Authority level of user */
-    private final ObjectProperty<UserLevel> level = new SimpleObjectProperty<>();
+    private final ObjectProperty<UserLevel> level =
+            new SimpleObjectProperty<>();
 
     /** Can only get the username, setting username only happens during user
      * creation */

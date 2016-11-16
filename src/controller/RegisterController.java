@@ -106,8 +106,10 @@ public class RegisterController {
     @FXML
     private void registerUser() {
         loadData();
-        //print error message for empty fields or emails/passwords not matching up
-        if (email.isEmpty() || password.isEmpty() || address.isEmpty() || zipcode.isEmpty()) {
+        //print error message for empty fields or
+        // emails/passwords not matching up
+        if (email.isEmpty() || password.isEmpty() || address.isEmpty()
+                || zipcode.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Registration Error!");
             alert.setHeaderText("Please complete all fields");
@@ -119,20 +121,24 @@ public class RegisterController {
                 alert.setTitle("Registration Error!");
                 alert.setHeaderText("Email Does Not Match");
                 alert.setContentText("The emails provided are not the same. " +
-                        "Please ensure you have entered the same email address.");
+                        "Please ensure you have entered " +
+                        "the same email address.");
 
                 alert.showAndWait();
             } else if (!(password.equals(passwordConfirm))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Registration Error!");
                 alert.setHeaderText("Password Does Not Match");
-                alert.setContentText("The passwords provided are not the same. " +
-                        "Please ensure you have entered the same password.");
+                alert.setContentText("The passwords provided " +
+                        "are not the same. " +
+                        "Please ensure you have entered " +
+                        "the same password.");
 
                 alert.showAndWait();
         } else {
             DatabaseModel databaseModel = DatabaseModel.getInstance();
-            User newUser = new User(email, password, userType, address, city, zipcode, States.valueOf(state));
+            User newUser = new User(email, password, userType, address, city,
+                    zipcode, States.valueOf(state));
             databaseModel.createUser(newUser);
             databaseModel.setCurrentUser(newUser);
             mainApplication.goToHomePage();
@@ -156,7 +162,8 @@ public class RegisterController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Dialog");
         alert.setHeaderText("Are you sure you want to cancel?");
-        alert.setContentText("If you cancel, the information will not be stored " +
+        alert.setContentText("If you cancel, the information" +
+                " will not be stored " +
                 "and you will be returned to the login page");
 
         Optional<ButtonType> result = alert.showAndWait();

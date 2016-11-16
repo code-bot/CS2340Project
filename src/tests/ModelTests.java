@@ -4,6 +4,7 @@ import model.WaterSourceReport;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertEqualsNoOrder;
 
 /**
  * Created by msternberg on 11/13/16.
@@ -63,5 +64,20 @@ public class ModelTests {
         assertEquals(waterType, WaterSourceReport.WaterType.SPRING);
         waterType = WaterSourceReport.stringToWaterType("OTHER");
         assertEquals(waterType, WaterSourceReport.WaterType.OTHER);
+    }
+
+    @Test
+    public void waterSourceStringToConditionTest() {
+        WaterSourceReport.WaterCondition waterCond;
+        waterCond = WaterSourceReport.stringToCondition("WASTE");
+        assertEquals(waterCond, WaterSourceReport.WaterCondition.WASTE);
+        waterCond = WaterSourceReport.stringToCondition("TREATEABLECLEAR");
+        assertEquals(waterCond, WaterSourceReport.WaterCondition.TREATABLECLEAR);
+        waterCond = WaterSourceReport.stringToCondition("TREATABLEMUDDLY");
+        assertEquals(waterCond, WaterSourceReport.WaterCondition.TREATABLEMUDDY);
+        waterCond = WaterSourceReport.stringToCondition("POTABLE");
+        assertEquals(waterCond, WaterSourceReport.WaterCondition.POTABLE);
+        waterCond = WaterSourceReport.stringToCondition("OTHER");
+        assertEquals(waterCond, WaterSourceReport.WaterCondition.WASTE);
     }
 }

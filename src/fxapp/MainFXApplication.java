@@ -20,9 +20,10 @@ import javafx.stage.WindowEvent;
 import model.DatabaseModel;
 import model.WaterQualityReport;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import org.apache.log4j.PropertyConfigurator;
 /**
  * Main application class. Handles switching scenes throughout application
  * Created by Sahaj Bhatt on 9/17/16.
@@ -39,9 +40,15 @@ public class MainFXApplication extends Application {
 
     private DatabaseModel databaseModel;
 
+    private static final org.apache.log4j.Logger logger =
+            org.apache.log4j.Logger.getLogger(LoginController.class);
+
+    private final String log4jConfigFile = System.getProperty("user.dir")
+            + File.separator + "log4j.properties";
 
     @Override
     public void start(Stage primaryStage) {
+        PropertyConfigurator.configure(log4jConfigFile);
         primaryStage.setResizable(false);
         initRootLayout(primaryStage);
         initLoginScreen();
@@ -64,7 +71,8 @@ public class MainFXApplication extends Application {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
 
-            loader.setLocation(MainFXApplication.class.getResource("../view/RootView.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource(
+                    "../view/RootView.fxml"));
             rootLayout = loader.load();
 
             Scene mainScene = new Scene(rootLayout);
@@ -76,7 +84,10 @@ public class MainFXApplication extends Application {
             //Show the login scene with the correct layout
             mainStage.setScene(mainScene);
             mainStage.show();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            logger.error("Unable to initialize root layout. Exception: "
+                    + e.toString());
+        }
     }
 
     /**
@@ -112,7 +123,8 @@ public class MainFXApplication extends Application {
         try {
             //Load layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/LoginView.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource(
+                    "../view/LoginView.fxml"));
             loginLayout = loader.load();
 
             rootLayout.setCenter(loginLayout);
@@ -121,7 +133,10 @@ public class MainFXApplication extends Application {
             LoginController controller = loader.getController();
             controller.setMainApp(this);
 
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            logger.error("Unable to initialize login screen. Exception: "
+                    + e.toString());
+        }
     }
 
     /**
@@ -131,7 +146,8 @@ public class MainFXApplication extends Application {
         try {
             //Load layout from fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/MainNavigationBar.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource(
+                    "../view/MainNavigationBar.fxml"));
             menu = loader.load();
 
             rootLayout.setTop(menu);
@@ -139,7 +155,8 @@ public class MainFXApplication extends Application {
             MenuController controller = loader.getController();
             controller.setMainApp(this);
         } catch (IOException e) {
-
+            logger.error("Unable to initialize menu screen. Exception: "
+                    + e.toString());
         }
 
     }
@@ -151,7 +168,8 @@ public class MainFXApplication extends Application {
         try {
             //Load layout from fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/BackMenuView.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource(
+                    "../view/BackMenuView.fxml"));
             menu = loader.load();
 
             rootLayout.setTop(menu);
@@ -159,6 +177,8 @@ public class MainFXApplication extends Application {
             BackMenuController controller = loader.getController();
             controller.setMainApp(this);
         } catch (IOException e) {
+            logger.error("Unable to initialize back screen. Exception: "
+                    + e.toString());
 
         }
 
@@ -171,7 +191,8 @@ public class MainFXApplication extends Application {
         try {
             //Load layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/RegisterView.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource(
+                    "../view/RegisterView.fxml"));
             AnchorPane profileLayout = loader.load();
 
             rootLayout.setCenter(profileLayout);
@@ -180,7 +201,8 @@ public class MainFXApplication extends Application {
             controller.setMainApp(this);
 
         } catch (IOException e) {
-            System.out.println(e.toString());
+            logger.error("Unable to initialize register screen. Exception: "
+                    + e.toString());
         }
 
     }
@@ -191,7 +213,8 @@ public class MainFXApplication extends Application {
     private void initEditRegisterScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/EditProfileView.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource(
+                    "../view/EditProfileView.fxml"));
             AnchorPane editProfileLayout = loader.load();
 
             rootLayout.setCenter(editProfileLayout);
@@ -201,7 +224,9 @@ public class MainFXApplication extends Application {
             controller.setMainApp(this);
 
         } catch (IOException e) {
-            System.out.println(e.toString());
+            logger.error("Unable to initialize edit register screen. " +
+                    "Exception: " + e.toString());
+
         }
     }
 
@@ -211,7 +236,8 @@ public class MainFXApplication extends Application {
     public void initCreateReportScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/CreateReportView.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource(
+                    "../view/CreateReportView.fxml"));
             AnchorPane createReportsLayout = loader.load();
 
             rootLayout.setCenter(createReportsLayout);
@@ -220,7 +246,8 @@ public class MainFXApplication extends Application {
             controller.setMainApp(this);
 
         } catch (IOException e) {
-            System.out.println(e.toString());
+            logger.error("Unable to initialize create report screen. " +
+                    "Exception: " + e.toString());
         }
     }
 
@@ -230,7 +257,8 @@ public class MainFXApplication extends Application {
     public void initCreateQualityScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/CreateQualityView.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource(
+                    "../view/CreateQualityView.fxml"));
             AnchorPane createQualityLayout = loader.load();
 
             rootLayout.setCenter(createQualityLayout);
@@ -239,7 +267,8 @@ public class MainFXApplication extends Application {
             controller.setMainApp(this);
 
         } catch (IOException e) {
-            System.out.println(e.toString());
+            logger.error("Unable to initialize quality report screen. " +
+                    "Exception: " + e.toString());
         }
     }
 
@@ -249,13 +278,16 @@ public class MainFXApplication extends Application {
     public void initViewReportsScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/ViewReportsView.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource(
+                    "../view/ViewReportsView.fxml"));
             AnchorPane viewReportsLayout = loader.load();
 
             rootLayout.setCenter(viewReportsLayout);
 
         } catch (IOException e) {
-            System.out.println(e.toString());
+            logger.error("Unable to initialize view reports screen. Exception: "
+                    + e.toString());
+
         }
     }
 
@@ -265,30 +297,32 @@ public class MainFXApplication extends Application {
     public void initQualityReportScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/QualityView.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource(
+                    "../view/QualityView.fxml"));
             AnchorPane qualityReportsLayout = loader.load();
 
             rootLayout.setCenter(qualityReportsLayout);
 
         } catch (IOException e) {
-            System.out.println(e.toString());
-        }
+            logger.error("Unable to initialize quality report screen. " +
+                    "Exception: " + e.toString());        }
     }
 
     /**
      * Initializes the map view screen
      */
-    public void initMapViewScreen() {
+    private void initMapViewScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/MapView.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource(
+                    "../view/MapView.fxml"));
             AnchorPane mapLayout = loader.load();
 
             rootLayout.setCenter(mapLayout);
 
         } catch (IOException e) {
-            System.out.println(e.toString());
-        }
+            logger.error("Unable to initialize map view screen. " +
+                    "Exception: " + e.toString());        }
     }
 
     /**
@@ -297,10 +331,12 @@ public class MainFXApplication extends Application {
      * @param type type of data
      * @param year year of report
      */
-    public void initGraphViewScreen(ArrayList<WaterQualityReport> reports, String type, String year) {
+    public void initGraphViewScreen(ArrayList<WaterQualityReport> reports,
+                                    String type, String year) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/GraphView.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource(
+                    "../view/GraphView.fxml"));
             AnchorPane viewGraphLayout = loader.load();
 
             rootLayout.setCenter(viewGraphLayout);
@@ -310,8 +346,8 @@ public class MainFXApplication extends Application {
             controller.setType(type);
             controller.loadGraph(year);
         } catch (IOException e) {
-            System.out.println(e.toString());
-        }
+            logger.error("Unable to initialize graph view screen. " +
+                    "Exception: " + e.toString());        }
     }
 
     /**
@@ -320,7 +356,8 @@ public class MainFXApplication extends Application {
     public void initCreateGraphScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/CreateGraphView.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource(
+                    "../view/CreateGraphView.fxml"));
             AnchorPane createGraphLayout = loader.load();
 
             rootLayout.setCenter(createGraphLayout);
@@ -328,8 +365,8 @@ public class MainFXApplication extends Application {
             CreateHistoricalController controller = loader.getController();
             controller.setMainApp(this);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+            logger.error("Unable to initialize create graph screen. " +
+                    "Exception: " + e.toString());        }
     }
 
     /**

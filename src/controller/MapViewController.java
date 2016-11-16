@@ -29,7 +29,8 @@ import java.util.Set;
 /**
  * Created by Rahul on 10/23/16.
  */
-public class MapViewController implements Initializable, MapComponentInitializedListener {
+public class MapViewController implements Initializable,
+        MapComponentInitializedListener {
 
     @FXML
     private GoogleMapView mapView;
@@ -73,7 +74,8 @@ public class MapViewController implements Initializable, MapComponentInitialized
             map.addUIEventHandler(marker,
                     UIEventType.click,
                     (JSObject obj) -> {
-                        InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+                        InfoWindowOptions infoWindowOptions = new
+                                InfoWindowOptions();
                         infoWindowOptions.content(report.toString());
 
                         InfoWindow window = new InfoWindow(infoWindowOptions);

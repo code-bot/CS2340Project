@@ -10,40 +10,60 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="550.0" prefWidth="600.0" styleClass="background-frame"
-            stylesheets="@css/CreateReport.css" xmlns="http://javafx.com/javafx/8.0.65"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateReportController">
-    <Label alignment="CENTER" layoutX="134.0" layoutY="35.0" prefHeight="39.0" prefWidth="335.0"
-           text="Create Water Source Report" textAlignment="CENTER" textFill="WHITE">
+            stylesheets="@css/CreateReport.css"
+            xmlns="http://javafx.com/javafx/8.0.65"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CreateReportController">
+    <Label alignment="CENTER" layoutX="134.0" layoutY="35.0"
+           prefHeight="39.0" prefWidth="335.0"
+           text="Create Water Source Report" textAlignment="CENTER"
+           textFill="WHITE">
         <font>
             <Font size="25.0" />
         </font>
     </Label>
-    <AnchorPane layoutX="200.0" layoutY="103.0" prefHeight="200.0" prefWidth="200.0"
-                styleClass="location-selection" stylesheets="@css/CreateReport.css">
+    <AnchorPane layoutX="200.0" layoutY="103.0" prefHeight="200.0"
+                prefWidth="200.0"
+                styleClass="location-selection"
+                stylesheets="@css/CreateReport.css">
 
-        <ToggleButton fx:id="currLocBtn" layoutX="11.0" layoutY="24.0" mnemonicParsing="false"
-                      prefHeight="29.0" prefWidth="179.0" selected="true" text="Use Current Location" />
-        <Label alignment="CENTER" layoutX="84.0" layoutY="61.0" prefHeight="39.0" prefWidth="32.0"
-               styleClass="focus-label" stylesheets="@css/CreateReport.css" text="-OR-"
+        <ToggleButton fx:id="currLocBtn" layoutX="11.0" layoutY="24.0"
+                      mnemonicParsing="false"
+                      prefHeight="29.0" prefWidth="179.0" selected="true"
+                      text="Use Current Location" />
+        <Label alignment="CENTER" layoutX="84.0" layoutY="61.0"
+               prefHeight="39.0" prefWidth="32.0"
+               styleClass="focus-label" stylesheets="@css/CreateReport.css"
+               text="-OR-"
                textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font size="12.0" />
             </font>
         </Label>
-        <TextField fx:id="latField" alignment="CENTER" layoutX="11.0" layoutY="100.0"
-                   prefHeight="28.0" prefWidth="179.0" promptText="Enter source latitude"
-                   styleClass="text-field" stylesheets="@css/CreateReport.css" />
-        <TextField fx:id="longField" alignment="CENTER" layoutX="11.0" layoutY="139.0" prefWidth="179.0"
+        <TextField fx:id="latField" alignment="CENTER" layoutX="11.0"
+                   layoutY="100.0"
+                   prefHeight="28.0" prefWidth="179.0"
+                   promptText="Enter source latitude"
+                   styleClass="text-field"
+                   stylesheets="@css/CreateReport.css" />
+        <TextField fx:id="longField" alignment="CENTER" layoutX="11.0"
+                   layoutY="139.0" prefWidth="179.0"
                    promptText="Enter source longitude" styleClass="text-field"
                    stylesheets="@css/CreateReport.css" />
 
     </AnchorPane>
-    <ComboBox fx:id="typeComboBox" layoutX="216.0" layoutY="366.0" prefHeight="27.0" prefWidth="170.0" />
-    <ComboBox fx:id="conditionComboBox" layoutX="217.0" layoutY="323.0" prefHeight="27.0" prefWidth="170.0" />
-    <Button ellipsisString="" layoutX="267.0" layoutY="451.0" mnemonicParsing="false" onAction="#createReport"
-            prefHeight="27.0" prefWidth="69.0" style="-fx-background-radius: 10;" styleClass="create-button"
-            stylesheets="@css/Register.css" text="Create Report" textFill="#005580" />
-    <Hyperlink alignment="CENTER" layoutX="267.0" layoutY="487.0" onAction="#cancel"
+    <ComboBox fx:id="typeComboBox" layoutX="216.0" layoutY="366.0"
+              prefHeight="27.0" prefWidth="170.0" />
+    <ComboBox fx:id="conditionComboBox" layoutX="217.0" layoutY="323.0"
+              prefHeight="27.0" prefWidth="170.0" />
+    <Button ellipsisString="" layoutX="267.0" layoutY="451.0"
+            mnemonicParsing="false" onAction="#createReport"
+            prefHeight="27.0" prefWidth="69.0"
+            style="-fx-background-radius: 10;" styleClass="create-button"
+            stylesheets="@css/Register.css" text="Create Report"
+            textFill="#005580" />
+    <Hyperlink alignment="CENTER" layoutX="267.0" layoutY="487.0"
+               onAction="#cancel"
                prefHeight="25.0" prefWidth="69.0" styleClass="hyper-link"
                stylesheets="@css/Register.css" text="Cancel" />
 </AnchorPane>
