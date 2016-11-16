@@ -89,9 +89,9 @@ public class ModelTests {
         WaterSourceReport.WaterCondition waterCond;
         waterCond = WaterSourceReport.stringToCondition("WASTE");
         assertEquals(waterCond, WaterSourceReport.WaterCondition.WASTE);
-        waterCond = WaterSourceReport.stringToCondition("TREATEABLECLEAR");
+        waterCond = WaterSourceReport.stringToCondition("TREATABLECLEAR");
         assertEquals(waterCond, WaterSourceReport.WaterCondition.TREATABLECLEAR);
-        waterCond = WaterSourceReport.stringToCondition("TREATABLEMUDDLY");
+        waterCond = WaterSourceReport.stringToCondition("TREATABLEMUDDY");
         assertEquals(waterCond, WaterSourceReport.WaterCondition.TREATABLEMUDDY);
         waterCond = WaterSourceReport.stringToCondition("POTABLE");
         assertEquals(waterCond, WaterSourceReport.WaterCondition.POTABLE);
