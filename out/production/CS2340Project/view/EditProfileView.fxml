@@ -34,7 +34,7 @@
     <Button ellipsisString="" layoutX="267.0" layoutY="451.0" mnemonicParsing="false"
             onAction="#updateUser" prefHeight="27.0" prefWidth="69.0" style="-fx-background-radius: 10;"
             styleClass="register-button" stylesheets="@css/Register.css" text="Confirm" textFill="#005580" />
-    <Hyperlink fx:id="cancel" alignment="CENTER" layoutX="267.0" layoutY="487.0" onAction="#cancel"
+    <Hyperlink alignment="CENTER" layoutX="267.0" layoutY="487.0" onAction="#cancel"
                prefHeight="25.0" prefWidth="69.0" styleClass="hyper-link"
                stylesheets="@css/Register.css" text="Cancel" />
 </AnchorPane>

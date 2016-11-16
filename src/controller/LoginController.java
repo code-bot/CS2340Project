@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+//import org.apache.log4j;
 
 
 import javafx.scene.control.Alert;
@@ -22,8 +23,10 @@ import model.DatabaseModel;
 import model.States;
 import model.User;
 import model.UserLevel;
+import org.apache.log4j.PropertyConfigurator;
 
 
+import java.io.File;
 import java.util.Optional;
 
 
@@ -35,6 +38,11 @@ public class LoginController {
 
     // Reference back to the main application if needed
     private MainFXApplication mainApplication;
+
+    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(LoginController.class);
+
+    private String log4jConfigFile = System.getProperty("user.dir")
+            + File.separator + "log4j.properties";
 
     private String _username;
 
@@ -72,6 +80,7 @@ public class LoginController {
      */
     @FXML
     private void initialize() {
+        PropertyConfigurator.configure(log4jConfigFile);
 
         //Initialize temp username and password:
         _username = username.getText();
@@ -152,6 +161,7 @@ public class LoginController {
     }
 
     private void loginError() {
+        logger.info("Login attempt. Userid: \"" + username.getText() + "\" Bad Login Attempt -");
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Login Error");
         alert.setHeaderText("Incorrect Information");
