@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 /**
- * Created by Rahul on 10/23/16.
+ * Controller for map view page on home screen
  */
 public class MapViewController implements Initializable,
         MapComponentInitializedListener {
