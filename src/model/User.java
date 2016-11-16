@@ -104,9 +104,13 @@ public class User {
 
     @Override
     public String toString() {
-        return email.get() + " " + password.get() + " " + level.get().name() +
+        States state = this.state.get();
+        String stateName = state.name();
+        UserLevel level = this.level.get();
+        String levelName = level.name();
+        return email.get() + " " + password.get() + " " + levelName +
                 " " + address.get() + " " + city.get() + " " + zipcode.get() +
-                " " + state.get().name();
+                " " + stateName;
     }
 
     /**
