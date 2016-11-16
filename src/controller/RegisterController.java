@@ -4,13 +4,9 @@ package controller;
 
 import fxapp.MainFXApplication;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import model.DatabaseModel;
 import model.States;
 import model.User;
@@ -74,12 +70,15 @@ public class RegisterController {
      */
     @FXML
     private void initialize() {
-
-        stateComboBox.getItems().addAll(States.toList());
-        stateComboBox.getSelectionModel().selectFirst();
+        ObservableList<String> list  = stateComboBox.getItems();
+        list.addAll(States.toList());
+        SingleSelectionModel<String> singleStateModel = stateComboBox.getSelectionModel();
+        singleStateModel.selectFirst();
         stateComboBox.setVisibleRowCount(6);
-        userTypeBox.getItems().addAll(UserLevel.toList());
-        userTypeBox.getSelectionModel().selectFirst();
+        ObservableList<UserLevel> typeitems  = userTypeBox.getItems();
+        typeitems.addAll(UserLevel.toList());
+        SingleSelectionModel<UserLevel> userSelectionModel  = userTypeBox.getSelectionModel();
+        userSelectionModel.selectFirst();
         userTypeBox.setVisibleRowCount(4);
     }
 

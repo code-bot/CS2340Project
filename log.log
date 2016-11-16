@@ -1,3 +1,7 @@
 2016-11-15 23:43:41 INFO  LoginController:163 - Login attempt. Userid: "agg" Bad Login Attempt -
 2016-11-15 23:45:29 INFO  LoginController:164 - Login attempt. Userid: "asdf" Bad Login Attempt -
 2016-11-15 23:57:46 INFO  LoginController:164 - Login attempt. Userid: "ag" Bad Login Attempt -
+2016-11-16 12:49:15 INFO  LoginController:164 - Login attempt. Userid: "agg2537@gmail.com" Bad Login Attempt -
+2016-11-16 12:49:16 WARN  DefaultHttpClient:1033 - Authentication error: Unable to respond to any of these challenges: {bearer=WWW-Authenticate: Bearer realm="https://auth.firebase.com"}
+2016-11-16 12:49:17 WARN  DefaultHttpClient:1033 - Authentication error: Unable to respond to any of these challenges: {bearer=WWW-Authenticate: Bearer realm="https://auth.firebase.com"}
+2016-11-16 12:49:17 INFO  LoginController:164 - Login attempt. Userid: "agg2537@gmail.com" Bad Login Attempt -
